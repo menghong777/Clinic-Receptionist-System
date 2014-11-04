@@ -3,4 +3,8 @@ Clinic-Receptionist-System
 
 ARU - HELP CAT Software Engineering Project
 
-Using Apache Tomcat
+Stack
+-----
+- Apache Tomcat
+- MySQL (PHPmyAdmin)
+- Bootstrap
