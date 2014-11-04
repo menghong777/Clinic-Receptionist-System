@@ -8,3 +8,11 @@ Stack
 - Apache Tomcat
 - MySQL (PHPmyAdmin)
 - Bootstrap
+
+Team
+----
+Pavi
+Buruhan :P
+Meng Hong
+Ally
+Joel
