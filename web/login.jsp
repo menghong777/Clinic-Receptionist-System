@@ -85,10 +85,11 @@
             pass = myResultSet.getString("Password");
             if(formUsername != null && formPassword != null &&
                     formUsername.equals(user) && formPassword.equals(pass)) {
-                session.setAttribute("login",true);
-                break;
+                session.setAttribute("login","true");
+                response.sendRedirect("index.jsp");
+                break; 
             } else {
-                session.setAttribute("login",false);
+                session.setAttribute("login","false");
             }
     }
 %>
