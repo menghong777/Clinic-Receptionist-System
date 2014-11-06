@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Database: `clinic_receptionist`
 --
 
+CREATE DATABASE clinic_receptionist;
+USE clinic_receptionist;
+
 -- --------------------------------------------------------
 
 --
