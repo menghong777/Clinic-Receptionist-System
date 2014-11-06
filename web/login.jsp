@@ -1,3 +1,4 @@
+<%@page import="java.sql.*"%>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -40,12 +41,12 @@
 			<form class="form-horizontal" role="form">
 			  <div class="form-group">
 			    <div class="col-sm-offset-3 col-sm-6">
-			      <input type="text" class="form-control" id="inputId" placeholder="ID">
+			      <input type="text" class="form-control" id="inputId" placeholder="ID" name="username">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-3 col-sm-6">
-			      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
 			    </div>
 			  </div>
 			  <div class="form-group">
@@ -62,3 +63,14 @@
     <script src="assets/js/bootstrap.min.js"></script>
 	</body>
 </html>
+
+
+<%
+    //Database Connection
+    String username = "root";
+    String password = "";
+    String conStr = "jdbc:mysql://localhost:3306/assign";
+
+    Connection con = DriverManager.getConnection(conStr, username, password);
+    Statement myStatement = con.createStatement();
+%>
