@@ -69,8 +69,19 @@
     //Database Connection
     String username = "root";
     String password = "";
-    String conStr = "jdbc:mysql://localhost:3306/assign";
-
+    String conStr = "jdbc:mysql://localhost:3306/CRS";
+    String user = " ";
+    String pass = " ";
+    Class.forName("com.mysql.jdbc.Driver");  
+    
     Connection con = DriverManager.getConnection(conStr, username, password);
     Statement myStatement = con.createStatement();
+    
+    ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
+    while (myResultSet.next()) {
+            user = myResultSet.getString("userID");
+            pass = myResultSet.getString("password");
+    }
 %>
+
+<%=user + " " + pass %>
