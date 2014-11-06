@@ -66,22 +66,32 @@
 
 
 <%
+    String formUsername = request.getParameter("username");
+    String formPassword = request.getParameter("password");
     //Database Connection
-    String username = "root";
-    String password = "";
-    String conStr = "jdbc:mysql://localhost:3306/CRS";
+    String dbUsername = "root";
+    String dbPassword = "";
+    String conStr = "jdbc:mysql://localhost:3306/clinic_receptionist";
     String user = " ";
     String pass = " ";
     Class.forName("com.mysql.jdbc.Driver");  
     
-    Connection con = DriverManager.getConnection(conStr, username, password);
+    Connection con = DriverManager.getConnection(conStr, dbUsername, dbPassword);
     Statement myStatement = con.createStatement();
     
     ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
     while (myResultSet.next()) {
-            user = myResultSet.getString("userID");
-            pass = myResultSet.getString("password");
+            user = myResultSet.getString("User_ID");
+            pass = myResultSet.getString("Password");
+            if(formUsername != null && formPassword != null &&
+                    formUsername.equals(user) && formPassword.equals(pass)) {
+                session.setAttribute("login",true);
+                break;
+            } else {
+                session.setAttribute("login",false);
+            }
     }
 %>
 
-<%=user + " " + pass %>
+<!-- debug -->
+<%=user + " " + pass + session.getAttribute("login")%>

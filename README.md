@@ -12,11 +12,11 @@ Stack
 
 Team
 ----
-Pavi
-Buruhan :P
-Meng Hong
-Ally
-Joel
+- Pavi
+- Buruhan :P
+- Meng Hong
+- Ally
+- Joel
 
 Setup
 -----
@@ -24,3 +24,7 @@ Setup
 2. Import database using PHPMyAdmin
 3. Add MYSQL JDBC driver to CRS project in Netbean
 4. Run! :D
+
+Known Bug
+---------
+1. Setup error WEB INF does not exists - Fixing in progress
