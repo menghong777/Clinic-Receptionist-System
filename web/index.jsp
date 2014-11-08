@@ -1,4 +1,4 @@
-<% if (session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
+<% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -50,7 +50,7 @@
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Logout</a></li>
+						<li><a href="logout.jsp">Logout</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">Hi, <a href="#" class="navbar-link">Meng Hong</a></p>
 					<form class="navbar-form navbar-right" role="search">
