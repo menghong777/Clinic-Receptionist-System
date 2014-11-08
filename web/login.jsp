@@ -54,7 +54,7 @@
 						<!-- <li class="active"><a href="#">Link</a></li> -->
 						<!-- <li><a href="#">Link</a></li> -->
 					</ul>
-					<form class="navbar-form navbar-right" role="login">
+					<form class="navbar-form navbar-right" role="login" method="post">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
