@@ -29,8 +29,8 @@
 		<style>
 			body {
 				padding-top: 70px;
-				background: #000000 url('assets/img/html5.jpg') no-repeat fixed center;
-		    	background-size: 1366px 768px;
+				background: #ffffff url('assets/img/bg.jpeg') no-repeat fixed center;
+		    	background-size: 100%;
 			}
 		</style>
 	</head>
