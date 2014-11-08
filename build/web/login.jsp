@@ -92,7 +92,4 @@
                 session.setAttribute("login","false");
             }
     }
-%>
-
-<!-- debug -->
-<%=user + " " + pass + session.getAttribute("login")%>
+%> 

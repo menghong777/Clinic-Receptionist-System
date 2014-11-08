@@ -1,4 +1,4 @@
-<% if (session.getAttribute("login") == null) {response.sendRedirect("login.jsp");} %>
+<% if (session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
 <!doctype html>
 <html lang="en">
 	<head>
