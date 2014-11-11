@@ -52,7 +52,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="logout.jsp">Logout</a></li>
 					</ul>
-					<p class="navbar-text navbar-right">Hi, <a href="#" class="navbar-link">Meng Hong</a></p>
+					<p class="navbar-text navbar-right">Hi, <a href="#" class="navbar-link"><%=session.getAttribute("login")%></a></p>
 					<form class="navbar-form navbar-right" role="search">
 						<div class="form-group">
 							<div class="input-group">
