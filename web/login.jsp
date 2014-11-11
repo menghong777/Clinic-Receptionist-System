@@ -28,7 +28,8 @@
                 session.setAttribute("error","");
                 break;
             }
-            else {
+            if(formUsername != null && formPassword != null &&
+                    !formUsername.equals(user) && !formPassword.equals(pass)) {
                 session.setAttribute("login","false");
                 session.setAttribute("error","Wrong username or password");
             }
