@@ -3,14 +3,10 @@
     String formUsername = request.getParameter("username");
     String formPassword = request.getParameter("password");
     //Database Connection
-    String dbUsername = "root";
-    String dbPassword = "";
-    String conStr = "jdbc:mysql://localhost:3306/clinic_receptionist";
     String user = " ";
     String pass = " ";
-    Class.forName("com.mysql.jdbc.Driver");  
     
-    Connection con = DriverManager.getConnection(conStr, dbUsername, dbPassword);
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
     
     ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
