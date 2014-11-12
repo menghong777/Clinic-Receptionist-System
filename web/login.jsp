@@ -1,4 +1,36 @@
 <%@page import="java.sql.*"%>
+<%
+    String formUsername = request.getParameter("username");
+    String formPassword = request.getParameter("password");
+    //Database Connection
+    String user = " ";
+    String pass = " ";
+    
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    
+    ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
+    while (myResultSet.next()) {
+            user = myResultSet.getString("User_ID");
+            pass = myResultSet.getString("Password");
+            if(formUsername != null && formPassword != null &&
+                    formUsername.equals(user) && formPassword.equals(pass)) {
+                session.setAttribute("login",user);
+                session.setAttribute("error","");
+                response.sendRedirect("index.jsp");
+                break; 
+            } 
+            if(formUsername == "" && formPassword == "") {
+                session.setAttribute("error","");
+                break;
+            }
+            if(formUsername != null && formPassword != null &&
+                    !formUsername.equals(user) && !formPassword.equals(pass)) {
+                session.setAttribute("login","false");
+                session.setAttribute("error","Wrong username or password");
+            }
+    }
+%> 
 <!doctype html>
 <html lang="en">
 	<head>
@@ -29,9 +61,12 @@
 		<style>
 			body {
 				padding-top: 70px;
-				background: #000000 url('assets/img/html5.jpg') no-repeat fixed center;
-		    	background-size: 1366px 768px;
+				background: #ffffff url('assets/img/bg.jpeg') no-repeat fixed center;
+                                background-size: 100%;
 			}
+                        error {
+                            color: rgba(215, 40, 40, 0.7);
+                        }
 		</style>
 	</head>
 	<body>
@@ -55,19 +90,22 @@
 						<!-- <li><a href="#">Link</a></li> -->
 					</ul>
 					<form class="navbar-form navbar-right" role="login" method="post">
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-								<input type="text" class="form-control" placeholder="Staff ID" name="username">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-								<input type="password" class="form-control" placeholder="Password" name="password">
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Login</button>
+                                            <div class="form-group">
+                                                <%if(session.getAttribute("error")!=null){out.println(session.getAttribute("error"));}%>&nbsp
+                                            </div>
+                                            <div class="form-group error">
+                                                    <div class="input-group">
+                                                            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                                            <input type="text" class="form-control" placeholder="Staff ID" name="username">
+                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <div class="input-group">
+                                                            <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                                                            <input type="password" class="form-control" placeholder="Password" name="password">
+                                                    </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Login</button>
 					</form>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -81,32 +119,3 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 	</body>
 </html>
-
-<%
-    String formUsername = request.getParameter("username");
-    String formPassword = request.getParameter("password");
-    //Database Connection
-    String dbUsername = "root";
-    String dbPassword = "";
-    String conStr = "jdbc:mysql://localhost:3306/clinic_receptionist";
-    String user = " ";
-    String pass = " ";
-    Class.forName("com.mysql.jdbc.Driver");  
-    
-    Connection con = DriverManager.getConnection(conStr, dbUsername, dbPassword);
-    Statement myStatement = con.createStatement();
-    
-    ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
-    while (myResultSet.next()) {
-            user = myResultSet.getString("User_ID");
-            pass = myResultSet.getString("Password");
-            if(formUsername != null && formPassword != null &&
-                    formUsername.equals(user) && formPassword.equals(pass)) {
-                session.setAttribute("login","true");
-                response.sendRedirect("index.jsp");
-                break; 
-            } else {
-                session.setAttribute("login","false");
-            }
-    }
-%> 
