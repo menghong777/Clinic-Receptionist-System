@@ -1,14 +1,15 @@
 <%@page import="java.sql.*"%>
-<%
+<%  
     String formUsername = request.getParameter("username");
     String formPassword = request.getParameter("password");
+    session.setAttribute("error","");
     //Database Connection
     String user = " ";
     String pass = " ";
-    
+    Class.forName("com.mysql.jdbc.Driver");
+    try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
-    
     ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
     while (myResultSet.next()) {
             user = myResultSet.getString("User_ID");
@@ -30,6 +31,10 @@
                 session.setAttribute("error","Wrong username or password");
             }
     }
+    } catch (SQLException sql) {
+        session.setAttribute("error","ERROR: Did you start your MySQL server?");
+    }
+    
 %> 
 <!doctype html>
 <html lang="en">

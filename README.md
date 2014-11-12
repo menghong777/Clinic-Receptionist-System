@@ -18,7 +18,7 @@ Setup
 
 Feature
 -------
-1. Login              - Done
+1. Login - Done
 2. Add patient
   - Patient data
   - Prescription
