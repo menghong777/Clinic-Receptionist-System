@@ -38,7 +38,3 @@ Team
 - Meng Hong
 - Ally
 - Joel
-=======
-Non :D Yeah!
-
-Change by ALlison TU Pull request testing
