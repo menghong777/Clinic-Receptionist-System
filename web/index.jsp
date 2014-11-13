@@ -1,5 +1,4 @@
-<!-- If not logged in redirect to login.jsp -->
-<% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
+<% session.setAttribute("pagetitle","Home"); %>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -67,3 +66,5 @@
 	    <!-- Placed at the end of the document so the pages load faster -->
 	    <script src="assets/js/jquery-2.1.1.min.js"></script>
     	<script src="assets/js/bootstrap.min.js"></script>
+	</body>
+</html>

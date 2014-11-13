@@ -18,7 +18,8 @@
                     formUsername.equals(user) && formPassword.equals(pass)) {
                 session.setAttribute("login",user);
                 session.setAttribute("error","");
-                response.sendRedirect("index.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+                view.forward(request, response);
                 break; 
             } 
             if(formUsername == "" && formPassword == "") {

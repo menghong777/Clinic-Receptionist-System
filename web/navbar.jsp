@@ -8,7 +8,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Over Surgery</a>
+					<a class="navbar-brand" href="index.jsp">Over Surgery</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->

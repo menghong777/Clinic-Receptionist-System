@@ -1,3 +1,4 @@
+<% session.setAttribute("pagetitle","Print Preview"); %>
 <!doctype html>
 <html lang="en">
 	<head>

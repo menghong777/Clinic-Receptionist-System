@@ -1,5 +1,4 @@
-<!-- If not logged in redirect to login.jsp -->
-<% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
+<% session.setAttribute("pagetitle","Appoinment"); %>
 <!doctype html>
 <html lang="en">
 	<head>

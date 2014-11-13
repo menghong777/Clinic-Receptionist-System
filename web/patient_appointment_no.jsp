@@ -1,5 +1,3 @@
-<!-- If not logged in redirect to login.jsp -->
-<% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
 <!doctype html>
 <html lang="en">
 	<head>
