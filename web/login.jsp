@@ -34,7 +34,6 @@
     } catch (SQLException sql) {
         session.setAttribute("error","ERROR: Did you start your MySQL server?");
     }
-    
 %> 
 <!doctype html>
 <html lang="en">
