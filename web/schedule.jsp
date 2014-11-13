@@ -1,9 +1,16 @@
-<jsp:include page="navbar.jsp"></jsp:include>
 <!-- If not logged in redirect to login.jsp -->
 <% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
-
-<!-- The NavBar -->
-<jsp:include page="navbar.jsp"></jsp:include>
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+		<link rel="stylesheet" href="assets/css/responsive-calendar.css">
+		
+		<jsp:include page="head.jsp"></jsp:include>
+	</head>
+	<body>
+		<!-- The NavBar -->
+		<jsp:include page="navbar.jsp"></jsp:include>
 		
 		<div class="col-md-3">
 			<div class="text-center"><h4>Filter</h4></div>

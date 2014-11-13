@@ -1,17 +1,17 @@
-<!-- The NavBar -->
-<jsp:include page="navbar.jsp"></jsp:include>
+<!doctype html>
+<html lang="en">
+	<head>
+		<jsp:include page="head.jsp"></jsp:include>
+	</head>
+	<body>
+		<!-- The NavBar -->
+		<jsp:include page="navbar.jsp"></jsp:include>
 
 		<div class="col-md-3">
-			<div class="text-center"><h4>Menu</h4></div>
-			<ul class="nav nav-pills nav-stacked">
-			<!-- <li><a href="#">Search</a></li> -->
-			<li><a href="patient_appointment.html"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Appointment</a></li>
-			<li><a href="patient_prescription.html"><span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;Prescription</a></li>
-			<li class="active"><a href="patient_print.html"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print report</a></li>
-			</ul>
+			<jsp:include page="nav_patient_detail.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
-			<div class="page-header"><h2><a class="btn btn-default" href="patient_print.html" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Back</a>&nbsp;Print preview <small>Patient ID: P000</small></h2></div>
+			<div class="page-header"><h2><a class="btn btn-default" href="patient_print.jsp" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Back</a>&nbsp;Print preview <small>Patient ID: P000</small></h2></div>
 			<div class="row">
 				<div class="col-md-3">
 					<p>Over surgery</p>
