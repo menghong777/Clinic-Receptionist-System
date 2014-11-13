@@ -1,5 +1,8 @@
 <!-- If not logged in redirect to login.jsp -->
 <% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
+<%
+    String name;
+%>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -10,7 +13,6 @@
 	<body>
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
-		
 		<div class="col-md-3">
 			<jsp:include page="nav_patient.jsp"></jsp:include>
 		</div>
