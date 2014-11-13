@@ -1,4 +1,8 @@
-<% session.setAttribute("pagetitle","Print"); %>
+<% 
+    session.setAttribute("pagetitle","Print");
+    session.setAttribute("tab","search");
+    session.setAttribute("patientDetailMenu","printReport");
+%>
 <!doctype html>
 <html lang="en">
 	<head>

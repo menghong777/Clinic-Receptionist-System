@@ -1,5 +1,7 @@
 <%
     session.setAttribute("pagetitle","Add Patient");
+    session.setAttribute("tab","search");
+    session.setAttribute("patientMenu","add");
     //The above statement is for dynamic title on each page
     String name;
 %>

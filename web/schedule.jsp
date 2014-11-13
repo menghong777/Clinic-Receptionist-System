@@ -1,4 +1,7 @@
-<% session.setAttribute("pagetitle","Schedule"); %>
+<% 
+    session.setAttribute("pagetitle","Schedule");
+    session.setAttribute("tab","schedule");
+%>
 <!doctype html>
 <html lang="en">
 	<head>

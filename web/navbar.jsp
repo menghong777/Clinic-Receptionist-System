@@ -35,9 +35,9 @@
 			</div><!-- /.container-fluid -->
 		</nav>
 		<ul class="nav nav-tabs nav-justified" role="tablist">
-			<li class="active"><a href="index.jsp">Home</a></li>
-			<li class=""><a href="patient_search.jsp">Patient</a></li>
-			<li class=""><a href="schedule.jsp">Schedule</a></li>
+			<li class="<% if(session.getAttribute("tab")=="home"){out.println("active");}%>" ><a href="index.jsp">Home</a></li>
+			<li class="<% if(session.getAttribute("tab")=="search"){out.println("active");}%>"><a href="patient_search.jsp">Patient</a></li>
+			<li class="<% if(session.getAttribute("tab")=="schedule"){out.println("active");}%>"><a href="schedule.jsp">Schedule</a></li>
 		</ul>
 
 

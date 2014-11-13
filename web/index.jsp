@@ -1,4 +1,7 @@
-<% session.setAttribute("pagetitle","Home"); %>
+<% 
+    session.setAttribute("pagetitle","Home");
+    session.setAttribute("tab","home"); 
+%>
 <!doctype html>
 <html lang="en">
 	<head>
