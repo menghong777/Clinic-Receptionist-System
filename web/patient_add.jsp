@@ -1,6 +1,6 @@
-<!-- If not logged in redirect to login.jsp -->
-<% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
 <%
+    session.setAttribute("pagetitle","Add Patient");
+    //The above statement is for dynamic title on each page
     String name;
 %>
 <!doctype html>

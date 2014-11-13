@@ -1,3 +1,10 @@
+<% 
+    if (session.getAttribute("login") == null || 
+            session.getAttribute("login") == "false") {
+        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+view.forward(request, response);
+    }
+%>
 <!-- Character set -->
 <meta charset="utf-8" />
 
@@ -8,7 +15,7 @@
 <link rel="shortcut icon" href="" />
 
 <!-- Website title -->
-<title>PAGE_TITLE | Over Surgery</title>
+<title><%= session.getAttribute("pagetitle") %> | Over Surgery</title>
 
 <style>
 	body { padding-top: 70px; }
