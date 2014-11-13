@@ -14,7 +14,7 @@
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
 		<div class="col-md-3">
-			<jsp:include page="nav_patient.jsp"></jsp:include>
+			<jsp:include page="nav_patient_search_add.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
