@@ -32,7 +32,7 @@
             }
     }
     } catch (SQLException sql) {
-        session.setAttribute("error","ERROR: Did you start your MySQL server?");
+        session.setAttribute("error","ERROR: Did you start your MySQL server?"+sql);
     }
 %> 
 <!doctype html>
