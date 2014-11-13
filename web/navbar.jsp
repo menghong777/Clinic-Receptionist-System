@@ -1,26 +1,3 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<!-- Character set -->
-		<meta charset="utf-8" />
-
-		<!-- IE compatible mode: edge=highest version supported -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-		<!-- favicon.ico -->
-		<link rel="shortcut icon" href="" />
-
-		<!-- Website title -->
-		<title>PAGE_TITLE | Over Surgery</title>
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-		<style>
-			body { padding-top: 70px; }
-		</style>
-	</head>
-	<body>
 		<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -59,7 +36,7 @@
 		</nav>
 		<ul class="nav nav-tabs nav-justified" role="tablist">
 			<li class="active"><a href="index.jsp">Home</a></li>
-			<li class=""><a href="patient_appointment.jsp">Patient</a></li>
+			<li class=""><a href="patient_search.jsp">Patient</a></li>
 			<li class=""><a href="schedule.jsp">Schedule</a></li>
 		</ul>
 

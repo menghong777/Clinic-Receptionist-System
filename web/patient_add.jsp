@@ -1,17 +1,18 @@
-<jsp:include page="navbar.jsp"></jsp:include>
 <!-- If not logged in redirect to login.jsp -->
 <% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
+<!doctype html>
+<html lang="en">
+	<head>
+		<jsp:include page="head.jsp"></jsp:include>
 
-<!-- The NavBar -->
-<jsp:include page="navbar.jsp"></jsp:include>
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+	</head>
+	<body>
+		<!-- The NavBar -->
+		<jsp:include page="navbar.jsp"></jsp:include>
 		
 		<div class="col-md-3">
-			<div class="text-center"><h4>Menu</h4></div>
-			<ul class="nav nav-pills nav-stacked">
-			<!-- <li><a href="#">Search</a></li> -->
-			<li><a href="patient_search.html"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Search patient</a></li>
-			<li class="active"><a href="patient_add.html"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add patient</a></li>
-			</ul>
+			<jsp:include page="nav_patient.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
