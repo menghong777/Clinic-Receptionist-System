@@ -58,26 +58,24 @@
 		</div>
 		<div class="col-md-9"><br>
 			<!-- Responsive calendar - START -->
-    	<div class="responsive-calendar">
-        <div class="controls">
-            <a class="pull-left" data-go="prev"><div class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Prev</div></a>
-            <h4><span data-head-year></span> <span data-head-month></span></h4>
-            <a class="pull-right" data-go="next"><div class="btn btn-primary">Next&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></div></a>
-        </div><hr/>
-        <div class="day-headers">
-          <div class="day header">Mon</div>
-          <div class="day header">Tue</div>
-          <div class="day header">Wed</div>
-          <div class="day header">Thu</div>
-          <div class="day header">Fri</div>
-          <div class="day header">Sat</div>
-          <div class="day header">Sun</div>
-        </div>
-        <div class="days" data-group="days">
-          
-        </div>
-      </div>
-      <!-- Responsive calendar - END -->
+    		<div class="responsive-calendar">
+        		<div class="controls">
+		            <a class="pull-left" data-go="prev"><div class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Prev</div></a>
+		            <h4><span data-head-year></span> <span data-head-month></span></h4>
+		            <a class="pull-right" data-go="next"><div class="btn btn-primary">Next&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></div></a>
+        		</div><hr/>
+        		<div class="day-headers">
+					<div class="day header">Mon</div>
+					<div class="day header">Tue</div>
+					<div class="day header">Wed</div>
+					<div class="day header">Thu</div>
+					<div class="day header">Fri</div>
+					<div class="day header">Sat</div>
+					<div class="day header">Sun</div>
+        		</div>
+        		<div class="days" data-group="days"></div>
+      		</div>
+			<!-- Responsive calendar - END -->
 		</div>
 
 		<!-- Bootstrap core JavaScript
@@ -89,7 +87,7 @@
 		<script src="assets/js/responsive-calendar.js"></script>
 		<script src="assets/js/moment.min.js"></script>
 		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    	<script src="assets/js/bootstrap.min.js"></script>
 
 		<!-- Reference: http://w3widgets.com/responsive-calendar/ -->
 		<script type="text/javascript">
