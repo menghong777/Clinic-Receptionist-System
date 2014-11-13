@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.1.13
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2014 at 02:21 PM
--- Server version: 5.5.34
--- PHP Version: 5.4.22
+-- Generation Time: Nov 13, 2014 at 07:28 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.5.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,9 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `clinic_receptionist`
 --
-
 CREATE Database clinic_receptionist;
 USE clinic_receptionist;
+
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `receptionist` (
   `Password` varchar(20) NOT NULL,
   `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `receptionist`
@@ -195,7 +195,9 @@ CREATE TABLE IF NOT EXISTS `receptionist` (
 
 INSERT INTO `receptionist` (`ID`, `Receptionist_ID`, `User_ID`, `Password`, `TimeStamp`) VALUES
 (1, 'RP001', 'US007', 'asd1234', '2014-11-08 17:39:58'),
-(2, 'RP002', 'US008', 'asd1234', '2014-11-08 17:39:58');
+(2, 'RP002', 'US008', 'asd1234', '2014-11-08 17:39:58'),
+(3, '', 'admin', '123456', '2014-11-11 13:36:29'),
+(4, '', 'admin', 'admin', '2014-11-13 07:26:37');
 
 -- --------------------------------------------------------
 
