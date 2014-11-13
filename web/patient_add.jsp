@@ -2,6 +2,9 @@
 <!-- If not logged in redirect to login.jsp -->
 <% if (session.getAttribute("login") == null || session.getAttribute("login") == "false") {response.sendRedirect("login.jsp");} %>
 
+<%
+    String name;
+%>
 <!-- The NavBar -->
 <jsp:include page="navbar.jsp"></jsp:include>
 		
