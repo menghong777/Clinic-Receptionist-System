@@ -14,13 +14,17 @@
     while (myResultSet.next()) {
             user = myResultSet.getString("User_ID");
             pass = myResultSet.getString("Password");
-            if(formUsername != null && formPassword != null &&
-                    formUsername.equals(user) && formPassword.equals(pass)) {
-                session.setAttribute("login",user);
-                session.setAttribute("error","");
-                RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-                view.forward(request, response);
-                break; 
+            if(formUsername != null && formPassword != null) {
+                if (formUsername.equals(user) && formPassword.equals(pass)) {
+                    session.setAttribute("login",user);
+                    session.setAttribute("error","");
+                    RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+                    view.forward(request, response);
+                    break; 
+                } else {
+                    session.setAttribute("login","false");
+                    session.setAttribute("error","Wrong username or password");
+                }
             } 
             if(formUsername == "" && formPassword == "") {
                 session.setAttribute("error","");

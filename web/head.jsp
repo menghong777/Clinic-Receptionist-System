@@ -2,7 +2,7 @@
     if (session.getAttribute("login") == null || 
             session.getAttribute("login") == "false") {
         RequestDispatcher view = request.getRequestDispatcher("login.jsp");
-view.forward(request, response);
+        view.forward(request, response);
     }
 %>
 <!-- Character set -->
