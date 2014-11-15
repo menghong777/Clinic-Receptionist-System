@@ -87,6 +87,7 @@
 						<th>Identification Card</th>
 						<th>First name</th>
 						<th>Last name</th>
+						<th>Sex</th>
 						<th>Personal contact</th>
 					</tr>
 				</thead>
@@ -97,6 +98,7 @@
                                         String lName = result.getString("LastName");
                                         String IC = result.getString("IC/Passport");
                                         String Phone = result.getString("PhoneNumber");
+                                        String sex = result.getString("Sex");
                                 %>
 					<tr>
 						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
@@ -104,6 +106,7 @@
 						<td><%=IC%></td>
 						<td><%=fName%></td>
 						<td><%=lName%></td>
+                                                <td><%=sex%></td>
 						<td><%=Phone%></td>
 					</tr>
                                 <%
