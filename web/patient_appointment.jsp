@@ -19,116 +19,45 @@
 			<jsp:include page="nav_patient_detail.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
-			<div class="page-header"><h2><jsp:include page="nav_back_patient_search.jsp"></jsp:include>&nbsp;Patient <small>ID: P000</small></h2></div>
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label class="col-sm-2 control-label">IC number</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">921010-12-1212</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Name</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Jerry Leong</p>
-					</div>
-				</div>
-<!-- 			  <div class="form-group">
-					<label class="col-sm-2 control-label">Address</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">23, Jalan Loke Yew 1</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label"></label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Kuala Lumpur</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label"></label>
-					<div class="col-sm-10">
-						<p class="form-control-static">56000</p>
-					</div>
-				</div> -->
-<!-- 			  <div class="form-group">
-					<label class="col-sm-2 control-label">Personal contact</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">01123456789</p> -->
-						<!-- Input type type="tel" is currently supported only in Safari 8 -->
-<!--			    </div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Birth date</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">22/03/1960</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Sex</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Male</p>
-					</div>
-				</div>
-		<div class="page-header"><h2>Emergency contact information</h2></div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Name</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Jenny Lee</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Relationship</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Mother</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Emergency contact</label>
-					<div class="col-sm-10">
-						<p class="form-control-static">0172347583</p>
-					</div>
-				</div> -->
-			</form>
-				<div class="page-header"><h2>Appointments</h2></div>
-				<table class="table table-hover table-condensed">
-					<thead>
-						<tr>
-							<th></th>
-							<th>General practice ID</th>
-							<th>General practice name</th>
-							<th>Date</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-							<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
-							<td>GP001</td>
-							<td>Doctor Joel</td>
-							<td>12/12/2013</td>
-							<td>Expired</td>
-						</tr>
-						<tr>
-							<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-							<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
-							<td>GP002</td>
-							<td>Doctor Lim</td>
-							<td>14/12/2013</td>
-							<td>Cancelled</td>
-						</tr>
-						<tr>
-							<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-							<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
-							<td>GP002</td>
-							<td>Doctor Lim</td>
-							<td>14/11/2014</td>
-							<td>Valid</td>
-						</tr>
-					</tbody>
-				</table>
-				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</button>
+			<jsp:include page="info_patient.jsp"></jsp:include>
+			<table class="table table-hover table-condensed">
+				<thead>
+					<tr>
+						<th></th>
+						<th>General practice ID</th>
+						<th>General practice name</th>
+						<th>Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td>GP001</td>
+						<td>Doctor Joel</td>
+						<td>12/12/2013</td>
+						<td>Expired</td>
+					</tr>
+					<tr>
+						<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td>GP002</td>
+						<td>Doctor Lim</td>
+						<td>14/12/2013</td>
+						<td>Cancelled</td>
+					</tr>
+					<tr>
+						<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td>GP002</td>
+						<td>Doctor Lim</td>
+						<td>14/11/2014</td>
+						<td>Valid</td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</button>
 		</div>
 
 		<!-- Change Appointment Date Modal -->
