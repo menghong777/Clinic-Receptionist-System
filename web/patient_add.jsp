@@ -1,9 +1,9 @@
 <%@page import="java.sql.*"%>
 <%
     /*For page tab/button/menu active state */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement();
-    //ResultSet myResultSet = myStatement.executeQuery("INSERT * FROM receptionist");
+    //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+//    /Statement myStatement = con.createStatement();
+    //ResultSet myResultSet = myStatement.executeQuery("INSERT * FROM patient");
     
     session.setAttribute("pagetitle","Add Patient");
     session.setAttribute("tab","search");
@@ -11,17 +11,33 @@
     //The above statement is for dynamic title on each page
     
     //do get section
-    String fname, lname, IC, phone, sex, street, city, postcode;
+    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="";
     Date dob;
     
-    fname = request.getParameter("fname");
-    lname = request.getParameter("lname");
-    IC = request.getParameter("IC");
-    street = request.getParameter("address");
-    city = request.getParameter("city");
-    postcode = request.getParameter("postcode");
-    phone = request.getParameter("p_contact");
-    sex = request.getParameter("sex");
+    if((String)session.getAttribute(fname)!= null && session.getAttribute("fname").equals(""))
+        fname = (String)request.getAttribute("fname");
+    
+    if((String)session.getAttribute(lname)!= null && session.getAttribute("lname").equals(""))
+        lname = (String)request.getAttribute("lname");
+    
+    if((String)session.getAttribute(IC)!= null && session.getAttribute("IC").equals(""))
+        IC = (String)request.getAttribute("IC");
+    
+    if((String)session.getAttribute(street)!= null && session.getAttribute("street").equals(""))
+        street = (String)request.getAttribute("street");
+    
+    if((String)session.getAttribute(city)!= null && session.getAttribute("city").equals(""))
+        city = (String)request.getAttribute("city");
+    
+    if((String)session.getAttribute(postcode)!= null && session.getAttribute("postcode").equals(""))
+        postcode = (String)request.getAttribute("postcode");
+    
+    if((String)session.getAttribute(phone)!= null && session.getAttribute("phone").equals(""))
+        phone = (String)request.getAttribute("phone");
+    
+    if((String)session.getAttribute(sex)!= null && session.getAttribute("sex").equals(""))
+        sex = (String)request.getAttribute("sex");
+    
     //dob = request.getParameter("dob");
     
 %>
