@@ -79,32 +79,36 @@
 						<th>Identification Card</th>
 						<th>First name</th>
 						<th>Last name</th>
+						<th>Sex</th>
 						<th>Personal contact</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
 						<td>P000</td>
 						<td>921010-12-1212</td>
 						<td>Jerry</td>
 						<td>Leong</td>
+						<td>Male</td>
 						<td>01123456789</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
 						<td>P000</td>
 						<td>921010-12-1212</td>
 						<td>Jerry</td>
 						<td>Leong</td>
+						<td>Male</td>
 						<td>01123456789</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
 						<td>P000</td>
 						<td>921010-12-1212</td>
 						<td>Jerry</td>
 						<td>Leong</td>
+						<td>Male</td>
 						<td>01123456789</td>
 					</tr>
 				</tbody>
