@@ -4,11 +4,19 @@
     session.setAttribute("pagetitle","Patient Search");
     session.setAttribute("tab","search");
     session.setAttribute("patientMenu","search");
+  
+    /*Database connection */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement(); 
     
-    /*Search Logic*/
-//    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-//    Statement myStatement = con.createStatement(); 
-//    ResultSet result = myStatement.executeQuery("SELECT * FROM operations WHERE username ='");
+    /*Search patientID */
+    String PID = request.getParameter("patientID");
+    ResultSet result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
+    
+    /*Get User ID*/
+    String UID = "";
+    while(result.next()) { UID = result.getString("User_ID");}
+    result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
 %>
 <!doctype html>
 <html lang="en">
@@ -26,11 +34,11 @@
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>Search and select a patient</h2></div>
-			<form class="form-inline" role="form">
+			<form class="form-inline" role="form" method="post">
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-						<input type="search" class="form-control" id="search" placeholder="Patient ID">
+						<input name="patientID" type="search" class="form-control" id="search" placeholder="Patient ID">
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary">Search</button>
@@ -83,30 +91,24 @@
 					</tr>
 				</thead>
 				<tbody>
+                                <%
+                                    while(result.next()) {
+                                        String fName = result.getString("FirstName");
+                                        String lName = result.getString("LastName");
+                                        String IC = result.getString("IC/Passport");
+                                        String Phone = result.getString("PhoneNumber");
+                                %>
 					<tr>
 						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
-						<td>P000</td>
-						<td>921010-12-1212</td>
-						<td>Jerry</td>
-						<td>Leong</td>
-						<td>01123456789</td>
+						<td><%=PID%></td>
+						<td><%=IC%></td>
+						<td><%=fName%></td>
+						<td><%=lName%></td>
+						<td><%=Phone%></td>
 					</tr>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
-						<td>P000</td>
-						<td>921010-12-1212</td>
-						<td>Jerry</td>
-						<td>Leong</td>
-						<td>01123456789</td>
-					</tr>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
-						<td>P000</td>
-						<td>921010-12-1212</td>
-						<td>Jerry</td>
-						<td>Leong</td>
-						<td>01123456789</td>
-					</tr>
+                                <%
+                                    }
+                                %>
 				</tbody>
 			</table>
 		</div>
