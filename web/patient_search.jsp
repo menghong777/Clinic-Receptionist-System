@@ -6,9 +6,9 @@
     session.setAttribute("patientMenu","search");
     
     /*Search Logic*/
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/assign", "root", "");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement(); 
-    ResultSet result = myStatement.executeQuery("SELECT * FROM operations WHERE username ='" + customerA.getAll()[3] + "'");
+    ResultSet result = myStatement.executeQuery("SELECT * FROM operations WHERE username ='");
 %>
 <!doctype html>
 <html lang="en">
