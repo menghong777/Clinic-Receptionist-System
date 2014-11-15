@@ -101,7 +101,7 @@
                                         String sex = result.getString("Sex");
                                 %>
 					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_appointment.jsp" role="button">Select</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
 						<td><%=PID%></td>
 						<td><%=IC%></td>
 						<td><%=fName%></td>
