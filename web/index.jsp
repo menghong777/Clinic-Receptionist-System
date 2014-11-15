@@ -50,7 +50,7 @@
 		<div class="col-md-5">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Today's GP/nurse</h2>
+					<h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Today's staff on duty</h2>
 				</div>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
