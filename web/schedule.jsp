@@ -1,4 +1,5 @@
 <% 
+    /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Schedule");
     session.setAttribute("tab","schedule");
 %>

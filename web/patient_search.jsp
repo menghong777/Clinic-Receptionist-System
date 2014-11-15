@@ -1,7 +1,14 @@
+<%@page import="java.sql.*"%>
 <% 
+    /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Patient Search");
     session.setAttribute("tab","search");
     session.setAttribute("patientMenu","search");
+    
+    /*Search Logic*/
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/assign", "root", "");
+    Statement myStatement = con.createStatement(); 
+    ResultSet result = myStatement.executeQuery("SELECT * FROM operations WHERE username ='" + customerA.getAll()[3] + "'");
 %>
 <!doctype html>
 <html lang="en">

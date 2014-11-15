@@ -1,4 +1,5 @@
 <% 
+    /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Print");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","printReport");
