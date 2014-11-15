@@ -26,24 +26,20 @@
 						<thead>
 							<tr>
 								<th>Patient name</th>
-								<th>Time</th>
 								<th>GP</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Kong</td>
-								<td>16:00</td>
 								<td>Dr Chong</td>
 							</tr>
 							<tr>
 								<td>Lee</td>
-								<td>17:30</td>
 								<td>Dr Rain</td>
 							</tr>
 							<tr>
 								<td>Kelly</td>
-								<td>16:00</td>
 								<td>Dr Ruby</td>
 							</tr>
 						</tbody>
