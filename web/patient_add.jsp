@@ -1,11 +1,31 @@
+<%@page import="java.sql.*"%>
 <%
     /*For page tab/button/menu active state */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    //ResultSet myResultSet = myStatement.executeQuery("INSERT * FROM receptionist");
+    
     session.setAttribute("pagetitle","Add Patient");
     session.setAttribute("tab","search");
     session.setAttribute("patientMenu","add");
     //The above statement is for dynamic title on each page
-    String fname, lname, IC, address, p_contact;
+    
+    //do get section
+    String fname, lname, IC, phone, sex, street, city, postcode;
+    Date dob;
+    
+    fname = request.getParameter("fname");
+    lname = request.getParameter("lname");
+    IC = request.getParameter("IC");
+    street = request.getParameter("address");
+    city = request.getParameter("city");
+    postcode = request.getParameter("postcode");
+    phone = request.getParameter("p_contact");
+    sex = request.getParameter("sex");
+    //dob = request.getParameter("dob");
+    
 %>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -25,16 +45,16 @@
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="IC" placeholder="IC number">
+			      <input type="text" class="form-control" id="IC" placeholder="IC number" name="IC">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="firstName" placeholder="First name">
+			      <input type="text" class="form-control" id="firstName" placeholder="First name" name="fname">
 			    </div>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="lastName" placeholder="Last name">
+			      <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lname">
 			    </div>
 			  </div>
 <!-- 			  <div class="form-group">
@@ -46,25 +66,29 @@
 			  <div class="form-group">
 			    <label for="addressStreet" class="col-sm-2 control-label">Address</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressStreet" placeholder="House number and street">
+			      <input type="text" class="form-control" id="addressStreet" placeholder="Unit number and street"
+                                     name="street">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressCity" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressCity" placeholder="City">
+			      <input type="text" class="form-control" id="addressCity" placeholder="City"
+                                     name="city">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressPostcode" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressPostcode" placeholder="Postcode">
+			      <input type="text" class="form-control" id="addressPostcode" placeholder="Postcode"
+                                     name="postcode">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="contact" class="col-sm-2 control-label">Personal contact</label>
 			    <div class="col-sm-10">
-			      <input type="tel" class="form-control" id="contact" placeholder="Mobile or home">
+			      <input type="tel" class="form-control" id="contact" placeholder="Mobile or home"
+                                     name="phone">
 			      <!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 			  </div>
@@ -76,7 +100,8 @@
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
-							<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date">
+							<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date"
+                                                               name="dob">
 						</div>
 			    </div>
 			  </div>
