@@ -41,7 +41,7 @@
 						<input name="patientID" type="search" class="form-control" id="search" placeholder="Patient ID">
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Search</button>
+				<button name="submit" type="submit" class="btn btn-primary">Search</button>
 			</form><br>
 			<p>Or</p>
 			<form class="form-inline" role="form">
@@ -78,9 +78,10 @@
 				<button type="submit" class="btn btn-primary">Search</button>
 			</form>
 			<br>
-			<h4>3 result(s) found</h4><br>
+			<!--h4>3 result(s) found</h4><br-->
 			<table class="table table-hover table-condensed">
 				<thead>
+                                <%if(request.getParameter("submit")!=null){%>
 					<tr>
 						<th></th>
 						<th>Patient ID</th>
@@ -90,6 +91,7 @@
 						<th>Sex</th>
 						<th>Personal contact</th>
 					</tr>
+                                <%}%>                        
 				</thead>
 				<tbody>
                                 <%
