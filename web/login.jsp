@@ -6,19 +6,17 @@
     //Database Connection
     String user = " ";
     String pass = " ";
-    String fname = " ";
     Class.forName("com.mysql.jdbc.Driver");
     try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
-    ResultSet myResultSet = myStatement.executeQuery("Select receptionist.User_ID, receptionist.Password, main_table.FirstName from receptionist, main_table where receptionist.user_id = '"+formUsername+"' and main_table.user_id = '"+formUsername+"'");
+    ResultSet myResultSet = myStatement.executeQuery("SELECT * FROM receptionist");
     while (myResultSet.next()) {
             user = myResultSet.getString("User_ID");
             pass = myResultSet.getString("Password");
-            fname = myResultSet.getString("FirstName");            
             if(formUsername != null && formPassword != null) {
                 if (formUsername.equals(user) && formPassword.equals(pass)) {
-                    session.setAttribute("login",fname);
+                    session.setAttribute("login",user);
                     session.setAttribute("error","");
                     RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                     view.forward(request, response);
