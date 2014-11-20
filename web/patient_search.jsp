@@ -8,14 +8,25 @@
     /*Database connection */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement(); 
-    
-    /*Search patientID */
-    String PID = request.getParameter("patientID");
-    ResultSet result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
-    
-    /*Get User ID*/
+    ResultSet result  = null;
+    String PID = "";
+    String name = "";
     String UID = "";
-    while(result.next()) { UID = result.getString("User_ID");}
+    /*Search patientID */
+    if(request.getParameter("patientID")!=null) {
+        PID = request.getParameter("patientID");
+        result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
+    }
+    //Search Name + Birthdate
+    if(request.getParameter("name")!=null){
+        name = request.getParameter("name");
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
+    }
+    /*Get User ID*/
+    if(result!=null){
+        while(result.next()) { UID = result.getString("User_ID");}
+        
+    }    
     result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
 %>
 <!doctype html>
