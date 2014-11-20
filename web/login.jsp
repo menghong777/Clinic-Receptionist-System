@@ -6,38 +6,44 @@
     //Database Connection
     String user = " ";
     String pass = " ";
-    String fname = " ";
+    String fname = "";
     Class.forName("com.mysql.jdbc.Driver");
     try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement();
-    ResultSet myResultSet = myStatement.executeQuery("Select receptionist.User_ID, receptionist.Password, main_table.FirstName from receptionist, main_table where receptionist.user_id = '"+formUsername+"' and main_table.user_id = '"+formUsername+"'");
+    Statement myStatement = con.createStatement();   
+   
+
+            if(formUsername != null && formPassword != null) {
+    ResultSet myResultSet = myStatement.executeQuery("SELECT receptionist.*, main_table.FirstName FROM receptionist, main_table Where receptionist.User_ID = '"+formUsername+"' and main_table.User_ID = '"+formUsername+"'");
     while (myResultSet.next()) {
             user = myResultSet.getString("User_ID");
             pass = myResultSet.getString("Password");
-            fname = myResultSet.getString("FirstName");            
-            if(formUsername != null && formPassword != null) {
+            fname = myResultSet.getString("FirstName");
+            }
                 if (formUsername.equals(user) && formPassword.equals(pass)) {
                     session.setAttribute("login",fname);
                     session.setAttribute("error","");
                     RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                     view.forward(request, response);
-                    break; 
+                //    break; 
                 } else {
                     session.setAttribute("login","false");
                     session.setAttribute("error","Wrong username or password");
                 }
-            } 
-            if(formUsername == "" && formPassword == "") {
-                session.setAttribute("error","");
-                break;
+            } //this code it didn't execute dono why
+            else if(formUsername == "" || formPassword == "") {
+                session.setAttribute("login","false");
+                session.setAttribute("error","Missing User or pass");
+               // break;
             }
             if(formUsername != null && formPassword != null &&
                     !formUsername.equals(user) && !formPassword.equals(pass)) {
-                session.setAttribute("login","false");
+                
                 session.setAttribute("error","Wrong username or password");
             }
-    }
+           
+    
+    
     } catch (SQLException sql) {
         session.setAttribute("error","ERROR: Did you start your MySQL server?"+sql);
     }
@@ -130,3 +136,5 @@
 		<script src="assets/js/bootstrap.min.js"></script>
 	</body>
 </html>
+
+

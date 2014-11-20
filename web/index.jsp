@@ -1,7 +1,14 @@
+<%@page import="java.sql.*"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Home");
     session.setAttribute("tab","home"); 
+    
+    Class.forName("com.mysql.jdbc.Driver");
+    try {
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();  
+
 %>
 <!doctype html>
 <html lang="en">
@@ -21,6 +28,13 @@
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Today's appointments</h2>
 				</div>
+                                 <% 
+                            //The date need to change according to current date
+                            ResultSet ResultSet = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, schedule where appointment.schedule_ID = Schedule.Schedule_ID and Schedule.USer_ID = main_table.user_ID");                                                     
+                            
+                           
+                            
+                            %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
@@ -29,19 +43,22 @@
 								<th>GP</th>
 							</tr>
 						</thead>
+                                                <%while(ResultSet.next()){%>
 						<tbody>
 							<tr>
-								<td>Kong</td>
-								<td>Dr Chong</td>
-							</tr>
-							<tr>
-								<td>Lee</td>
-								<td>Dr Rain</td>
-							</tr>
-							<tr>
-								<td>Kelly</td>
-								<td>Dr Ruby</td>
-							</tr>
+                                                            <td>
+                                                                <%= ResultSet.getString("FirstName")%>
+                                                            </td>   
+                                                        </tr>    
+                                                        <%}%>
+                                                <%ResultSet result = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, patient where appointment.patient_ID = patient.patient_ID and patient.USer_ID = main_table.user_ID");%>            
+                                                <%while(result.next()){%>  
+                                                <tr>
+                                                            <td>
+                                                               <%= result.getString("FirstName")%>
+                                                            </td>                                                            
+                                                        </tr>  
+                                                    <%}%>     
 						</tbody>
 					</table>
 				</div>
@@ -52,26 +69,36 @@
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Today's staff on duty</h2>
 				</div>
+                            <% 
+                            //The date need to change according to current date
+                            ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                                                     
+                            
+                            %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>User ID</th>
+                                                                <th>First Name</th>
+                                                                <th>Last Name</th>
+                                                       
 							</tr>
 						</thead>
 						<tbody>
+                                                    <%while(myResultSet.next()) {%>
 							<tr>
-								<td>Dr Chong</td>
-							</tr>
-							<tr>
-								<td>Dr Rain</td>
-							</tr>
-							<tr>
-								<td>Nurse Ruby</td>
-							</tr>
-							<tr>
-								<td>Dr Ray</td>
-							</tr>
+                                                            <td>
+                                                                <%= myResultSet.getString("User_ID")%>
+                                                            </td>
+                                                            <td>
+                                                                <%= myResultSet.getString("FirstName")%>
+                                                            </td>
+                                                             <td>
+                                                                <%= myResultSet.getString("LastName")%>
+                                                            </td>
+                                                
+							</tr>	
+                                                        <%}%>
 						</tbody>
 					</table>
 				</div>
@@ -83,4 +110,9 @@
 	    <script src="assets/js/jquery-2.1.1.min.js"></script>
     	<script src="assets/js/bootstrap.min.js"></script>
 	</body>
+<%                
+}catch (SQLException sql) {
+  session.setAttribute("error","ERROR: Did you start your MySQL server?"+sql);
+}
+%>
 </html>
