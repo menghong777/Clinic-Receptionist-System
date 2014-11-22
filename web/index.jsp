@@ -31,10 +31,7 @@
                                  <% 
                             //The date need to change according to current date
                             ResultSet ResultSet = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, schedule where appointment.schedule_ID = Schedule.Schedule_ID and Schedule.USer_ID = main_table.user_ID");                                                     
-                            
-                           
-                            
-                            %>
+                                                %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
@@ -50,15 +47,7 @@
                                                                 <%= ResultSet.getString("FirstName")%>
                                                             </td>   
                                                         </tr>    
-                                                        <%}%>
-                                                <%ResultSet result = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, patient where appointment.patient_ID = patient.patient_ID and patient.USer_ID = main_table.user_ID");%>            
-                                                <%while(result.next()){%>  
-                                                <tr>
-                                                            <td>
-                                                               <%= result.getString("FirstName")%>
-                                                            </td>                                                            
-                                                        </tr>  
-                                                    <%}%>     
+                                                        <%}%>                                             
 						</tbody>
 					</table>
 				</div>
