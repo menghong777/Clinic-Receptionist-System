@@ -20,7 +20,7 @@
     //Search Name + Birthdate
     if(request.getParameter("name")!=null){
         name = request.getParameter("name");
-        result = myStatement.executeQuery("SELECT * FROM main_table WHERE FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
     }
     /*Get User ID*/
     if(result!=null){
@@ -28,6 +28,7 @@
         
     }    
     result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
+    
 %>
 <!doctype html>
 <html lang="en">
@@ -55,11 +56,11 @@
 				<button name="submit" type="submit" class="btn btn-primary">Search</button>
 			</form><br>
 			<p>Or</p>
-			<form class="form-inline" role="form">
+			<form class="form-inline" role="form" method="post">
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-						<input type="search" class="form-control" id="search" placeholder="Name">
+						<input name="name" type="search" class="form-control" id="search" placeholder="Name">
 					</div>
 				</div>
 				<div class="form-group">
@@ -70,10 +71,10 @@
 						<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date">
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Search</button>
+				<button name="submit" type="submit" class="btn btn-primary">Search</button>
 			</form><br>
 			<p>Or</p>
-			<form class="form-inline" role="form">
+			<form class="form-inline" role="form" method="post">
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
@@ -86,7 +87,7 @@
 						<input type="search" class="form-control" id="search" placeholder="Address">
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">Search</button>
+				<button name="submit" type="submit" class="btn btn-primary">Search</button>
 			</form>
 			<br>
 			<!--h4>3 result(s) found</h4><br-->
