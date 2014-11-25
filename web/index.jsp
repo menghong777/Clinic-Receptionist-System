@@ -7,7 +7,8 @@
     Class.forName("com.mysql.jdbc.Driver");
     try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement();
+    Statement myStatement = con.createStatement();  
+
 %>
 <!doctype html>
 <html lang="en">
@@ -27,10 +28,10 @@
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Today's appointments</h2>
 				</div>
-				<% 
-                //The date need to change according to current date
-                ResultSet ResultSet = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, schedule where appointment.schedule_ID = Schedule.Schedule_ID and Schedule.USer_ID = main_table.user_ID");
-                %>
+                                 <% 
+                            //The date need to change according to current date
+                            ResultSet ResultSet = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, schedule where appointment.schedule_ID = Schedule.Schedule_ID and Schedule.USer_ID = main_table.user_ID");                                                     
+                                                %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
@@ -39,22 +40,14 @@
 								<th>GP</th>
 							</tr>
 						</thead>
-                        <% while(ResultSet.next()){ %>
+                                                <%while(ResultSet.next()){%>
 						<tbody>
 							<tr>
-                                <td>
-                                    <%= ResultSet.getString("FirstName") %>
-                                </td>
-                            </tr>
-                            <% } %>
-                            <% ResultSet result = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, patient where appointment.patient_ID = patient.patient_ID and patient.USer_ID = main_table.user_ID"); %>            
-                            <%while(result.next()){%>  
-                            <tr>
-                                <td>
-                                   <%= result.getString("FirstName") %>
-                                </td>
-                            </tr>  
-                        	<% } %>
+                                                            <td>
+                                                                <%= ResultSet.getString("FirstName")%>
+                                                            </td>   
+                                                        </tr>    
+                                                        <%}%>                                             
 						</tbody>
 					</table>
 				</div>
@@ -65,33 +58,36 @@
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Today's staff on duty</h2>
 				</div>
-                <% 
-                //The date need to change according to current date
-                ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");
-                %>
+                            <% 
+                            //The date need to change according to current date
+                            ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                                                     
+                            
+                            %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
 							<tr>
 								<th>User ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                                                <th>First Name</th>
+                                                                <th>Last Name</th>
+                                                       
 							</tr>
 						</thead>
 						<tbody>
-                        	<% while(myResultSet.next()) { %>
+                                                    <%while(myResultSet.next()) {%>
 							<tr>
-                                <td>
-                                    <%= myResultSet.getString("User_ID")%>
-                                </td>
-                                <td>
-                                    <%= myResultSet.getString("FirstName")%>
-                                </td>
-                                <td>
-                                    <%= myResultSet.getString("LastName")%>
-                                </td>
+                                                            <td>
+                                                                <%= myResultSet.getString("User_ID")%>
+                                                            </td>
+                                                            <td>
+                                                                <%= myResultSet.getString("FirstName")%>
+                                                            </td>
+                                                             <td>
+                                                                <%= myResultSet.getString("LastName")%>
+                                                            </td>
+                                                
 							</tr>	
-                            <% } %>
+                                                        <%}%>
 						</tbody>
 					</table>
 				</div>
