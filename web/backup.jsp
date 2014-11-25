@@ -27,7 +27,11 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Today's appointments</h2>
-				</div>                                
+				</div>
+                                 <% 
+                            //The date need to change according to current date
+                            ResultSet ResultSet = myStatement.executeQuery("SELECT main_table.firstname from main_table, appointment, schedule where appointment.schedule_ID = Schedule.Schedule_ID and Schedule.USer_ID = main_table.user_ID");                                                     
+                                                %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
 						<thead>
@@ -53,10 +57,11 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h2 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Today's staff on duty</h2>
-				</div> 
-                              <% 
+				</div>
+                            <% 
                             //The date need to change according to current date
-                            ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                            
+                            ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                                                     
+                            
                             %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
@@ -68,20 +73,23 @@
                                                        
 							</tr>
 						</thead>
-						<tbody> 
-                                                    <% while(myResultSet.next()) { %>
+						<tbody>                                                    
 							<tr>
                                                             <td>
-                                                                <%= myResultSet.getString("User_ID")%>                                                               
+                                                                haha
+                                                                
                                                             </td>
                                                             <td>
-                                                                <%= myResultSet.getString("FirstName")%>                                                                
+                                                                haha
+                                                                
                                                             </td>
                                                              <td>
-                                                                <%= myResultSet.getString("LastName")%>                                                                
-                                                            </td>                                                
+                                                                 haha
+                                                                
+                                                            </td>
+                                                
 							</tr>	
-                                                    <% } %>    
+                                                        <%}%>
 						</tbody>
 					</table>
 				</div>
