@@ -1,4 +1,7 @@
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.sql.*"%>
+<%@ page import="java.io.*,java.util.Locale" %>
+<%@ page import="java.text.DateFormat,java.util.Date" %>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Home");
@@ -8,6 +11,13 @@
     try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();  
+    
+    //get the locale date
+    Locale locale = request.getLocale(); //request for locale date
+    String date = DateFormat.getDateTimeInstance(
+                              DateFormat.FULL, 
+                              DateFormat.SHORT, 
+                              locale).format(new Date( ));
 
 %>
 <!doctype html>
@@ -20,7 +30,8 @@
 		<jsp:include page="navbar.jsp"></jsp:include>
 		<div class="row">
 			<div class="col-md-12 text-center">
-			<h3>Tuesday, November 17, 2014</h3>
+                        <h3><% out.println(date); %></h3>    
+			
 		</div>
 		<div class="col-md-1"></div>
 		<div class="col-md-5">
