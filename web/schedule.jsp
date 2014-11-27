@@ -29,7 +29,7 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="DD/MM/YYYY"/>
+						<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Pick a date">
 					</div>
 				</div>
 				<div class="text-center">
@@ -60,52 +60,57 @@
 				<li class="active"><a href="patient_add.html"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add patient</a></li>
 			</ul> -->
 		</div>
-		<div class="col-md-9"><br>
-			<!-- Responsive calendar - START -->
-    		<div class="responsive-calendar">
-        		<div class="controls">
-		            <a class="pull-left" data-go="prev"><div class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Prev</div></a>
-		            <h4><span data-head-year></span> <span data-head-month></span></h4>
-		            <a class="pull-right" data-go="next"><div class="btn btn-primary">Next&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right"></span></div></a>
-        		</div><hr/>
-        		<div class="day-headers">
-					<div class="day header">Mon</div>
-					<div class="day header">Tue</div>
-					<div class="day header">Wed</div>
-					<div class="day header">Thu</div>
-					<div class="day header">Fri</div>
-					<div class="day header">Sat</div>
-					<div class="day header">Sun</div>
-        		</div>
-        		<div class="days" data-group="days"></div>
-      		</div>
-			<!-- Responsive calendar - END -->
+		<div class="col-md-9">
+			<div class="header">
+				<div class="page-header"><h2>Filtered result</h2></div>
+				<table class="table table-hover table-condensed">
+					<thead>
+						<tr>
+							<th>Staff ID</th>
+							<th>Staff type</th>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Phone number</th>
+							<th>Sex</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>ID000</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>0000000000</td>
+							<td>Null</td>
+						</tr>
+						<tr>
+							<td>ID000</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>0000000000</td>
+							<td>Null</td>
+						</tr>
+						<tr>
+							<td>ID000</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>ADMIN</td>
+							<td>0000000000</td>
+							<td>Null</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<!-- <script src="assets/js/jquery.js"></script> -->
-		<!-- Testing with new version JQuery 2.1.1 -->
 		<script src="assets/js/jquery-2.1.1.min.js"></script>
-		<script src="assets/js/responsive-calendar.js"></script>
 		<script src="assets/js/moment.min.js"></script>
 		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
     	<script src="assets/js/bootstrap.min.js"></script>
-
-		<!-- Reference: http://w3widgets.com/responsive-calendar/ -->
-		<script type="text/javascript">
-      $(document).ready(function () {
-        $(".responsive-calendar").responsiveCalendar({
-          time: '2014-11',
-          events: {
-            "2014-11-30": {"number": "Close", "badgeClass": "badge-warning", "url": "www.google.com"},
-            "2014-11-26": {"number": "Holiday!", "badgeClass": "badge-error", "url": "http://w3widgets.com"}, 
-            "2014-11-03": {"number": "Nurse: Wong"}, 
-            "2014-11-12": {"number": "GP: Lim"}}
-        });
-      });
-    </script>
     <script type="text/javascript">
 			$(function () {
 				$('#date').datetimepicker({
