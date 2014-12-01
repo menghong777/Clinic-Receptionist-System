@@ -16,7 +16,7 @@
 			<div class=""><h2>Patient <small>ID: P000 (Jerry Leong)</small></h2></div>
 			<a class="btn btn-success" onClick="printReport()">&nbsp;&nbsp;<span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print&nbsp;&nbsp;</a><br><br>
 			<div class="embed-responsive embed-responsive-4by3">
-				<iframe id="printf" name="printfile" class="embed-responsive-item" src="print.jsp"></iframe>
+				<iframe id="printfile" name="printfile" class="embed-responsive-item" src="print.jsp"></iframe>
 			</div>
 		</div>
 
