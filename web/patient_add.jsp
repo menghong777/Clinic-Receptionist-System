@@ -5,43 +5,11 @@
 //    session.setAttribute("pagetitle","Add Patient");
 //    session.setAttribute("tab","search");
 //    session.setAttribute("patientMenu","add");
-//    //The above statement is for dynamic title on each page
-//    
-//    //do get section
+//    The above statement is for dynamic title on each page
+
     String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="";
     Date dob;
-//    
-//    if((String)session.getAttribute(fname)!= null && session.getAttribute("fname").equals(""))
-//        fname = (String)request.getAttribute("fname");
-//    
-//    if((String)session.getAttribute(lname)!= null && session.getAttribute("lname").equals(""))
-//        lname = (String)request.getAttribute("lname");
-//    
-//    if((String)session.getAttribute(IC)!= null && session.getAttribute("IC").equals(""))
-//        IC = (String)request.getAttribute("IC");
-//    
-//    if((String)session.getAttribute(street)!= null && session.getAttribute("street").equals(""))
-//        street = (String)request.getAttribute("street");
-//    
-//    if((String)session.getAttribute(city)!= null && session.getAttribute("city").equals(""))
-//        city = (String)request.getAttribute("city");
-//    
-//    if((String)session.getAttribute(postcode)!= null && session.getAttribute("postcode").equals(""))
-//        postcode = (String)request.getAttribute("postcode");
-//    
-//    if((String)session.getAttribute(phone)!= null && session.getAttribute("phone").equals(""))
-//        phone = (String)request.getAttribute("phone");
-//    
-//    if((String)session.getAttribute(sex)!= null && session.getAttribute("sex").equals(""))
-//        sex = (String)request.getAttribute("sex");
     
-    /*For page tab/button/menu active state */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement();
-    ResultSet myResultSet = myStatement.executeQuery("INSERT INTO `clinic_receptionist`.`main_table` "
-            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('us123', '"+fname+"', '"+lname+"', '"+address+"', '"+IC+"', '"+phone+"', '2014-11-20', 'patient', '"+sex+"', CURRENT_TIMESTAMP);");
-//    
     IC = request.getParameter("IC");
     fname = request.getParameter("fname");
     lname = request.getParameter("lname");
@@ -52,6 +20,15 @@
     sex = request.getParameter("sex");
     
     address = street + " " + city + " " + postcode;
+    
+    /*For page tab/button/menu active state */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
+            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
+            + "VALUES ('us998', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', '2014-12-02', 'patient', 'male', CURRENT_TIMESTAMP);");
+//    
+    
             
      
     
