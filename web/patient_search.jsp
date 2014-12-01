@@ -1,13 +1,13 @@
 <%@page import="java.sql.*"%>
-<% 
+<%
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Patient Search");
     session.setAttribute("tab","search");
     session.setAttribute("patientMenu","search");
-  
+
     /*Database connection */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement(); 
+    Statement myStatement = con.createStatement();
     ResultSet result  = null;
     String PID = "";
     String name = "";
@@ -25,16 +25,16 @@
     /*Get User ID*/
     if(result!=null){
         while(result.next()) { UID = result.getString("User_ID");}
-        
-    }    
+
+    }
     result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
-    
+
 %>
 <!doctype html>
 <html lang="en">
 	<head>
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
-		
+
 		<jsp:include page="head.jsp"></jsp:include>
 	</head>
 	<body>
@@ -103,7 +103,7 @@
 						<th>Sex</th>
 						<th>Personal contact</th>
 					</tr>
-                                <%}%>                        
+                                <%}%>
 				</thead>
 				<tbody>
                                 <%
