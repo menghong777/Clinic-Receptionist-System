@@ -16,19 +16,31 @@
     if(request.getParameter("patientID")!=null) {
         PID = request.getParameter("patientID");
         result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
+        /*Get User ID*/
+        if(result!=null){
+            while(result.next()) { UID = result.getString("User_ID");}
+        }
+        /* Using the User_ID get the other details, name, sex etc */
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
     }
     //Search Name + Birthdate
     if(request.getParameter("name")!=null){
         name = request.getParameter("name");
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
-    }
-    /*Get User ID*/
-    if(result!=null){
-        while(result.next()) { UID = result.getString("User_ID");}
+        /*Get User ID*/
+        if(result!=null){
+            while(result.next()) { UID = result.getString("User_ID");}
+            /* Using the User_ID get the other details, name, sex etc */
+            result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
+            while(result.next()) { PID = result.getString("Patient_ID");}
+        }
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
 
     }
-    result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
-
+    
+    if ((request.getParameter("patientID") == "") || (request.getParameter("name") == "")) {
+        result = null;
+    }
 %>
 <!doctype html>
 <html lang="en">
@@ -68,7 +80,7 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date">
+						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date">
 					</div>
 				</div>
 				<button name="submit" type="submit" class="btn btn-primary">Search</button>
@@ -93,7 +105,10 @@
 			<!--h4>3 result(s) found</h4><br-->
 			<table class="table table-hover table-condensed">
 				<thead>
-                                <%if(request.getParameter("submit")!=null){%>
+                                <%if(request.getParameter("submit")!=null){
+                                    if(result!=null) {
+                                %>
+                                    
 					<tr>
 						<th></th>
 						<th>Patient ID</th>
@@ -103,20 +118,24 @@
 						<th>Sex</th>
 						<th>Personal contact</th>
 					</tr>
-                                <%}%>
+                                <%
+                                        }
+                                    }
+                                %>
 				</thead>
 				<tbody>
                                 <%
-                                    while(result.next()) {
-                                        String fName = result.getString("FirstName");
-                                        String lName = result.getString("LastName");
-                                        String IC = result.getString("IC/Passport");
-                                        String Phone = result.getString("PhoneNumber");
-                                        String sex = result.getString("Sex");
+                                    if (result!=null) {
+                                        while(result.next()) {
+                                            String fName = result.getString("FirstName");
+                                            String lName = result.getString("LastName");
+                                            String IC = result.getString("IC/Passport");
+                                            String Phone = result.getString("PhoneNumber");
+                                            String sex = result.getString("Sex");
                                 %>
 					<tr>
 						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
-						<td><%=PID%></td>
+						<td><%=PID.toUpperCase()%></td>
 						<td><%=IC%></td>
 						<td><%=fName%></td>
 						<td><%=lName%></td>
@@ -124,6 +143,7 @@
 						<td><%=Phone%></td>
 					</tr>
                                 <%
+                                        }
                                     }
                                 %>
 				</tbody>
