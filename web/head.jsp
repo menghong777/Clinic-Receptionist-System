@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <!-- favicon.ico -->
-<link rel="shortcut icon" href="" />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
 <!-- Website title -->
 <title><%= session.getAttribute("pagetitle") %> | Over Surgery</title>
