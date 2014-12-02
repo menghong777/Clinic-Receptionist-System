@@ -24,9 +24,12 @@
     /*For page tab/button/menu active state */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
-    myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
+    if(IC != null && fname != null && lname != null && street != null && 
+            city != null && postcode != null && phone != null && sex != null)
+        myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('us998', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', '2014-12-02', 'patient', 'male', CURRENT_TIMESTAMP);");
+            + "VALUES ('us988', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "'2014-12-02', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
 //    
     
             
@@ -49,7 +52,7 @@
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
 			    <div class="col-sm-10">
@@ -108,7 +111,7 @@
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
-							<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date"
+							<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date"
                                                                name="dob">
 						</div>
 			    </div>
