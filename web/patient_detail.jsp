@@ -1,12 +1,55 @@
+<%@page import="java.sql.*"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Patient Detail");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","detail");
     
+    /*Database connection */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    
+    /* Get PID from previous search page */
     String PID = (String)session.getAttribute("PID");
+    PID = PID.toUpperCase();
+    
+    /*Declaration */
+    String UID = "";
+    String IC = "";
+    String fName = "";
+    String lName = "";
+    String address = "";
+    String phone = "";
+    String dob = "";
+    String sex = "";
+    String eContact = "";
+    String eName = "";
+    String eRelation = "";
+    
+    ResultSet result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
+    /*Get data from patient table*/
+    if(result!=null){
+        while(result.next()) { 
+            UID = result.getString("User_ID");
+            eContact = result.getString("EmergencyContact");
+            eName = result.getString("EmergencyName");
+            eRelation = result.getString("EmergencyRelationship");
+        }
+    }
+    /* Using the User_ID get the other details, name, sex etc */
+    result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
     
     
+    /*Get the value from database */
+    while(result.next()) {
+        IC = result.getString("IC/Passport");
+        fName = result.getString("FirstName");
+        lName = result.getString("LastName");
+        address = result.getString("Address");
+        phone = result.getString("PhoneNumber");
+        dob = result.getString("DateOFBirth");
+        sex = result.getString("Sex");
+    }
 %>
 <!doctype html>
 <html lang="en">
@@ -28,19 +71,19 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">IC number</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">921010-12-1212</p>
+						<p class="form-control-static"><%=IC%></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">Jerry Leong</p>
+						<p class="form-control-static"><%=fName + " " + lName%></p>
 					</div>
 				</div>
 			  <div class="form-group">
 					<label class="col-sm-2 control-label">Address</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">23, Jalan Loke Yew 1</p>
+						<p class="form-control-static"><%=address%></p>
 					</div>
 				</div>
 				<div class="form-group">
@@ -58,39 +101,39 @@
 			  <div class="form-group">
 					<label class="col-sm-2 control-label">Personal contact</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">01123456789</p>
+						<p class="form-control-static"><%=phone%></p>
 						<!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Birth date</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">22/03/1960</p>
+						<p class="form-control-static"><%=dob%></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Sex</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">Male</p>
+						<p class="form-control-static"><%=sex%></p>
 					</div>
 				</div>
 		<div class="page-header"><h2>Emergency contact information</h2></div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Name</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">Jenny Lee</p>
+						<p class="form-control-static"><%=eName%></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Relationship</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">Mother</p>
+						<p class="form-control-static"><%=eRelation%></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Emergency contact</label>
 					<div class="col-sm-10">
-						<p class="form-control-static">0172347583</p>
+						<p class="form-control-static"><%=eContact%></p>
 					</div>
 				</div> 
 			</form>
