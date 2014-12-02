@@ -7,8 +7,8 @@
 //    session.setAttribute("patientMenu","add");
 //    The above statement is for dynamic title on each page
 
-    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="";
-    Date dob;
+    //general info
+    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
     
     IC = request.getParameter("IC");
     fname = request.getParameter("fname");
@@ -18,7 +18,7 @@
     postcode = request.getParameter("postcode");
     phone = request.getParameter("phone");
     sex = request.getParameter("sex");
-    
+    dob = request.getParameter("dob");
     address = street + " " + city + " " + postcode;
     
     /*For page tab/button/menu active state */
@@ -28,9 +28,11 @@
             city != null && postcode != null && phone != null && sex != null)
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('us988', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
-            + "'2014-12-02', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
-//    
+            + "VALUES ('us989', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
+
+    //emergency contact info
+    String name="", relationship="", contact="";
     
             
      
@@ -127,7 +129,7 @@
 						</div>
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="sex" id="sexFemale" value="Semale">
+						    <input type="radio" name="sex" id="sexFemale" value="Female">
 						    Female
 						  </label>
 						</div>
