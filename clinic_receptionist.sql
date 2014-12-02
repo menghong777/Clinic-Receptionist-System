@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2014 at 05:24 PM
+-- Generation Time: Dec 02, 2014 at 04:30 PM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -20,32 +20,28 @@ SET time_zone = "+00:00";
 -- Database: `clinic_receptionist`
 --
 
-CREATE Database clinic_receptionist;
-USE clinic_receptionist;
-
-
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appoinment`
+-- Table structure for table `appointment`
 --
 
-CREATE TABLE IF NOT EXISTS `appoinment` (
+CREATE TABLE IF NOT EXISTS `appointment` (
   `Patient_ID` varchar(5) NOT NULL,
   `Schedule_ID` varchar(5) NOT NULL,
-  `Status` varchar(10) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Status` varchar(20) NOT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `appoinment`
+-- Dumping data for table `appointment`
 --
 
-INSERT INTO `appoinment` (`Patient_ID`, `Schedule_ID`, `Status`, `TimeStamp`) VALUES
-('PT001', 'SC001', 'Pending', '2014-11-08 09:40:54'),
-('PT002', 'SC004', 'Done', '2014-11-08 09:40:54'),
-('PT001', 'SC006', 'Canceled', '2014-11-08 09:40:54');
+INSERT INTO `appointment` (`Patient_ID`, `Schedule_ID`, `Status`, `Timestamp`) VALUES
+('PT001', 'SC001', 'Pending', '2014-11-20 16:39:58'),
+('PT002', 'SC003', 'Pending', '2014-11-20 16:39:58'),
+('PT003', 'SC004', 'Completed', '2014-11-20 16:39:58'),
+('PT002', 'SC006', 'Pending', '2014-11-20 16:39:58');
 
 -- --------------------------------------------------------
 
@@ -100,9 +96,9 @@ INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Pas
 ('US006', 'Kajal', 'Agraval', '', '870513-09-9614', '0136542891', '1987-05-13', 'Nurse', 'Female', '2014-11-08 09:31:37'),
 ('US007', 'Mary', 'Jane', '', '900312-14-6625', '0194261538', '1990-03-12', 'Receptionist', 'Female', '2014-11-08 09:32:54'),
 ('US008', 'Noor', 'Rozita', '', '870415-14-3245', '0174861539', '1987-04-15', 'Receptionist', 'Female', '2014-11-08 09:35:11'),
-('US009', 'Hisamudin', 'Ahmad', '', '710825-01-1256', '0147419635', '1971-08-25', 'Patient', 'Male', '2014-11-08 09:35:11'),
-('US010', 'Muthu', 'Pillay', '', '690915-08-4826', '0161597534', '1969-09-15', 'Patient', 'Male', '2014-11-08 09:35:11'),
-('US011', 'Jinghua', 'Juan', '', 'F52612L', '0194561597', '1965-07-03', 'Patient', 'Female', '2014-11-08 09:35:11');
+('US009', 'Hisamudin', 'Ahmad', 'No.2 Taman Setapak Permai 53300 Kuala Lumpur', '710825-01-1256', '0147419635', '1971-08-25', 'Patient', 'Male', '2014-12-02 13:30:53'),
+('US010', 'Muthu', 'Pillay', 'A-07-07, Jalan Ikan Emas,\r\nMesra villa, \r\nTaman Pandan Mesra,\r\n68000 Ampang, \r\nSelangor', '690915-08-4826', '0161597534', '1969-09-15', 'Patient', 'Male', '2014-12-02 14:42:11'),
+('US011', 'Jinghua', 'Juan', 'No.42 Lorong 2, Taman Maluri Shah Alam 51200 Sealngor', 'F52612L', '0194561597', '1965-07-03', 'Patient', 'Female', '2014-12-02 14:42:56');
 
 -- --------------------------------------------------------
 
@@ -225,9 +221,9 @@ INSERT INTO `schedule` (`Schedule_Id`, `User_ID`, `Date`, `Availability`, `TimeS
 --
 
 --
--- Indexes for table `appoinment`
+-- Indexes for table `appointment`
 --
-ALTER TABLE `appoinment`
+ALTER TABLE `appointment`
  ADD KEY `Patient_ID` (`Patient_ID`), ADD KEY `Schedule_ID` (`Schedule_ID`);
 
 --
@@ -277,11 +273,11 @@ ALTER TABLE `schedule`
 --
 
 --
--- Constraints for table `appoinment`
+-- Constraints for table `appointment`
 --
-ALTER TABLE `appoinment`
-ADD CONSTRAINT `appoinment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
-ADD CONSTRAINT `appoinment_ibfk_2` FOREIGN KEY (`Schedule_ID`) REFERENCES `schedule` (`Schedule_Id`);
+ALTER TABLE `appointment`
+ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
+ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`Schedule_ID`) REFERENCES `schedule` (`Schedule_Id`);
 
 --
 -- Constraints for table `gp`
