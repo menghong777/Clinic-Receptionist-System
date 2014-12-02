@@ -1,11 +1,44 @@
+<%@page import="java.sql.*"%>
 <%
+   
+    
+//    session.setAttribute("pagetitle","Add Patient");
+//    session.setAttribute("tab","search");
+//    session.setAttribute("patientMenu","add");
+//    The above statement is for dynamic title on each page
+
+    //general info
+    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
+    
+    IC = request.getParameter("IC");
+    fname = request.getParameter("fname");
+    lname = request.getParameter("lname");
+    street = request.getParameter("street");
+    city = request.getParameter("city");
+    postcode = request.getParameter("postcode");
+    phone = request.getParameter("phone");
+    sex = request.getParameter("sex");
+    dob = request.getParameter("dob");
+    address = street + " " + city + " " + postcode;
+    
     /*For page tab/button/menu active state */
-    session.setAttribute("pagetitle","Add Patient");
-    session.setAttribute("tab","search");
-    session.setAttribute("patientMenu","add");
-    //The above statement is for dynamic title on each page
-    String name;
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    if(IC != null && fname != null && lname != null && street != null && 
+            city != null && postcode != null && phone != null && sex != null)
+        myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
+            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
+            + "VALUES ('us989', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
+
+    //emergency contact info
+    String name="", relationship="", contact="";
+    
+            
+     
+    
 %>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -21,20 +54,20 @@
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="IC" placeholder="IC number">
+			      <input type="text" class="form-control" id="IC" placeholder="IC number" name="IC">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="firstName" placeholder="First name">
+			      <input type="text" class="form-control" id="firstName" placeholder="First name" name="fname">
 			    </div>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="lastName" placeholder="Last name">
+			      <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lname">
 			    </div>
 			  </div>
 <!-- 			  <div class="form-group">
@@ -46,25 +79,29 @@
 			  <div class="form-group">
 			    <label for="addressStreet" class="col-sm-2 control-label">Address</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressStreet" placeholder="House number and street">
+			      <input type="text" class="form-control" id="addressStreet" placeholder="Unit number and street"
+                                     name="street">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressCity" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressCity" placeholder="City">
+			      <input type="text" class="form-control" id="addressCity" placeholder="City"
+                                     name="city">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressPostcode" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="addressPostcode" placeholder="Postcode">
+			      <input type="text" class="form-control" id="addressPostcode" placeholder="Postcode"
+                                     name="postcode">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="contact" class="col-sm-2 control-label">Personal contact</label>
 			    <div class="col-sm-10">
-			      <input type="tel" class="form-control" id="contact" placeholder="Mobile or home">
+			      <input type="tel" class="form-control" id="contact" placeholder="Mobile or home"
+                                     name="phone">
 			      <!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 			  </div>
@@ -76,7 +113,8 @@
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
-							<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Birth date">
+							<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date"
+                                                               name="dob">
 						</div>
 			    </div>
 			  </div>
@@ -91,7 +129,7 @@
 						</div>
 						<div class="radio">
 						  <label>
-						    <input type="radio" name="sex" id="sexFemale" value="Semale">
+						    <input type="radio" name="sex" id="sexFemale" value="Female">
 						    Female
 						  </label>
 						</div>
