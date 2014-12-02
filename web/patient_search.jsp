@@ -27,27 +27,34 @@
     //Search Name
     if(request.getParameter("name")!=null && request.getParameter("name")!= ""){
         name = request.getParameter("name");
-        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
-        /*Get User ID*/
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
+        /*Get User ID then Patient_ID*/
         if(result!=null){
             while(result.next()) { UID = result.getString("User_ID");}
             /* Using the User_ID get the other details, name, sex etc */
             result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
             while(result.next()) { PID = result.getString("Patient_ID");}
         }
-        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
     }
     
     if(request.getParameter("dob")!=null && request.getParameter("dob")!= "" ){
         dob = request.getParameter("dob");
-        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND DateOFBirth = '" + dob + "'");
-        
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND DateOFBirth = '" + dob + "'");
+        if(result!=null){
+            while(result.next()) { UID = result.getString("User_ID");}
+            /* Using the User_ID get the other details, name, sex etc */
+            result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
+            while(result.next()) { PID = result.getString("Patient_ID");}
+        }
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND DateOFBirth = '" + dob + "'");
     }
     
-    //Safety net
-    if ((request.getParameter("patientID") == "") || (request.getParameter("name") == "")) {
-        result = null;
-    }
+    
 %>
 <!doctype html>
 <html lang="en">
