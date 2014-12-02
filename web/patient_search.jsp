@@ -12,8 +12,9 @@
     String PID = "";
     String name = "";
     String UID = "";
+    String dob = "";
     /*Search patientID */
-    if(request.getParameter("patientID")!=null) {
+    if(request.getParameter("patientID")!=null && request.getParameter("patientID")!= "") {
         PID = request.getParameter("patientID");
         result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
         /*Get User ID*/
@@ -23,8 +24,8 @@
         /* Using the User_ID get the other details, name, sex etc */
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE User_ID = '" +UID+"'");
     }
-    //Search Name + Birthdate
-    if(request.getParameter("name")!=null){
+    //Search Name
+    if(request.getParameter("name")!=null && request.getParameter("name")!= ""){
         name = request.getParameter("name");
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
         /*Get User ID*/
@@ -35,9 +36,15 @@
             while(result.next()) { PID = result.getString("Patient_ID");}
         }
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
-
     }
     
+    if(request.getParameter("dob")!=null && request.getParameter("dob")!= "" ){
+        dob = request.getParameter("dob");
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' AND DateOFBirth = '" + dob + "'");
+        
+    }
+    
+    //Safety net
     if ((request.getParameter("patientID") == "") || (request.getParameter("name") == "")) {
         result = null;
     }
@@ -80,7 +87,7 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date">
+						<input name="dob" type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date">
 					</div>
 				</div>
 				<button name="submit" type="submit" class="btn btn-primary">Search</button>
