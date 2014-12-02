@@ -24,29 +24,30 @@
 						<th></th>
 						<th>Report name</th>
 						<th>Date</th>
+						<th>Report by</th>
 						<th>Last updated</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="patient_print.jsp" role="button"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print</a>
-						<a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Check</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
 						<td>Xray</td>
 						<td>01/11/2014</td>
+						<td>Doctor Tan</td>
 						<td>01/11/2014</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="patient_prescription.jsp" role="button"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print</a>
-						<a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Check</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
 						<td>Teeth checking</td>
 						<td>01/11/2014</td>
+						<td>Doctor Tan</td>
 						<td>01/11/2014</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="patient_prescription.jsp" role="button"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print</a>
-						<a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Check</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
 						<td>Lung checking</td>
 						<td>01/11/2014</td>
+						<td>Doctor Tan</td>
 						<td>01/11/2014</td>
 					</tr>
 				</tbody>

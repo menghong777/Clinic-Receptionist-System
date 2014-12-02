@@ -31,7 +31,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
+						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
 						<td>Medi001</td>
 						<td>112g</td>
 						<td>14 day(s)</td>
@@ -39,7 +39,7 @@
 						<td>01/11/2014</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
+						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
 						<td>Medi002</td>
 						<td>50g</td>
 						<td>14 day(s)</td>
@@ -47,7 +47,7 @@
 						<td>01/11/2014</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
+						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
 						<td>Medi003</td>
 						<td>100g</td>
 						<td>14 day(s)</td>
@@ -72,7 +72,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
-						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Yes</button>
+						<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Extent and save</button>
 					</div>
 				</div>
 			</div>

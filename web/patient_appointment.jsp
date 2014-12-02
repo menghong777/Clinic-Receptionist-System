@@ -32,24 +32,24 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td><a class="btn btn-warning btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
 						<td>GP001</td>
 						<td>Doctor Joel</td>
 						<td>12/12/2013</td>
 						<td>Expired</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td><a class="btn btn-warning btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
 						<td>GP002</td>
 						<td>Doctor Lim</td>
 						<td>14/12/2013</td>
 						<td>Cancelled</td>
 					</tr>
 					<tr>
-						<td><a class="btn btn-primary btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel</a></td>
+						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+						<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
 						<td>GP002</td>
 						<td>Doctor Lim</td>
 						<td>14/11/2014</td>
@@ -57,7 +57,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</button>
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</button>
 		</div>
 
 		<!-- Change Appointment Date Modal -->
@@ -101,7 +101,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
-						<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Yes</button>
+						<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel appointment</button>
 					</div>
 				</div>
 			</div>
