@@ -13,6 +13,7 @@
     String name = "";
     String UID = "";
     String dob = "";
+    String address = "";
     /*Search patientID */
     if(request.getParameter("patientID")!=null && request.getParameter("patientID")!= "") {
         PID = request.getParameter("patientID");
@@ -54,6 +55,19 @@
                 + "AND DateOFBirth = '" + dob + "'");
     }
     
+    if(request.getParameter("address")!=null && request.getParameter("address")!= "" ){
+        address = request.getParameter("address");
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND Address = '" + address + "'");
+        if(result!=null){
+            while(result.next()) { UID = result.getString("User_ID");}
+            /* Using the User_ID get the other details, name, sex etc */
+            result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
+            while(result.next()) { PID = result.getString("Patient_ID");}
+        }
+        result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
+                + "AND Address = '" + address + "'");
+    }
     
 %>
 <!doctype html>
@@ -104,13 +118,13 @@
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-						<input type="search" class="form-control" id="search" placeholder="Name">
+						<input name="name" type="search" class="form-control" id="search" placeholder="Name">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-home"></span></div>
-						<input type="search" class="form-control" id="search" placeholder="Address">
+						<input name="address" type="search" class="form-control" id="search" placeholder="Address">
 					</div>
 				</div>
 				<button name="submit" type="submit" class="btn btn-primary">Search</button>
