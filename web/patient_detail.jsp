@@ -3,6 +3,10 @@
     session.setAttribute("pagetitle","Patient Detail");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","detail");
+    
+    String PID = (String)session.getAttribute("PID");
+    
+    
 %>
 <!doctype html>
 <html lang="en">
@@ -19,7 +23,7 @@
 			<jsp:include page="nav_patient_detail.jsp"></jsp:include>
 		</div>
 		<div class="col-md-9">
-			<div class="page-header"><h2><jsp:include page="nav_back_patient_search.jsp"></jsp:include>&nbsp;Patient <small>ID: P000</small></h2></div>
+			<div class="page-header"><h2><jsp:include page="nav_back_patient_search.jsp"></jsp:include>&nbsp;Patient <small>ID: <%=PID%></small></h2></div>
 			<form class="form-horizontal" role="form">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">IC number</label>

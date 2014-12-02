@@ -17,6 +17,7 @@
     /*Search patientID */
     if(request.getParameter("patientID")!=null && request.getParameter("patientID")!= "") {
         PID = request.getParameter("patientID");
+        session.setAttribute("PID",PID);
         result = myStatement.executeQuery("SELECT * FROM patient WHERE Patient_ID = '" +PID+"'");
         /*Get User ID*/
         if(result!=null){
@@ -32,10 +33,10 @@
                 + "AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
         /*Get User ID then Patient_ID*/
         if(result!=null){
-            while(result.next()) { UID = result.getString("User_ID");}
+            while(result.next()) { UID = result.getString("User_ID");}             
             /* Using the User_ID get the other details, name, sex etc */
             result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
-            while(result.next()) { PID = result.getString("Patient_ID");}
+            while(result.next()) { PID = result.getString("Patient_ID");}        
         }
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
                 + "AND FirstName LIKE '%"+name+"%' OR LastName LIKE '%"+name+"%'");
@@ -46,10 +47,10 @@
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
                 + "AND DateOFBirth = '" + dob + "'");
         if(result!=null){
-            while(result.next()) { UID = result.getString("User_ID");}
+            while(result.next()) {  UID = result.getString("User_ID");}            
             /* Using the User_ID get the other details, name, sex etc */
             result = myStatement.executeQuery("SELECT * FROM patient WHERE User_ID = '" +UID+"'");
-            while(result.next()) { PID = result.getString("Patient_ID");}
+            while(result.next()) { PID = result.getString("Patient_ID");}        
         }
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
                 + "AND DateOFBirth = '" + dob + "'");
@@ -67,6 +68,10 @@
         }
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
                 + "AND Address = '" + address + "'");
+        
+        if(request.getParameter("select")!=null) {
+            session.setAttribute("PID",PID);
+        }
     }
     
 %>
@@ -136,16 +141,15 @@
                                 <%if(request.getParameter("submit")!=null){
                                     if(result!=null) {
                                 %>
-                                    
-					<tr>
-						<th></th>
-						<th>Patient ID</th>
-						<th>Identification Card</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Sex</th>
-						<th>Personal contact</th>
-					</tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Patient ID</th>
+                                    <th>Identification Card</th>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Sex</th>
+                                    <th>Personal contact</th>
+                                </tr>
                                 <%
                                         }
                                     }
@@ -162,7 +166,7 @@
                                             String sex = result.getString("Sex");
                                 %>
 					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button">Select</a></td>
+						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button" name="select">Select</a></td>
 						<td><%=PID.toUpperCase()%></td>
 						<td><%=IC%></td>
 						<td><%=fName%></td>
