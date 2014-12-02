@@ -1,12 +1,10 @@
 <%@page import="java.sql.*"%>
 <%
-   
+    /*For dynamic title and tab selected on each page*/
+    session.setAttribute("pagetitle","Add Patient");
+    session.setAttribute("tab","search");
+    session.setAttribute("patientMenu","add");
     
-//    session.setAttribute("pagetitle","Add Patient");
-//    session.setAttribute("tab","search");
-//    session.setAttribute("patientMenu","add");
-//    The above statement is for dynamic title on each page
-
     //general info
     String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
     
