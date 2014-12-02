@@ -54,8 +54,7 @@
         }
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
                 + "AND DateOFBirth = '" + dob + "'");
-    }
-    
+    }    
     if(request.getParameter("address")!=null && request.getParameter("address")!= "" ){
         address = request.getParameter("address");
         result = myStatement.executeQuery("SELECT * FROM main_table WHERE Category = 'Patient' "
@@ -73,7 +72,6 @@
             session.setAttribute("PID",PID);
         }
     }
-    
 %>
 <!doctype html>
 <html lang="en">
