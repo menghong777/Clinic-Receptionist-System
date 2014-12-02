@@ -1,7 +1,7 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.sql.*"%>
 <%@ page import="java.io.*,java.util.Locale" %>
-<%@ page import="java.text.DateFormat,java.util.Date" %>
+<%@ page import="java.text.*,java.util.Date" %>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Home");
@@ -12,13 +12,9 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();  
     
-    //get the locale date
-    Locale locale = request.getLocale(); //request for locale date
-    String date = DateFormat.getDateTimeInstance(
-                              DateFormat.FULL, 
-                              DateFormat.SHORT, 
-                              locale).format(new Date( ));
-
+    Date d = new Date(); //request for locale date
+    SimpleDateFormat formatter=new SimpleDateFormat("EEEE, d MMMM yyyy");
+    String date=formatter.format(d);
 %>
 <!doctype html>
 <html lang="en">
