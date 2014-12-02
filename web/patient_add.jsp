@@ -52,6 +52,9 @@
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
+			<!-- Head up display for displaying information -->
+			<div class="alert alert-danger" role="alert"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
+			<div class="alert alert-success" role="alert"><b>Done!</b> Patient information saved successfully.</div>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
@@ -103,17 +106,17 @@
 			      <!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 			  </div>
-			  <div class="form-group">
+			  <div class="form-group has-error">
 			    <label for="dob" class="col-sm-2 control-label">Birth date</label>
 			    <div class="col-sm-10">
 			      <!-- <input type="date" class="form-control" id="dob" placeholder="Birth date"> -->
-			      <div class='input-group date' id='birhDateInput'>
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-							<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date"
-                                                               name="dob">
-						</div>
+			    	<div class='input-group date' id='birhDateInput'>
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date" name="dob">
+					</div>
+					<p class="help-block"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
 			    </div>
 			  </div>
 			  <div class="form-group">

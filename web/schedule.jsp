@@ -29,9 +29,11 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Pick a date">
+						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date">
 					</div>
+					<p class="help-block text-center"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
 				</div>
+				
 				<div class="text-center">
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-default active">
