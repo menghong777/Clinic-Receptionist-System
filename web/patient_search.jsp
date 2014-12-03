@@ -93,6 +93,14 @@
                                 <% String submit = request.getParameter("submit");
                                   if(submit !=null){
                                     if(result!=null) {
+                                        while(result.next()) {
+                                        String fName = result.getString("FirstName");
+                                        String lName = result.getString("LastName");
+                                        String IC = result.getString("IC/Passport");
+                                        String Phone = result.getString("PhoneNumber");
+                                        String sex = result.getString("Sex");
+                                        String pid = result.getString("Patient_ID");
+                                        session.setAttribute("PID",pid);
                                 %>
                                 <tr>
                                     <th></th>
@@ -105,30 +113,16 @@
                                 </tr>                      
 				</thead>
 				<tbody>
-                                <%                                  
-                                        while(result.next()) {
-                                            String fName = result.getString("FirstName");
-                                            String lName = result.getString("LastName");
-                                            String IC = result.getString("IC/Passport");
-                                            String Phone = result.getString("PhoneNumber");
-                                            String sex = result.getString("Sex");
-                                            String pid = result.getString("Patient_ID");
-                                            session.setAttribute("PID",pid);
-                                %>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button" name="select">Select</a></td>
-						<td><%=pid.toUpperCase()%></td>
-						<td><%=IC%></td>
-						<td><%=fName%></td>
-						<td><%=lName%></td>
-                                                <td><%=sex%></td>
-						<td><%=Phone%></td>
-					</tr>
-                                <%
-                                            }
-                                        }
-                                    }
-                                %>
+				<tr>
+				<td><a class="btn btn-default btn-sm" href="patient_detail.jsp" role="button" name="select">Select</a></td>
+				<td><%=pid.toUpperCase()%></td>
+				<td><%=IC%></td>
+				<td><%=fName%></td>
+				<td><%=lName%></td>
+                                <td><%=sex%></td>
+				<td><%=Phone%></td>
+				</tr>
+                                <% } } } %>
 				</tbody>
 			</table>
 		</div>
