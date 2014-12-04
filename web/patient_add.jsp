@@ -7,6 +7,7 @@
     
     //general info
     String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
+    String status="";
     
     IC = request.getParameter("IC");
     fname = request.getParameter("fname");
@@ -18,22 +19,60 @@
     sex = request.getParameter("sex");
     dob = request.getParameter("dob");
     address = street + " " + city + " " + postcode;
-    
+
     /*For page tab/button/menu active state */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
+    
+    //userID
+    ResultSet result = myStatement.executeQuery("SELECT User_ID FROM main_table ORDER BY User_ID DESC LIMIT 1");
+    String userID="";
+    while(result.next()) {
+        userID = result.getString("User_ID");
+    }
+    int userNum = Integer.parseInt(userID.substring(2));
+    int userid = userNum + 1;
+    String user = "US" + userid;
+    
+    //patientID
+    ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
+    String paID="";
+    while(result2.next()) {
+        paID = result2.getString("Patient_ID");
+    }
+    int paNum = Integer.parseInt(paID.substring(2));
+    int patientID = paNum + 1;
+    String patient = "PT" + patientID;
+
+    //general info
     if(IC != null && fname != null && lname != null && street != null && 
-            city != null && postcode != null && phone != null && sex != null)
+            city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('us989', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
-            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
-
+            + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
+       
+            status = "<div class='alert alert-success' role='alert'><b>Done!</b> Patient information saved successfully.</div>";
+        }
+    
+        if(IC == "" || fname == "" || lname == "" || street == "" || 
+            city == "" || postcode == "" || phone == "" || sex == "" || dob == "") {
+            
+            status = "<div class='alert alert-danger' role='alert'><b>Oh snap!</b> Change a few things up and try submitting again.</div>";
+        }
     //emergency contact info
     String name="", relationship="", contact="";
     
-            
-     
+    name = request.getParameter("name");        
+    relationship = request.getParameter("relationship");
+    contact = request.getParameter("contact");
+    
+    if(name != null && relationship != null && contact != null && dob != null && dob != "")
+        
+    myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, "
+            + "`EmergencyName`, `EmergencyRelationship`, `TimeStamp`) "
+            + "VALUES ('" + patient +"', '"+ user +"', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
+    
     
 %>
 
@@ -53,8 +92,7 @@
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
 			<!-- Head up display for displaying information -->
-			<div class="alert alert-danger" role="alert"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
-			<div class="alert alert-success" role="alert"><b>Done!</b> Patient information saved successfully.</div>
+                    <%= status %>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
@@ -143,19 +181,22 @@
 			  <div class="form-group">
 			    <label for="emergencyName" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="emergencyName" placeholder="Name">
+			      <input type="text" class="form-control" id="emergencyName" placeholder="Name"
+                                     name="name">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyRelationship" class="col-sm-2 control-label">Relationship</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="emergencyRelationship" placeholder="Relationship">
+			      <input type="text" class="form-control" id="emergencyRelationship" placeholder="Relationship"
+                                     name="relationship">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyPhone" class="col-sm-2 control-label">Emergency contact</label>
 			    <div class="col-sm-10">
-			      <input type="tel" class="form-control" id="emergencyContact" placeholder="Emergancy mobile">
+			      <input type="tel" class="form-control" id="emergencyContact" placeholder="Emergancy mobile"
+                                     name="contact">
 			    </div>
 			  </div>
 			  <div class="form-group">
