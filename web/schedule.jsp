@@ -1,7 +1,18 @@
+<%@page import="java.sql.*"%>
 <% 
-    /*For page tab/button/menu active state */
-    session.setAttribute("pagetitle","Schedule");
-    session.setAttribute("tab","schedule");
+	/*For page tab/button/menu active state */
+	session.setAttribute("pagetitle","Schedule");
+	session.setAttribute("tab","schedule");
+
+	/*Database connection */
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+	Statement myStatement = con.createStatement();
+	ResultSet result  = null;
+	String s_id = request.getParameter("staff_id");
+	String date = request.getParameter("date");    
+	String s_type = request.getParameter("staff_type");
+	String duty = request.getParameter("duty");
+
 %>
 <!doctype html>
 <html lang="en">
@@ -21,7 +32,7 @@
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-						<input type="search" class="form-control" placeholder="Staff ID">
+						<input name="staff_id" type="search" class="form-control" placeholder="Staff ID">
 					</div>
 				</div>
 				<div class="form-group">
@@ -29,7 +40,7 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date">
+						<input name="date" type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date">
 					</div>
 					<p class="help-block text-center"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
 				</div>
@@ -37,13 +48,13 @@
 				<div class="text-center">
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-default active">
-					    <input type="radio" name="type" id="All" checked>&nbsp;&nbsp;All&nbsp;&nbsp;
+					    <input type="radio" name="staff_type" id="All" checked>&nbsp;&nbsp;All&nbsp;&nbsp;
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="type" id="General Practice">General Practice
+					    <input type="radio" name="staff_type" id="General Practice">General Practice
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="type" id="Nurse">&nbsp;Nurse&nbsp;
+					    <input type="radio" name="staff_type" id="Nurse">&nbsp;Nurse&nbsp;
 					  </label>
 					</div><p></p>
 					<div class="btn-group" data-toggle="buttons">
@@ -57,10 +68,6 @@
 				</div><p></p>
 				<button type="submit" class="btn btn-primary btn-block">Search</button>
 			</form>
-			<!-- <ul class="nav nav-pills nav-stacked">
-				<li><a href="patient_appointment.html"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Make appointment</a></li>
-				<li class="active"><a href="patient_add.html"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add patient</a></li>
-			</ul> -->
 		</div>
 		<div class="col-md-9">
 			<div class="header">
