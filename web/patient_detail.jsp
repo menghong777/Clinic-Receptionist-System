@@ -89,24 +89,12 @@
 						<p class="form-control-static"><%=address%></p>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label"></label>
-					<div class="col-sm-10">
-						<p class="form-control-static">Kuala Lumpur</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label"></label>
-					<div class="col-sm-10">
-						<p class="form-control-static">56000</p>
-					</div>
-				</div>
 			  <div class="form-group">
 					<label class="col-sm-2 control-label">Personal contact</label>
 					<div class="col-sm-10">
 						<p class="form-control-static"><%=phone%></p>
 						<!-- Input type type="tel" is currently supported only in Safari 8 -->
-			    </div>
+			    	</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Birth date</label>
