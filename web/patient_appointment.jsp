@@ -1,8 +1,20 @@
+<%@page import="java.sql.*"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Appoinment");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","appointment");
+    
+    /*Database connection */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    
+    /* Get PID from previous search page */
+    String PID = (String)session.getAttribute("PID");
+    PID = PID.toUpperCase();
+    
+    /* SQL query */
+    ResultSet result = myStatement.executeQuery("SELECT * FROM appoinment WHERE Patient_ID = '" +PID+"'");
 %>
 <!doctype html>
 <html lang="en">
@@ -31,22 +43,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><a class="btn btn-warning btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
-						<td>GP001</td>
-						<td>Doctor Joel</td>
-						<td>12/12/2013</td>
-						<td>Expired</td>
-					</tr>
-					<tr>
+					<!-- disabled record -->
+					<!--tr>
 						<td><a class="btn btn-warning btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
 						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
 						<td>GP002</td>
 						<td>Doctor Lim</td>
 						<td>14/12/2013</td>
 						<td>Cancelled</td>
-					</tr>
+					</tr-->
 					<tr>
 						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
 						<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>

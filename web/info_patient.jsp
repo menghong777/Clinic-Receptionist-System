@@ -69,4 +69,4 @@
 		</div>
 	</div> -->
 </form>
-<div class=""><h2>Patient <small>ID: P000 (Jerry Leong)</small></h2></div>
+<div class=""><h2>Patient <small>ID: <%=session.getAttribute("PID")%> (<%=session.getAttribute("name")%>)</small></h2></div>

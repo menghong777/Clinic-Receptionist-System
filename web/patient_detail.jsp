@@ -50,6 +50,9 @@
         dob = result.getString("DateOFBirth");
         sex = result.getString("Sex");
     }
+    
+    /*to be used on other page */
+    session.setAttribute("name",fName+" "+lName);
 %>
 <!doctype html>
 <html lang="en">
