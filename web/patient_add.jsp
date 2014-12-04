@@ -32,8 +32,16 @@
     }
     int userNum = Integer.parseInt(userID.substring(2));
     int userid = userNum + 1;
-    String user = "US" + userid;
+    String user="";
+    String OneZero="0";
+    String TwoZero="00";
+    String us="US";
     
+    if(userid >= 10 && userid<= 99 )
+        user = us + OneZero + userid;
+    if(userid <= 9)
+        user = us + TwoZero + userid;
+    out.println(user);
     //patientID
     ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
     String paID="";
@@ -42,8 +50,16 @@
     }
     int paNum = Integer.parseInt(paID.substring(2));
     int patientID = paNum + 1;
-    String patient = "PT" + patientID;
-
+    String OneZero1="0";
+    String TwoZero2="00";
+    String patient="";
+    String pt="PT";
+    
+    if(patientID >= 10 && patientID<= 99 )
+        patient = pt + OneZero1 + patientID;
+    if(patientID <= 9)
+        patient = pt + TwoZero2 + patientID;
+    out.println(patient);
     //general info
     if(IC != null && fname != null && lname != null && street != null && 
             city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
