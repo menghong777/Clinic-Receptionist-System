@@ -32,40 +32,26 @@
 			<jsp:include page="info_patient.jsp"></jsp:include>
 			<table class="table table-hover table-condensed">
 				<thead>
-					<tr>
-						<th></th>
-						<th>Medicine name</th>
-						<th>Dosage</th>
-						<th>Period</th>
-						<th>Extension period</th>
-						<th>Last updated</th>
-					</tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>Medicine name</th>
+                                        <th>Dosage</th>
+                                        <th>Period</th>
+                                        <th>Extension period</th>
+                                        <th>Issue on</th>
+                                    </tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
-						<td>Medi001</td>
-						<td>112g</td>
-						<td>14 day(s)</td>
-						<td>None</td>
-						<td>01/11/2014</td>
-					</tr>
-					<tr>
-						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
-						<td>Medi002</td>
-						<td>50g</td>
-						<td>14 day(s)</td>
-						<td>None</td>
-						<td>01/11/2014</td>
-					</tr>
-					<tr>
-						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
-						<td>Medi003</td>
-						<td>100g</td>
-						<td>14 day(s)</td>
-						<td>None</td>
-						<td>01/11/2014</td>
-					</tr>
+                                    <% while(result.next()) { %>
+                                    <tr>
+                                        <td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
+                                        <td><%=result.getString("Medicine_Name")%></td>
+                                        <td><%=result.getString("Dosage")%></td>
+                                        <td><%=result.getString("Period")%> day(s)</td>
+                                        <td><%=result.getString("Extension_Period")%></td>
+                                        <td><%=result.getString("TimeStamp")%></td>
+                                    </tr>
+                                    <% } %>
 				</tbody>
 			</table>
 		</div>
