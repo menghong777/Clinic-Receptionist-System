@@ -26,14 +26,21 @@
             city != null && postcode != null && phone != null && sex != null)
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('us989', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "VALUES ('US333', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
             + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
 
     //emergency contact info
     String name="", relationship="", contact="";
     
-            
-     
+    name = request.getParameter("name");        
+    relationship = request.getParameter("relationship");
+    contact = request.getParameter("contact");
+    
+    if(name != null && relationship != null && contact != null)
+        
+    myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, "
+            + "`EmergencyName`, `EmergencyRelationship`, `TimeStamp`) "
+            + "VALUES ('PT991', 'US333', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
     
 %>
 
@@ -143,19 +150,22 @@
 			  <div class="form-group">
 			    <label for="emergencyName" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="emergencyName" placeholder="Name">
+			      <input type="text" class="form-control" id="emergencyName" placeholder="Name"
+                                     name="name">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyRelationship" class="col-sm-2 control-label">Relationship</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="emergencyRelationship" placeholder="Relationship">
+			      <input type="text" class="form-control" id="emergencyRelationship" placeholder="Relationship"
+                                     name="relationship">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyPhone" class="col-sm-2 control-label">Emergency contact</label>
 			    <div class="col-sm-10">
-			      <input type="tel" class="form-control" id="emergencyContact" placeholder="Emergancy mobile">
+			      <input type="tel" class="form-control" id="emergencyContact" placeholder="Emergancy mobile"
+                                     name="contact">
 			    </div>
 			  </div>
 			  <div class="form-group">
