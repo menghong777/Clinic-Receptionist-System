@@ -22,7 +22,7 @@
 						<li><a href="logout.jsp">Logout</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">Hi, <a href="#" class="navbar-link"><%=session.getAttribute("login")%></a></p>
-					<form action="patient_search.jsp" class="navbar-form navbar-right" role="search">
+					<!-- <form action="patient_search.jsp" class="navbar-form navbar-right" role="search">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
@@ -30,7 +30,7 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">Search</button>
-					</form>
+					</form> -->
                                         <!-- Get the search from form and put into session object -->
                                         <% if(request.getParameter("search")!=null) 
                                         {session.setAttribute("search",request.getParameter("search"));} %>
