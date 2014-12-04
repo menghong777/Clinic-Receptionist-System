@@ -1,8 +1,20 @@
+<%@page import="java.sql.*"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Prescription");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","prescription");
+    
+    /*Database connection */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    
+    /* Get PID from previous search page */
+    String PID = (String)session.getAttribute("PID");
+    PID = PID.toUpperCase();
+    
+    /* SQL query */
+    ResultSet result = myStatement.executeQuery("SELECT * FROM prescription WHERE Patient_ID = '" +PID+"'");
 %>
 <!doctype html>
 <html lang="en">
