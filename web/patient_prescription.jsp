@@ -67,8 +67,14 @@
 						<h4 class="modal-title" id="extendPrescription"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend prescription</h4>
 					</div>
 					<div class="modal-body">
-						<p>Days to extend: </p>
-						<input type="number" class="form-control" id="dob" placeholder="Extend period (day)"></input>
+						<form class="form-horizontal" role="form" method="post">
+							<div class="form-group">
+								<label for="period" class="col-sm-3 control-label">Extend period</label>
+								<div class="col-sm-9">
+									<input type="number" class="form-control" id="period" placeholder="Day(s)">
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
