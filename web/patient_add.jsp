@@ -7,6 +7,7 @@
     
     //general info
     String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
+    String status="";
     
     IC = request.getParameter("IC");
     fname = request.getParameter("fname");
@@ -23,6 +24,7 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
     
+    //userID
     ResultSet result = myStatement.executeQuery("SELECT User_ID FROM main_table ORDER BY User_ID DESC LIMIT 1");
     String userID="";
     while(result.next()) {
@@ -32,6 +34,7 @@
     int userid = userNum + 1;
     String user = "US" + userid;
     
+    //patientID
     ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
     String paID="";
     while(result2.next()) {
@@ -40,14 +43,23 @@
     int paNum = Integer.parseInt(paID.substring(2));
     int patientID = paNum + 1;
     String patient = "PT" + patientID;
-    
+
+    //general info
     if(IC != null && fname != null && lname != null && street != null && 
-            city != null && postcode != null && phone != null && sex != null)
+            city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
             + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
-            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
-
+            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
+       
+            status = "<div class='alert alert-success' role='alert'><b>Done!</b> Patient information saved successfully.</div>";
+        }
+    
+        if(IC == "" || fname == "" || lname == "" || street == "" || 
+            city == "" || postcode == "" || phone == "" || sex == "" || dob == "") {
+            
+            status = "<div class='alert alert-danger' role='alert'><b>Oh snap!</b> Change a few things up and try submitting again.</div>";
+        }
     //emergency contact info
     String name="", relationship="", contact="";
     
@@ -55,11 +67,12 @@
     relationship = request.getParameter("relationship");
     contact = request.getParameter("contact");
     
-    if(name != null && relationship != null && contact != null)
+    if(name != null && relationship != null && contact != null && dob != null && dob != "")
         
     myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, "
             + "`EmergencyName`, `EmergencyRelationship`, `TimeStamp`) "
             + "VALUES ('" + patient +"', '"+ user +"', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
+    
     
 %>
 
@@ -79,8 +92,7 @@
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
 			<!-- Head up display for displaying information -->
-			<div class="alert alert-danger" role="alert"><b>Oh snap!</b> Change a few things up and try submitting again.</div>
-			<div class="alert alert-success" role="alert"><b>Done!</b> Patient information saved successfully.</div>
+                    <%= status %>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
