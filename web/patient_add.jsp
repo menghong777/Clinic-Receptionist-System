@@ -18,15 +18,34 @@
     sex = request.getParameter("sex");
     dob = request.getParameter("dob");
     address = street + " " + city + " " + postcode;
-    
+
     /*For page tab/button/menu active state */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();
+    
+    ResultSet result = myStatement.executeQuery("SELECT User_ID FROM main_table ORDER BY User_ID DESC LIMIT 1");
+    String userID="";
+    while(result.next()) {
+        userID = result.getString("User_ID");
+    }
+    int userNum = Integer.parseInt(userID.substring(2));
+    int userid = userNum + 1;
+    String user = "US" + userid;
+    
+    ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
+    String paID="";
+    while(result2.next()) {
+        paID = result2.getString("Patient_ID");
+    }
+    int paNum = Integer.parseInt(paID.substring(2));
+    int patientID = paNum + 1;
+    String patient = "PT" + patientID;
+    
     if(IC != null && fname != null && lname != null && street != null && 
             city != null && postcode != null && phone != null && sex != null)
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
             + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('US333', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
+            + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
             + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);");
 
     //emergency contact info
@@ -40,7 +59,7 @@
         
     myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, "
             + "`EmergencyName`, `EmergencyRelationship`, `TimeStamp`) "
-            + "VALUES ('PT991', 'US333', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
+            + "VALUES ('" + patient +"', '"+ user +"', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
     
 %>
 
