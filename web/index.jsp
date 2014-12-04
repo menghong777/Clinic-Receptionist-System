@@ -11,6 +11,8 @@
     try {
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();  
+    ResultSet myResultSet = null;
+    ResultSet ResultSet = null;
     
     Date d = new Date(); //request for locale date
     SimpleDateFormat formatter=new SimpleDateFormat("EEEE, d MMMM yyyy");
@@ -36,22 +38,42 @@
 					<h2 class="panel-title"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Today's appointments</h2>
 				</div>                                
 				<div class="panel-body">
+                            <% 
+                            //get the patient name 
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS gp FROM main_table, appoinment, schedule WHERE appoinment.schedule_ID = schedule.schedule_ID AND schedule.User_ID = main_table.User_ID");                                                                                    
+                            %>
 					<table class="table table-hover table-condensed">
 						<thead>
-							<tr>
-								<th>Patient name</th>
+							<tr>								
 								<th>GP</th>
 							</tr>
-						</thead>
-                                               
+						</thead>                                               
 						<tbody>
-							<tr>
+                                                    <tr>
+                                                    <% while(myResultSet.next()) { %>
                                                             <td>
-                                                               
-                                                            </td>   
-                                                        </tr>    
-                                                                                                    
+                                                                <%= myResultSet.getString("gp")%>                                                               
+                                                            </td>
+                                                            <%} %>
+                                                    </tr> 
+                                                <thead>
+							<tr>								
+								<th>Patient</th>
+							</tr>
+						</thead>     
+                            <%                                                    
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient FROM main_table, patient, appoinment WHERE appoinment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID");                            
+                            %>                                                                                                    
 						</tbody>
+                                                <tbody>
+                                                    <tr>
+                                                    <% while(myResultSet.next()) { %>							                                                  
+                                                            <td>
+                                                                <%= myResultSet.getString("patient")%>                                                               
+                                                            </td>                                                                                                                
+                                                        <%}%>
+                                                    </tr>    
+                                                </tbody>
 					</table>
 				</div>
 			</div>
@@ -63,7 +85,7 @@
 				</div> 
                               <% 
                             //The date need to change according to current date
-                            ResultSet myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                            
+                            myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                            
                             %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
