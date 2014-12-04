@@ -40,7 +40,7 @@
 				<div class="panel-body">
                             <% 
                             //get the patient name 
-                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS gp FROM main_table, appoinment, schedule WHERE appoinment.schedule_ID = schedule.schedule_ID AND schedule.User_ID = main_table.User_ID");                                                                                    
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS gp FROM main_table, appointment, gp WHERE appointment.gp_ID = gp.gp_ID AND gp.User_ID = main_table.User_ID");                                                                                    
                             %>
 					<table class="table table-hover table-condensed">
 						<thead>
@@ -62,7 +62,7 @@
 							</tr>
 						</thead>     
                             <%                                                    
-                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient FROM main_table, patient, appoinment WHERE appoinment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID");                            
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient FROM main_table, patient, appointment WHERE appointment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID");                            
                             %>                                                                                                    
 						</tbody>
                                                 <tbody>
