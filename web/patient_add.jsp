@@ -16,35 +16,38 @@
     }
         
     if ((String) request.getParameter("fname") != null && !request.getParameter("fname").equals("")) {
-        IC =  request.getParameter("fname");
+        fname =  request.getParameter("fname");
         session.setAttribute("fname", fname);
     }
     
     if ((String) request.getParameter("lname") != null && !request.getParameter("lname").equals("")) {
-        IC =  request.getParameter("lname");
+        lname =  request.getParameter("lname");
         session.setAttribute("lname", lname);
     }
     
     if ((String) request.getParameter("phone") != null && !request.getParameter("phone").equals("")) {
-        IC =  request.getParameter("phone");
+        phone =  request.getParameter("phone");
         session.setAttribute("phone", phone);
     }
     
-    sex = request.getParameter("sex");
-    
     if ((String) request.getParameter("street") != null && !request.getParameter("street").equals("")) {
-        IC =  request.getParameter("street");
+        street =  request.getParameter("street");
         session.setAttribute("street", street);
     }
     
     if ((String) request.getParameter("city") != null && !request.getParameter("city").equals("")) {
-        IC =  request.getParameter("city");
+        city =  request.getParameter("city");
         session.setAttribute("city", city);
     }
     
     if ((String) request.getParameter("postcode") != null && !request.getParameter("postcode").equals("")) {
-        IC =  request.getParameter("postcode");
+        postcode =  request.getParameter("postcode");
         session.setAttribute("postcode", postcode);
+    }
+    
+    if ((String) request.getParameter("sex") != null && !request.getParameter("sex").equals("")) {
+        sex =  request.getParameter("sex");
+        session.setAttribute("sex", sex);
     }
     
     //dob = request.getParameter("dob");
@@ -92,6 +95,7 @@
     if(patientID <= 9)
         patient = pt + TwoZero2 + patientID;
     out.println(patient);
+    
     //general info
     if(IC != null && fname != null && lname != null && street != null && 
             city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
@@ -141,7 +145,7 @@
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
 			<!-- Head up display for displaying information -->
-                    <%= status %>
+                        <%= status %>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
