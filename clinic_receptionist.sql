@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `main_table` (
   `FirstName` varchar(30) NOT NULL,
   `LastName` varchar(30) NOT NULL,
   `Address` varchar(100) NOT NULL,
-  `IC/Passport` varchar(14) NOT NULL,
+  `IdentificationID` varchar(14) NOT NULL,
   `PhoneNumber` varchar(11) NOT NULL,
   `DateOFBirth` date NOT NULL,
   `Category` varchar(12) NOT NULL,
