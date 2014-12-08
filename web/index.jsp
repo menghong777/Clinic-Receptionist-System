@@ -65,12 +65,13 @@
                                                     <%}%>
                                                 </tbody> 
                             <%                                                    
-                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient, main_table.IdentificationID as iden  FROM main_table, patient, appointment WHERE appointment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID and appointment.gp_ID = 'GP001' and appointment.Date = '2014-12-05'");                            
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient, main_table.IdentificationID as iden, appointment.GP_ID  FROM main_table, patient, appointment WHERE appointment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID  and appointment.Date = '"+dateC+"'");                            
                             %>                                                                                                    
 						<thead>
 							<tr>								
 								<th>Patient</th>
                                                                 <th>Identification ID</th>
+                                                                <th>GP ID</th>
 							</tr>                                               
 						</thead>
                                                 <tbody>                                                      
@@ -82,6 +83,9 @@
                                                             <td>
                                                                 <%= myResultSet.getString("iden")%>     
                                                             </td> 
+                                                            <td>
+                                                                <%= myResultSet.getString("GP_ID")%>     
+                                                            </td>
                                                     </tr> 
                                                     <%}%>                                                                                                                     
                                                 </tbody>
@@ -96,7 +100,7 @@
 				</div> 
                               <% 
                             //The date need to change according to current date
-                            myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '2014-01-12' AND schedule.User_ID = main_table.User_ID");                            
+                            myResultSet = myStatement.executeQuery("SELECT main_table.FirstName, main_table.LastName, main_table.Category, schedule.User_ID FROM main_table, schedule WHERE schedule.Date =  '"+dateC+"' AND schedule.User_ID = main_table.User_ID");                            
                             %>
 				<div class="panel-body">
 					<table class="table table-hover table-condensed">
@@ -105,7 +109,7 @@
 								<th>User ID</th>
                                                                 <th>First Name</th>
                                                                 <th>Last Name</th>
-                                                       
+                                                                <th>Position</th>
 							</tr>
 						</thead>
 						<tbody> 
@@ -117,9 +121,12 @@
                                                             <td>
                                                                 <%= myResultSet.getString("FirstName")%>                                                                
                                                             </td>
-                                                             <td>
+                                                            <td>
                                                                 <%= myResultSet.getString("LastName")%>                                                                
                                                             </td>                                                
+                                                            <td>
+                                                                <%= myResultSet.getString("Category")%>                                                                
+                                                            </td>
 							</tr>	
                                                     <% } %>    
 						</tbody>
@@ -139,3 +146,4 @@
 }
 %>
 </html>
+
