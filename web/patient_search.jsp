@@ -96,7 +96,7 @@
                                         while(result.next()) {
                                         String fName = result.getString("FirstName");
                                         String lName = result.getString("LastName");
-                                        String IC = result.getString("IC/Passport");
+                                        String IC = result.getString("IdentificationID");
                                         String Phone = result.getString("PhoneNumber");
                                         String sex = result.getString("Sex");
                                         String pid = result.getString("Patient_ID");

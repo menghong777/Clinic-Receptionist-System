@@ -64,7 +64,7 @@
     if(IC != null && fname != null && lname != null && street != null && 
             city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
-            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
+            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `identificationID`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
             + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
             + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
        
