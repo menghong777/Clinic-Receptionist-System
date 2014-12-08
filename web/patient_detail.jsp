@@ -42,7 +42,7 @@
     
     /*Get the value from database */
     while(result.next()) {
-        IC = result.getString("IC/Passport");
+        IC = result.getString("IdentificationID");
         fName = result.getString("FirstName");
         lName = result.getString("LastName");
         address = result.getString("Address");
