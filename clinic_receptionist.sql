@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2014 at 08:59 AM
+-- Generation Time: Dec 08, 2014 at 09:32 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `clinic_receptionist`
 --
-CREATE Database `clinic_receptionist`
-Use `clinic_receptionist`
+CREATE Database `clinic_receptionist`;
+Use `clinic_receptionist`;
 -- --------------------------------------------------------
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
 --
 
 INSERT INTO `appointment` (`Appoinment_ID`, `Patient_ID`, `GP_ID`, `Date`, `Status`) VALUES
-(1, 'PT001', 'GP001', '2014-12-12', 'Pending'),
+(1, 'PT001', 'GP001', '2014-12-08', 'Pending'),
 (2, 'PT002', 'GP001', '2014-12-12', 'Pending'),
 (3, 'PT003', 'GP002', '2014-12-06', 'Done'),
 (4, 'PT002', 'GP003', '2014-12-08', 'Done'),
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `main_table` (
 -- Dumping data for table `main_table`
 --
 
-INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) VALUES
+INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IdentificationID`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) VALUES
 ('admin', 'Admin', 'Gay', 'Gay house', '123456789', '123456789', '2014-12-01', 'Receptionist', 'Non', '2014-12-04 09:26:28'),
 ('US001', 'Siva', 'Kunalan', '', '830918-01-1547', '0172768812', '1983-09-18', 'GP', 'Male', '2014-11-08 09:26:06'),
 ('US002', 'Angelo', 'Andy', '', 'A301324', '0127540892', '1973-03-22', 'GP', 'Female', '2014-11-08 09:26:06'),
@@ -227,14 +227,14 @@ CREATE TABLE IF NOT EXISTS `schedule` (
 --
 
 INSERT INTO `schedule` (`Schedule_Id`, `User_ID`, `Date`, `Availability`, `TimeStamp`) VALUES
-('SC001', 'US001', '2014-01-12', 'False', '2014-11-08 09:43:56'),
-('SC002', 'US004', '2014-01-12', 'TRUE', '2014-11-08 09:43:56'),
-('SC003', 'US002', '2014-02-12', 'TRUE', '2014-11-08 09:43:56'),
-('SC004', 'US003', '2014-03-12', 'False', '2014-11-08 09:43:56'),
-('SC005', 'US005', '2014-03-12', 'TRUE', '2014-11-08 09:43:56'),
-('SC006', 'US002', '2014-04-12', 'False', '2014-11-08 09:43:56'),
-('SC007', 'US006', '2014-04-12', 'TRUE', '2014-11-08 09:43:56'),
-('SC008', 'US004', '2014-04-12', 'TRUE', '2014-11-08 09:43:56');
+('SC001', 'US001', '2014-12-08', 'False', '2014-11-08 09:43:56'),
+('SC002', 'US004', '2014-12-08', 'TRUE', '2014-11-08 09:43:56'),
+('SC003', 'US002', '2014-12-08', 'TRUE', '2014-11-08 09:43:56'),
+('SC004', 'US003', '2014-12-09', 'False', '2014-11-08 09:43:56'),
+('SC005', 'US005', '2014-12-09', 'TRUE', '2014-11-08 09:43:56'),
+('SC006', 'US002', '2014-12-10', 'False', '2014-11-08 09:43:56'),
+('SC007', 'US006', '2014-12-10', 'TRUE', '2014-11-08 09:43:56'),
+('SC008', 'US004', '2014-12-11', 'TRUE', '2014-11-08 09:43:56');
 
 --
 -- Constraints for dumped tables
