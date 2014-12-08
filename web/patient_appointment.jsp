@@ -14,7 +14,7 @@
     PID = PID.toUpperCase();
     
     /* SQL query */
-    ResultSet result = myStatement.executeQuery("SELECT * FROM appoinment WHERE Patient_ID = '" +PID+"'");
+    ResultSet result = myStatement.executeQuery("SELECT * FROM appointment WHERE Patient_ID = '" +PID+"'");
 %>
 <!doctype html>
 <html lang="en">
