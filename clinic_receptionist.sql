@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2014 at 04:30 PM
+-- Generation Time: Dec 08, 2014 at 08:59 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.4.22
 
@@ -19,7 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `clinic_receptionist`
 --
-
+CREATE Database `clinic_receptionist`
+Use `clinic_receptionist`
 -- --------------------------------------------------------
 
 --
@@ -27,21 +28,26 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `appointment` (
+  `Appoinment_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Patient_ID` varchar(5) NOT NULL,
-  `Schedule_ID` varchar(5) NOT NULL,
+  `GP_ID` varchar(5) NOT NULL,
+  `Date` date NOT NULL,
   `Status` varchar(20) NOT NULL,
-  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`Appoinment_ID`),
+  KEY `Patient_ID` (`Patient_ID`),
+  KEY `GP_ID` (`GP_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `appointment`
 --
 
-INSERT INTO `appointment` (`Patient_ID`, `Schedule_ID`, `Status`, `Timestamp`) VALUES
-('PT001', 'SC001', 'Pending', '2014-11-20 16:39:58'),
-('PT002', 'SC003', 'Pending', '2014-11-20 16:39:58'),
-('PT003', 'SC004', 'Completed', '2014-11-20 16:39:58'),
-('PT002', 'SC006', 'Pending', '2014-11-20 16:39:58');
+INSERT INTO `appointment` (`Appoinment_ID`, `Patient_ID`, `GP_ID`, `Date`, `Status`) VALUES
+(1, 'PT001', 'GP001', '2014-12-12', 'Pending'),
+(2, 'PT002', 'GP001', '2014-12-12', 'Pending'),
+(3, 'PT003', 'GP002', '2014-12-06', 'Done'),
+(4, 'PT002', 'GP003', '2014-12-08', 'Done'),
+(5, 'PT003', 'GP002', '2014-12-24', 'Cancelled');
 
 -- --------------------------------------------------------
 
@@ -52,7 +58,9 @@ INSERT INTO `appointment` (`Patient_ID`, `Schedule_ID`, `Status`, `Timestamp`) V
 CREATE TABLE IF NOT EXISTS `gp` (
   `GP_ID` varchar(5) NOT NULL,
   `User_ID` varchar(5) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`GP_ID`),
+  KEY `User_ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -80,7 +88,8 @@ CREATE TABLE IF NOT EXISTS `main_table` (
   `DateOFBirth` date NOT NULL,
   `Category` varchar(12) NOT NULL,
   `Sex` varchar(6) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -88,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `main_table` (
 --
 
 INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) VALUES
+('admin', 'Admin', 'Gay', 'Gay house', '123456789', '123456789', '2014-12-01', 'Receptionist', 'Non', '2014-12-04 09:26:28'),
 ('US001', 'Siva', 'Kunalan', '', '830918-01-1547', '0172768812', '1983-09-18', 'GP', 'Male', '2014-11-08 09:26:06'),
 ('US002', 'Angelo', 'Andy', '', 'A301324', '0127540892', '1973-03-22', 'GP', 'Female', '2014-11-08 09:26:06'),
 ('US003', 'Aron', 'Aziz', '', '840601-14-1482', '01118426416', '1984-06-01', 'GP', 'Male', '2014-11-08 09:31:37'),
@@ -96,9 +106,9 @@ INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Pas
 ('US006', 'Kajal', 'Agraval', '', '870513-09-9614', '0136542891', '1987-05-13', 'Nurse', 'Female', '2014-11-08 09:31:37'),
 ('US007', 'Mary', 'Jane', '', '900312-14-6625', '0194261538', '1990-03-12', 'Receptionist', 'Female', '2014-11-08 09:32:54'),
 ('US008', 'Noor', 'Rozita', '', '870415-14-3245', '0174861539', '1987-04-15', 'Receptionist', 'Female', '2014-11-08 09:35:11'),
-('US009', 'Hisamudin', 'Ahmad', 'No.2 Taman Setapak Permai 53300 Kuala Lumpur', '710825-01-1256', '0147419635', '1971-08-25', 'Patient', 'Male', '2014-12-02 13:30:53'),
-('US010', 'Muthu', 'Pillay', 'A-07-07, Jalan Ikan Emas,\r\nMesra villa, \r\nTaman Pandan Mesra,\r\n68000 Ampang, \r\nSelangor', '690915-08-4826', '0161597534', '1969-09-15', 'Patient', 'Male', '2014-12-02 14:42:11'),
-('US011', 'Jinghua', 'Juan', 'No.42 Lorong 2, Taman Maluri Shah Alam 51200 Sealngor', 'F52612L', '0194561597', '1965-07-03', 'Patient', 'Female', '2014-12-02 14:42:56');
+('US009', 'Hisamudin', 'Ahmad', 'No.2 Taman Setapak Permai 53300 Kuala Lumpur', '710825-01-1256', '0147419635', '1971-08-25', 'Patient', 'Male', '2014-12-04 09:38:01'),
+('US010', 'Muthu', 'Pillay', ' Jalan Ikan Emas,Mesra villa, Taman Pandan Mesra, 68000 Ampang, Selangor', '690915-08-4826', '0161597534', '1969-09-15', 'Patient', 'Male', '2014-12-04 09:38:47'),
+('US011', 'Jinghua', 'Juan', 'No.42 Lorong 2, Taman Maluri Shah Alam 51200 Sealngor', 'F52612L', '0194561597', '1965-07-03', 'Patient', 'Female', '2014-12-04 09:40:47');
 
 -- --------------------------------------------------------
 
@@ -109,7 +119,9 @@ INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Pas
 CREATE TABLE IF NOT EXISTS `nurse` (
   `Nurse_ID` varchar(5) NOT NULL,
   `User_ID` varchar(5) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Nurse_ID`),
+  KEY `User_ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -133,7 +145,9 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `EmergencyContact` varchar(11) NOT NULL,
   `EmergencyName` varchar(30) NOT NULL,
   `EmergencyRelationship` varchar(20) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Patient_ID`),
+  KEY `User_ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -157,7 +171,8 @@ CREATE TABLE IF NOT EXISTS `prescription` (
   `Dosage` varchar(20) NOT NULL,
   `Period` varchar(20) NOT NULL,
   `Extension_Period` varchar(20) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `Patient_ID` (`Patient_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -177,7 +192,9 @@ CREATE TABLE IF NOT EXISTS `receptionist` (
   `Receptionist_ID` varchar(5) NOT NULL,
   `User_ID` varchar(5) NOT NULL,
   `Password` varchar(20) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Receptionist_ID`),
+  KEY `User_ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -186,7 +203,8 @@ CREATE TABLE IF NOT EXISTS `receptionist` (
 
 INSERT INTO `receptionist` (`Receptionist_ID`, `User_ID`, `Password`, `TimeStamp`) VALUES
 ('RP001', 'US007', 'asd1234', '2014-11-08 09:39:58'),
-('RP002', 'US008', 'asd1234', '2014-11-08 09:39:58');
+('RP002', 'US008', 'asd1234', '2014-12-04 09:27:40'),
+('RP003', 'admin', 'admin', '2014-12-04 09:26:39');
 
 -- --------------------------------------------------------
 
@@ -199,7 +217,9 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `User_ID` varchar(5) NOT NULL,
   `Date` date NOT NULL,
   `Availability` varchar(6) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Schedule_Id`),
+  KEY `User_ID` (`User_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -217,58 +237,6 @@ INSERT INTO `schedule` (`Schedule_Id`, `User_ID`, `Date`, `Availability`, `TimeS
 ('SC008', 'US004', '2014-04-12', 'TRUE', '2014-11-08 09:43:56');
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `appointment`
---
-ALTER TABLE `appointment`
- ADD KEY `Patient_ID` (`Patient_ID`), ADD KEY `Schedule_ID` (`Schedule_ID`);
-
---
--- Indexes for table `gp`
---
-ALTER TABLE `gp`
- ADD PRIMARY KEY (`GP_ID`), ADD KEY `User_ID` (`User_ID`);
-
---
--- Indexes for table `main_table`
---
-ALTER TABLE `main_table`
- ADD PRIMARY KEY (`User_ID`);
-
---
--- Indexes for table `nurse`
---
-ALTER TABLE `nurse`
- ADD PRIMARY KEY (`Nurse_ID`), ADD KEY `User_ID` (`User_ID`);
-
---
--- Indexes for table `patient`
---
-ALTER TABLE `patient`
- ADD PRIMARY KEY (`Patient_ID`), ADD KEY `User_ID` (`User_ID`);
-
---
--- Indexes for table `prescription`
---
-ALTER TABLE `prescription`
- ADD KEY `Patient_ID` (`Patient_ID`);
-
---
--- Indexes for table `receptionist`
---
-ALTER TABLE `receptionist`
- ADD PRIMARY KEY (`Receptionist_ID`), ADD KEY `User_ID` (`User_ID`);
-
---
--- Indexes for table `schedule`
---
-ALTER TABLE `schedule`
- ADD PRIMARY KEY (`Schedule_Id`), ADD KEY `User_ID` (`User_ID`);
-
---
 -- Constraints for dumped tables
 --
 
@@ -276,44 +244,44 @@ ALTER TABLE `schedule`
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
-ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`Schedule_ID`) REFERENCES `schedule` (`Schedule_Id`);
+  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
+  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`GP_ID`) REFERENCES `gp` (`GP_ID`);
 
 --
 -- Constraints for table `gp`
 --
 ALTER TABLE `gp`
-ADD CONSTRAINT `gp_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+  ADD CONSTRAINT `gp_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
 
 --
 -- Constraints for table `nurse`
 --
 ALTER TABLE `nurse`
-ADD CONSTRAINT `nurse_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+  ADD CONSTRAINT `nurse_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
 
 --
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
-ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+  ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
 
 --
 -- Constraints for table `prescription`
 --
 ALTER TABLE `prescription`
-ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`);
+  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`);
 
 --
 -- Constraints for table `receptionist`
 --
 ALTER TABLE `receptionist`
-ADD CONSTRAINT `receptionist_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+  ADD CONSTRAINT `receptionist_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
 
 --
 -- Constraints for table `schedule`
 --
 ALTER TABLE `schedule`
-ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+  ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
