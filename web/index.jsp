@@ -16,7 +16,9 @@
     
     Date d = new Date(); //request for locale date
     SimpleDateFormat formatter=new SimpleDateFormat("EEEE, d MMMM yyyy");
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
     String date=formatter.format(d);
+    String dateC=sdf.format(d); //this is for query bcus the format is different
 %>
 <!doctype html>
 <html lang="en">
@@ -28,7 +30,8 @@
 		<jsp:include page="navbar.jsp"></jsp:include>
 		<div class="row">
 			<div class="col-md-12 text-center">
-                        <h3><% out.println(date); %></h3>    
+                        <h3><% out.println(date); %></h3> 
+                        
 			
 		</div>
 		<div class="col-md-1"></div>
@@ -40,39 +43,47 @@
 				<div class="panel-body">
                             <% 
                             //get the patient name 
-                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS gp FROM main_table, appoinment, schedule WHERE appoinment.schedule_ID = schedule.schedule_ID AND schedule.User_ID = main_table.User_ID");                                                                                    
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS gp, gp.gp_ID  FROM main_table, gp WHERE main_table.Category = 'gp' AND gp.User_ID = main_table.User_ID"); 
                             %>
 					<table class="table table-hover table-condensed">
 						<thead>
 							<tr>								
 								<th>GP</th>
+                                                                <th>ID</th>
 							</tr>
 						</thead>                                               
-						<tbody>
-                                                    <tr>
+						<tbody>                                                    
                                                     <% while(myResultSet.next()) { %>
+                                                    <tr>
                                                             <td>
                                                                 <%= myResultSet.getString("gp")%>                                                               
                                                             </td>
-                                                            <%} %>
+                                                            <td>
+                                                                <%= myResultSet.getString("gp_ID")%>                                                               
+                                                            </td>
                                                     </tr> 
-                                                <thead>
+                                                    <%}%>
+                                                </tbody> 
+                            <%                                                    
+                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient, main_table.IdentificationID as iden  FROM main_table, patient, appointment WHERE appointment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID and appointment.gp_ID = 'GP001' and appointment.Date = '2014-12-05'");                            
+                            %>                                                                                                    
+						<thead>
 							<tr>								
 								<th>Patient</th>
-							</tr>
-						</thead>     
-                            <%                                                    
-                            myResultSet = myStatement.executeQuery("SELECT main_table.firstname AS patient FROM main_table, patient, appoinment WHERE appoinment.patient_ID = patient.Patient_ID AND patient.User_ID = main_table.User_ID");                            
-                            %>                                                                                                    
-						</tbody>
-                                                <tbody>
-                                                    <tr>
+                                                                <th>Identification ID</th>
+							</tr>                                               
+						</thead>
+                                                <tbody>                                                      
                                                     <% while(myResultSet.next()) { %>							                                                  
+                                                    <tr>
                                                             <td>
                                                                 <%= myResultSet.getString("patient")%>                                                               
                                                             </td>                                                                                                                
-                                                        <%}%>
-                                                    </tr>    
+                                                            <td>
+                                                                <%= myResultSet.getString("iden")%>     
+                                                            </td> 
+                                                    </tr> 
+                                                    <%}%>                                                                                                                     
                                                 </tbody>
 					</table>
 				</div>
