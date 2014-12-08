@@ -6,18 +6,52 @@
     session.setAttribute("patientMenu","add");
     
     //general info
-    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob;
+    String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob="";
     String status="";
     
-    IC = request.getParameter("IC");
-    fname = request.getParameter("fname");
-    lname = request.getParameter("lname");
-    street = request.getParameter("street");
-    city = request.getParameter("city");
-    postcode = request.getParameter("postcode");
-    phone = request.getParameter("phone");
-    sex = request.getParameter("sex");
-    dob = request.getParameter("dob");
+    //sticky part
+    if ((String) request.getParameter("IC") != null && !request.getParameter("IC").equals("")) {
+        IC =  request.getParameter("IC");
+        session.setAttribute("IC", IC);
+    }
+        
+    if ((String) request.getParameter("fname") != null && !request.getParameter("fname").equals("")) {
+        fname =  request.getParameter("fname");
+        session.setAttribute("fname", fname);
+    }
+    
+    if ((String) request.getParameter("lname") != null && !request.getParameter("lname").equals("")) {
+        lname =  request.getParameter("lname");
+        session.setAttribute("lname", lname);
+    }
+    
+    if ((String) request.getParameter("phone") != null && !request.getParameter("phone").equals("")) {
+        phone =  request.getParameter("phone");
+        session.setAttribute("phone", phone);
+    }
+    
+    if ((String) request.getParameter("street") != null && !request.getParameter("street").equals("")) {
+        street =  request.getParameter("street");
+        session.setAttribute("street", street);
+    }
+    
+    if ((String) request.getParameter("city") != null && !request.getParameter("city").equals("")) {
+        city =  request.getParameter("city");
+        session.setAttribute("city", city);
+    }
+    
+    if ((String) request.getParameter("postcode") != null && !request.getParameter("postcode").equals("")) {
+        postcode =  request.getParameter("postcode");
+        session.setAttribute("postcode", postcode);
+    }
+    
+    if ((String) request.getParameter("sex") != null && !request.getParameter("sex").equals("")) {
+        sex =  request.getParameter("sex");
+        session.setAttribute("sex", sex);
+    }
+    
+    //dob = request.getParameter("dob");
+    
     address = street + " " + city + " " + postcode;
 
     /*For page tab/button/menu active state */
@@ -42,6 +76,7 @@
     if(userid <= 9)
         user = us + TwoZero + userid;
     out.println(user);
+    
     //patientID
     ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
     String paID="";
@@ -60,6 +95,7 @@
     if(patientID <= 9)
         patient = pt + TwoZero2 + patientID;
     out.println(patient);
+    
     //general info
     if(IC != null && fname != null && lname != null && street != null && 
             city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
@@ -76,6 +112,7 @@
             
             status = "<div class='alert alert-danger' role='alert'><b>Oh snap!</b> Change a few things up and try submitting again.</div>";
         }
+        
     //emergency contact info
     String name="", relationship="", contact="";
     
@@ -108,21 +145,24 @@
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
 			<!-- Head up display for displaying information -->
-                    <%= status %>
+                        <%= status %>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="IC" placeholder="IC number" name="IC">
+                                <input type="text" class="form-control" id="IC" placeholder="IC number" 
+                                       name="IC" value="<%= IC %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="firstName" placeholder="First name" name="fname">
+			      <input type="text" class="form-control" id="firstName" placeholder="First name" 
+                                     name="fname" value="<%= fname %>">
 			    </div>
 			    <div class="col-sm-5">
-			      <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lname">
+			      <input type="text" class="form-control" id="lastName" placeholder="Last name" 
+                                     name="lname" value="<%= lname %>">
 			    </div>
 			  </div>
 <!-- 			  <div class="form-group">
@@ -135,28 +175,28 @@
 			    <label for="addressStreet" class="col-sm-2 control-label">Address</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="addressStreet" placeholder="Unit number and street"
-                                     name="street">
+                                     name="street" value="<%= street %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressCity" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="addressCity" placeholder="City"
-                                     name="city">
+                                     name="city" value="<%= city %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="addressPostcode" class="col-sm-2 control-label"></label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="addressPostcode" placeholder="Postcode"
-                                     name="postcode">
+                                     name="postcode" value="<%= postcode %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="contact" class="col-sm-2 control-label">Personal contact</label>
 			    <div class="col-sm-10">
 			      <input type="tel" class="form-control" id="contact" placeholder="Mobile or home"
-                                     name="phone">
+                                     name="phone" value="<%= phone %>">
 			      <!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 			  </div>
@@ -168,7 +208,8 @@
 						<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Birth date" name="dob">
+						<input type='text' class="form-control" data-date-format="YYYY-MM-DD" 
+                                                       placeholder="Birth date" name="dob" value="<%= dob %>">
 					</div>
 					<p class="help-block"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
 			    </div>
