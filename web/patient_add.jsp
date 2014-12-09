@@ -4,12 +4,13 @@
     session.setAttribute("pagetitle","Add Patient");
     session.setAttribute("tab","search");
     session.setAttribute("patientMenu","add");
+    session.setAttribute("status","");
     
-    //general info
+    
     String fname="", lname="", IC="", phone="", sex="", street="", city="", postcode="", address="", dob="";
-    String status="";
+    String name="", relationship="", contact="";
     
-    //sticky part
+    //general info sticky part
     if ((String) request.getParameter("IC") != null && !request.getParameter("IC").equals("")) {
         IC =  request.getParameter("IC");
         session.setAttribute("IC", IC);
@@ -50,9 +51,29 @@
         session.setAttribute("sex", sex);
     }
     
-    //dob = request.getParameter("dob");
+    if ((String) request.getParameter("dob") != null && !request.getParameter("dob").equals("")) {
+        dob =  request.getParameter("dob");
+        session.setAttribute("dob", dob);
+    }
     
     address = street + " " + city + " " + postcode;
+    
+    //emergency info sticky part
+    
+    if ((String) request.getParameter("name") != null && !request.getParameter("name").equals("")) {
+        name =  request.getParameter("name");
+        session.setAttribute("name", name);
+    }
+    
+    if ((String) request.getParameter("relationship") != null && !request.getParameter("relationship").equals("")) {
+        relationship =  request.getParameter("relationship");
+        session.setAttribute("relationship", relationship);
+    }
+    
+    if ((String) request.getParameter("contact") != null && !request.getParameter("contact").equals("")) {
+        contact =  request.getParameter("contact");
+        session.setAttribute("contact", contact);
+    }
 
     /*For page tab/button/menu active state */
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
@@ -75,7 +96,6 @@
         user = us + OneZero + userid;
     if(userid <= 9)
         user = us + TwoZero + userid;
-    out.println(user);
     
     //patientID
     ResultSet result2 = myStatement.executeQuery("SELECT Patient_ID FROM patient ORDER BY User_ID DESC LIMIT 1");
@@ -94,39 +114,94 @@
         patient = pt + OneZero1 + patientID;
     if(patientID <= 9)
         patient = pt + TwoZero2 + patientID;
-    out.println(patient);
     
+    boolean condition=false;
     //general info
     if(IC != null && fname != null && lname != null && street != null && 
-            city != null && postcode != null && phone != null && sex != null && dob != null && dob != "") {
-        myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
-            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `identificationID`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
-            + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', ' " + street  + "', '" + city +"', '"+ postcode +"', "
-            + "'"+ dob +"', 'patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
-       
-            status = "<div class='alert alert-success' role='alert'><b>Done!</b> Patient information saved successfully.</div>";
-        }
-    
-        if(IC == "" || fname == "" || lname == "" || street == "" || 
-            city == "" || postcode == "" || phone == "" || sex == "" || dob == "") {
+            city != null && postcode != null && phone != null && sex != null && dob != null && dob != ""
+            && name != null && relationship != null && contact != null 
             
-            status = "<div class='alert alert-danger' role='alert'><b>Oh snap!</b> Change a few things up and try submitting again.</div>";
+            ) {
+        condition=true;
+        
+        myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
+            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
+            + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', '" + address  + "', '" + IC +"', '"+ phone +"', "
+            + "'"+ dob +"', 'Patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
+              
+        myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyName`, "
+            + "`EmergencyRelationship`, `EmergencyContact`, `TimeStamp`) "
+            + "VALUES ('" + patient +"', '"+ user +"', '"+ name +"', '"+ relationship +"', '"+ contact +"', CURRENT_TIMESTAMP);");
+        
+           session.setAttribute("status", "<div class='alert alert-success' role='alert'><b>Done!</b> Patient information saved successfully.</div>");
+    }
+    if(request.getParameter("submit")!=null) {
+        if(  
+           IC == null || fname == null || lname == null || street == null || city == null || postcode == null 
+                || phone == null || sex == null || dob == null || dob == ""
+                || name == null || relationship == null || contact == null ) {
+            
+            //condition = false;
+            session.setAttribute("status", "<div class='alert alert-danger' role='alert'><b>Oh snap!</b> Change a few things up and try submitting again.</div>");
+        } 
+    }
+        if(condition == true) {
+           session.setAttribute("IC","");
+           session.setAttribute("fname","");
+           session.setAttribute("lname","");
+           session.setAttribute("street","");
+           session.setAttribute("city","");
+           session.setAttribute("postcode",""); 
+           session.setAttribute("phone","");
+           session.setAttribute("sex","");
+           session.setAttribute("dob","");
+           session.setAttribute("name", "");
+           session.setAttribute("relationship", "");
+           session.setAttribute("contact","");
+           
+           fname="";
+           lname="";
+           IC="";
+           phone="";
+           sex="";
+           street="";
+           city="";
+           postcode="";
+           address="";
+           dob="";
+           name="";
+           relationship="";
+           contact="";
         }
         
-    //emergency contact info
-    String name="", relationship="", contact="";
-    
-    name = request.getParameter("name");        
-    relationship = request.getParameter("relationship");
-    contact = request.getParameter("contact");
-    
-    if(name != null && relationship != null && contact != null && dob != null && dob != "")
-        
-    myStatement.execute("INSERT INTO `clinic_receptionist`.`patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, "
-            + "`EmergencyName`, `EmergencyRelationship`, `TimeStamp`) "
-            + "VALUES ('" + patient +"', '"+ user +"', '"+ contact +"', '"+ name +"', '"+ relationship +"', CURRENT_TIMESTAMP);");
-    
-    
+        if(request.getParameter("reset")!= null) {
+            session.setAttribute("IC","");
+           session.setAttribute("fname","");
+           session.setAttribute("lname","");
+           session.setAttribute("street","");
+           session.setAttribute("city","");
+           session.setAttribute("postcode",""); 
+           session.setAttribute("phone","");
+           session.setAttribute("sex","");
+           session.setAttribute("dob","");
+           session.setAttribute("name", "");
+           session.setAttribute("relationship", "");
+           session.setAttribute("contact","");
+           
+           fname="";
+           lname="";
+           IC="";
+           phone="";
+           sex="";
+           street="";
+           city="";
+           postcode="";
+           address="";
+           dob="";
+           name="";
+           relationship="";
+           contact="";
+        }
 %>
 
 <!doctype html>
@@ -145,7 +220,7 @@
 		<div class="col-md-9">
 			<div class="page-header"><h2>General information</h2></div>
 			<!-- Head up display for displaying information -->
-                        <%= status %>
+                <%= session.getAttribute("status") %>
 			<form class="form-horizontal" role="form" method="post">
 			  <div class="form-group">
 			    <label for="IC" class="col-sm-2 control-label">IC number</label>
@@ -200,7 +275,7 @@
 			      <!-- Input type type="tel" is currently supported only in Safari 8 -->
 			    </div>
 			  </div>
-			  <div class="form-group has-error">
+			  <div class="form-group">
 			    <label for="dob" class="col-sm-2 control-label">Birth date</label>
 			    <div class="col-sm-10">
 			      <!-- <input type="date" class="form-control" id="dob" placeholder="Birth date"> -->
@@ -239,27 +314,27 @@
 			    <label for="emergencyName" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="emergencyName" placeholder="Name"
-                                     name="name">
+                                     name="name" value="<%= name %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyRelationship" class="col-sm-2 control-label">Relationship</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="emergencyRelationship" placeholder="Relationship"
-                                     name="relationship">
+                                     name="relationship" value="<%= relationship %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="emergencyPhone" class="col-sm-2 control-label">Emergency contact</label>
 			    <div class="col-sm-10">
 			      <input type="tel" class="form-control" id="emergencyContact" placeholder="Emergancy mobile"
-                                     name="contact">
+                                     name="contact" value="<%= contact %>">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Save</button>
-			      <button type="reset" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Clear all</button>
+			      <button name="submit" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Save</button>
+			      <button name="reset" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Clear all</button>
 			    </div>
 			  </div>
 			</form>
