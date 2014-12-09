@@ -13,8 +13,9 @@
 	String s_type = request.getParameter("staff_type");
 	String duty = request.getParameter("duty");
 
-	if(s_id !=null && s_id != "" && date!=null && date="" && s_type!=null && s_type!="" && duty!=null && duty!="") {
-		result = myStatement.executeQuery(SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' and main_table.category = '"+s_type+"');
+	//get gp\nurse only with specific date
+	if(s_id != null && s_id != "" && date != null && date != "" && s_type != null && s_type != "" && duty != null && duty != "") {
+		result = myStatement.executeQuery(SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' and main_table.category = '"+s_type+"';);
 	}
 %>
 <!doctype html>
