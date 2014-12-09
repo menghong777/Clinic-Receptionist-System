@@ -22,8 +22,7 @@
 						<th>Test Name</th>
 						<th>Value</th>
 						<th>Result</th>
-						<th>Normal range</th>
-						<th>Remark</th>
+						<th>Normal range</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -31,36 +30,37 @@
 						<td>Blood Pressure</td>
 						<td>mm Hg</td>
 						<td>110</td>
-						<td>&lt;120</td>
-						<td>Medi control</td>
+						<td>&lt;120</td>						
 					</tr>
 					<tr>
 						<td>Heartbeat</td>
 						<td>bpm</td>
 						<td>100</td>
-						<td>70 ~ 120</td>
-						<td>Normal</td>
+						<td>70 ~ 120</td>						
 					</tr>
 					<tr>
 						<td>Blood Sugar - Glucose</td>
 						<td>g</td>
 						<td>120</td>
-						<td>&lt;100</td>
-						<td>At risk</td>
+						<td>&lt;100</td>						
+					</tr>
+                                        <tr>
+						<td>Urea Level</td>
+						<td>g</td>
+						<td>13</td>
+						<td>12 ~ 20</td>						
 					</tr>
 					<tr>
 						<td>Weight</td>
 						<td>kg</td>
 						<td>120</td>
-						<td>50 ~ 70</td>
-						<td>Over weight</td>
+						<td>50 ~ 70</td>						
 					</tr>
 					<tr>
 						<td>Height</td>
 						<td>cm</td>
 						<td>160</td>
-						<td>-</td>
-						<td>-</td>
+						<td>-</td>						
 					</tr>
 				</tbody>
 			</table>
