@@ -7,12 +7,16 @@
 	/*Database connection */
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
 	Statement myStatement = con.createStatement();
-	ResultSet result  = null;
+	ResultSet result = null;
 	String s_id = request.getParameter("staff_id");
 	String date = request.getParameter("date");    
 	String s_type = request.getParameter("staff_type");
 	String duty = request.getParameter("duty");
 
+	//get gp\nurse only with specific date
+	// if(s_id != null && s_id != "" && date != null && date != "" && s_type != null && s_type != "" && duty != null && duty != "") {
+	// 	result = myStatement.executeQuery(SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' and main_table.category = '"+s_type+"';);
+	// }
 %>
 <!doctype html>
 <html lang="en">
@@ -29,12 +33,6 @@
 		<div class="col-md-3">
 			<div class="text-center"><h4>Filter</h4></div>
 			<form role="form">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-						<input name="staff_id" type="search" class="form-control" placeholder="Staff ID">
-					</div>
-				</div>
 				<div class="form-group">
 					<div class='input-group date' id='date'>
 						<span class="input-group-addon">
