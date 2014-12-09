@@ -12,7 +12,7 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
     Statement myStatement = con.createStatement();  
     ResultSet myResultSet = null;
-    ResultSet ResultSet = null;
+    
     
     Date d = new Date(); //request for locale date
     SimpleDateFormat formatter=new SimpleDateFormat("EEEE, d MMMM yyyy");

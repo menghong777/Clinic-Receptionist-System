@@ -1,8 +1,20 @@
+<%@page import="java.sql.*"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Print Report");
     session.setAttribute("tab","search");
     session.setAttribute("patientDetailMenu","printReport");
+
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();  
+    ResultSet myResultSet = null;
+
+    String health_ID = "";
+    String HID = "";
+    String preview = "";
+    String PID = (String)session.getAttribute("PID");
+
+    myResultSet = myStatement.executeQuery("SELECT health_report.*, main_table.Firstname as GP_Name From health_report, gp, main_table where health_report.gp_ID = gp.gp_ID and gp.User_ID = main_table.User_ID and health_report.patient_ID = '"+PID+"'");
 %>
 <!doctype html>
 <html lang="en">
@@ -24,32 +36,28 @@
 						<th></th>
 						<th>Report name</th>
 						<th>Date</th>
-						<th>Report by</th>
-						<th>Last updated</th>
+						<th>Report by</th>						
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
-						<td>Xray</td>
-						<td>01/11/2014</td>
-						<td>Doctor Tan</td>
-						<td>01/11/2014</td>
-					</tr>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
-						<td>Teeth checking</td>
-						<td>01/11/2014</td>
-						<td>Doctor Tan</td>
-						<td>01/11/2014</td>
-					</tr>
-					<tr>
-						<td><a class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Print Preview</a></td>
-						<td>Lung checking</td>
-						<td>01/11/2014</td>
-						<td>Doctor Tan</td>
-						<td>01/11/2014</td>
-					</tr>
+				<tbody>                                    
+					
+                                            <%while(myResultSet.next()){ 
+                                          //  health_ID = myResultSet.getString("health_ID");%>
+                                        <tr>        
+                                            <td><a name="preview" class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span><%= myResultSet.getString("health_ID") %><%session.setAttribute("health_ID",myResultSet.getString("health_ID"));%></a></td>
+						<td>General Report</td>
+                                                <%/* health_ID = myResultSet.getString("health_ID"); 
+                                                    preview = request.getParameter("preview");
+                                                    preview = health_ID; 
+                                                    session.setAttribute("health_ID",health_ID); */%>
+                                                <td>
+                                                    <%= myResultSet.getString("Date")%>
+                                                </td>                                                
+						<td>
+                                                    Dr. <%= myResultSet.getString("gp_name") %>
+                                                </td>	                                               
+					</tr>  
+                                            <%}//preview = request.getParameter("preview"); session.setAttribute("preview",preview);%>                                                                             
 				</tbody>
 			</table>
 		</div>
