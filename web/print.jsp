@@ -1,3 +1,12 @@
+<%@page import="java.sql.*"%>
+<%
+    /*Database connection */
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Statement myStatement = con.createStatement();
+    ResultSet result  = null;
+
+    result = myStatement.executeQuery("Select * from health_report where patient_ID = 'PT001' ");
+%>
 <!doctype html>
 <html lang="en">
 	<head>
