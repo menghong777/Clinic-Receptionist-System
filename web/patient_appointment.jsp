@@ -13,8 +13,10 @@
     String PID = (String)session.getAttribute("PID");
     PID = PID.toUpperCase();
     
-    /* SQL query */
-    ResultSet result = myStatement.executeQuery("SELECT * FROM appointment WHERE Patient_ID = '" +PID+"'");
+    /* Query linking TABLE appointment + gp + main_table */
+    ResultSet result = myStatement.executeQuery("SELECT appointment.*, gp.GP_ID, main_table.LastName "
+            + "FROM appointment, gp, main_table WHERE appointment.Patient_ID = '" +PID+"' "
+            + "AND appointment.GP_ID = gp.GP_ID and gp.User_ID = main_table.User_ID");
 %>
 <!doctype html>
 <html lang="en">
@@ -33,34 +35,27 @@
 		<div class="col-md-9">
 			<jsp:include page="info_patient.jsp"></jsp:include>
 			<table class="table table-hover table-condensed">
-				<thead>
-					<tr>
-						<th></th>
-						<th>General practice ID</th>
-						<th>General practice name</th>
-						<th>Date</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- disabled record -->
-					<!--tr>
-						<td><a class="btn btn-warning btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="patient_appointment.html" role="button" disabled="disabled"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
-						<td>GP002</td>
-						<td>Doctor Lim</td>
-						<td>14/12/2013</td>
-						<td>Cancelled</td>
-					</tr-->
-					<tr>
-						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-						<a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
-						<td>GP002</td>
-						<td>Doctor Lim</td>
-						<td>14/11/2014</td>
-						<td>Valid</td>
-					</tr>
-				</tbody>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>General practice ID</th>
+                                    <th>General practice name</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%while(result.next()) {%>
+                                <tr>
+                                    <td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
+                                    <a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
+                                    <td><%=result.getString("GP_ID")%></td>
+                                    <td>Dr. <%=result.getString("LastName")%></td>
+                                    <td><%=result.getString("Date")%></td>
+                                    <td><%=result.getString("Status")%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
 			</table>
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add</button>
 		</div>
