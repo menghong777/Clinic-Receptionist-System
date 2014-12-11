@@ -134,6 +134,7 @@
                                         </span>
                                         <input name="changedDate" type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date..">
                                     </div>
+                                    <p class="help-block"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">

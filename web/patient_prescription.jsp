@@ -16,7 +16,11 @@
 	/* Get extend */
 	String extend = request.getParameter("extend");
 	if(extend !=null && extend != "") {
-		myStatement.execute("UPDATE prescription SET Extension_Period='"+extend+"' WHERE Patient_ID = '" +PID+"'");
+                String preID = request.getParameter("preID");
+		myStatement.execute("UPDATE prescription SET Extension_Period='"+extend+"' "
+                        + "WHERE Patient_ID = '" +PID+"' AND presrciptionID='"+preID+"'");
+                out.print("UPDATE prescription SET Extension_Period='"+extend+"' "
+                        + "WHERE Patient_ID = '" +PID+"' AND presrciptionID='"+preID+"'");
 	}
 	
 	/* To print out the prescription*/
@@ -44,13 +48,14 @@
 						<th>Dosage</th>
 						<th>Period</th>
 						<th>Extension period</th>
-						<th>Issue on</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% while(result.next()) { %>
 					<tr>
-						<td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
+						<td><button class="btn btn-warning btn-sm" role="button" data-toggle="modal" data-target="#extendModal"
+                                                            onclick="$('#preID').val('<%=result.getString("presrciptionID")%>')">
+                                                        <span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</button></td>
 						<td><%=result.getString("MedicineName")%></td>
 						<td><%=result.getString("Dosage")%></td>
 						<td><%=result.getString("Period_days")%> day(s)</td>
@@ -78,6 +83,7 @@
 								</div>
 							</div>
 							<div class="modal-footer">
+                                                                <input type="hidden" value="" id="preID" name="preID">
 								<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
 								<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Extent and save</button>
 							</div>
