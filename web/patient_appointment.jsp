@@ -13,6 +13,8 @@
     Statement myStatement = con.createStatement();
     Statement doctorStatement = con.createStatement();
     Statement appointmentStatement = con.createStatement();
+    Statement deleteStatement = con.createStatement();
+
 
     /* Get current date */
     Date d = new Date(); //request for locale date
@@ -35,6 +37,13 @@
         //Default set to pending
     }
     
+    /* Remove appointment */
+    if(request.getParameter("confirmCancel")!=null) {
+        String appointmentID = request.getParameter("aID");
+        deleteStatement.execute("DELETE FROM `clinic_receptionist`.`appointment` "
+                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
+    }
+    
     /* Doctor List in the Make Appointment */
     doctorList = doctorStatement.executeQuery("SELECT main_table.LastName, gp.* FROM main_table, gp "
             + "WHERE main_table.Category = 'GP' AND main_table.User_ID = gp.User_ID");
@@ -52,6 +61,7 @@
         <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
         <script>
             var myDate = "No date";
+            var ID;
             </script>
     </head>
     <body>
@@ -76,8 +86,13 @@
                     <tbody>
                         <%while(result.next()) {%>
                         <tr>
-                            <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</button>
-                            <button name="date" type="submit" form="cancel" value="<%=result.getString("Date")%>" class="btn btn-danger btn-sm"  role="button" data-toggle="modal" data-target="#cancelModal" onclick="$('#updatedDate').html('<%=result.getString("Date")%>');"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</button></td>
+                            <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal">
+                                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</button>
+                            <button value="<%=result.getString("Date")%>" 
+                                    class="btn btn-danger btn-sm"  role="button" data-toggle="modal" data-target="#cancelModal" 
+                                    onclick="$('#updatedDate').html('<%=result.getString("Date")%>'); $('#aID').val('<%=result.getString("Appoinment_ID")%>')">
+                                <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</button></td>
+                                
                             <td><%=result.getString("GP_ID")%></td>
                             <td>Dr. <%=result.getString("LastName")%></td>
                             <td><%=result.getString("Date")%></td>
@@ -131,6 +146,7 @@
                                 <p>Are you sure?</p>
                             </div>
                             <div class="modal-footer">
+                                <input name="aID" id="aID" type="hidden" value="">
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
                                 <button name="confirmCancel" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel appointment</button>
                             </div>
