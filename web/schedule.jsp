@@ -8,15 +8,19 @@
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
 	Statement myStatement = con.createStatement();
 	ResultSet result = null;
-	String s_id = request.getParameter("staff_id");
 	String date = request.getParameter("date");    
 	String s_type = request.getParameter("staff_type");
 	String duty = request.getParameter("duty");
 
 	//get gp\nurse only with specific date
-	// if(s_id != null && s_id != "" && date != null && date != "" && s_type != null && s_type != "" && duty != null && duty != "") {
-	// 	result = myStatement.executeQuery(SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' and main_table.category = '"+s_type+"';);
-	// }
+	if(date != null && date != "" && s_type != null && s_type != "" && duty != null && duty != "") {
+		if (s_type == "all") {
+			result = myStatement.executeQuery("SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' AND `Availability` = '"+duty+"'");
+		}
+		else {
+			result = myStatement.executeQuery("SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' and main_table.category = '"+s_type+"' AND `Availability` = '"+duty+"'");
+		}
+	}
 %>
 <!doctype html>
 <html lang="en">
@@ -32,7 +36,7 @@
 		
 		<div class="col-md-3">
 			<div class="text-center"><h4>Filter</h4></div>
-			<form role="form">
+			<form role="form" method="get">
 				<div class="form-group">
 					<div class='input-group date' id='date'>
 						<span class="input-group-addon">
@@ -46,24 +50,24 @@
 				<div class="text-center">
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-default active">
-					    <input type="radio" name="staff_type" id="All" checked>&nbsp;&nbsp;All&nbsp;&nbsp;
+					    <input type="radio" name="staff_type" value="all" checked>&nbsp;&nbsp;All&nbsp;&nbsp;
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="staff_type" id="General Practice">General Practice
+					    <input type="radio" name="staff_type" value="gp">General Practice
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="staff_type" id="Nurse">&nbsp;Nurse&nbsp;
+					    <input type="radio" name="staff_type" value="nurse">&nbsp;Nurse&nbsp;
 					  </label>
 					</div><p></p>
 					<div class="btn-group" data-toggle="buttons">
 					  <label class="btn btn-default active">
-					    <input type="radio" name="duty" id="On duty" checked>On duty
+					    <input type="radio" name="duty" value="false" checked>On duty
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="duty" id="Availability">Availability
+					    <input type="radio" name="duty" value="true">Availability
 					  </label>
 					</div>
-				</div><p></p>
+				</div><br>
 				<button type="submit" class="btn btn-primary btn-block">Search</button>
 			</form>
 		</div>
@@ -82,30 +86,25 @@
 						</tr>
 					</thead>
 					<tbody>
+						<% 
+						if(result != null) {
+							while(result.next()) {
+								String staff_id = result.getString("User_ID");
+								String staff_type = result.getString("Category");
+								String first_name = result.getString("FirstName");
+								String last_name = result.getString("LastName");
+								String phone_number = result.getString("PhoneNumber");
+								String sex = result.getString("Sex");
+						%>
 						<tr>
-							<td>ID000</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>0000000000</td>
-							<td>Null</td>
+							<td><%= staff_id %></td>
+							<td><%= staff_type %></td>
+							<td><%= first_name %></td>
+							<td><%= last_name %></td>
+							<td><%= phone_number %></td>
+							<td><%= sex %></td>
 						</tr>
-						<tr>
-							<td>ID000</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>0000000000</td>
-							<td>Null</td>
-						</tr>
-						<tr>
-							<td>ID000</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>ADMIN</td>
-							<td>0000000000</td>
-							<td>Null</td>
-						</tr>
+						<% }} %>
 					</tbody>
 				</table>
 			</div>
