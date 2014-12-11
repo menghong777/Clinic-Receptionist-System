@@ -16,27 +16,33 @@
 
     /* Get current date */
     Date d = new Date(); //request for locale date
-    SimpleDateFormat formatter=new SimpleDateFormat("EEEE, d MMMM yyyy");
     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-    String date=formatter.format(d);
-    String dateC=sdf.format(d); //this is for query bcus the format is different
+    String dateC=sdf.format(d);
     
     /* Get PID from previous search page */
     String PID = (String)session.getAttribute("PID");
+    String GP_ID = "";
     PID = PID.toUpperCase();
     ResultSet doctorList;
+    
+    /* Make Appointment */
+    if(request.getParameter("makeAppointment") != null) {
+        if(request.getParameter("doctorSelected") != null && request.getParameter("dateSelected") != null &&
+                request.getParameter("doctorSelected") != "" && request.getParameter("dateSelected") != "")
+        GP_ID = (String)request.getParameter("doctorSelected");
+        appointmentStatement.execute("INSERT INTO appointment (Patient_ID, GP_ID, Date, Status) "
+                + "VALUES ('"+PID+"','"+GP_ID+"','"+request.getParameter("dateSelected")+"','Pending' )");
+        //Default set to pending
+    }
+    
+    /* Doctor List in the Make Appointment */
+    doctorList = doctorStatement.executeQuery("SELECT main_table.LastName, gp.* FROM main_table, gp "
+            + "WHERE main_table.Category = 'GP' AND main_table.User_ID = gp.User_ID");
     
     /* Query linking TABLE appointment + gp + main_table */
     ResultSet result = myStatement.executeQuery("SELECT appointment.*, main_table.LastName "
             + "FROM appointment, gp, main_table WHERE appointment.Patient_ID = '" +PID+"' "
-            + "AND appointment.GP_ID = gp.GP_ID and gp.User_ID = main_table.User_ID");
-    
-    doctorList = doctorStatement.executeQuery("SELECT main_table.LastName, gp.* FROM main_table, gp "
-            + "WHERE main_table.Category = 'GP' AND main_table.User_ID = gp.User_ID");
-    String GP_ID = request.getParameter("doctorSelected");
-    if(request.getParameter("makeAppointment") != null) {
-        appointmentStatement.execute("INSERT INTO appointment (Patient_ID, GP_ID, Date, Status) VALUES ("+PID+","+GP_ID+" )");
-    }
+            + "AND appointment.GP_ID = gp.GP_ID and gp.User_ID = main_table.User_ID ORDER BY appointment.Date");
 %>
 <!doctype html>
 <html lang="en">
@@ -90,7 +96,7 @@
                             <h4 class="modal-title" id="editAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Choose a new date</h4>
                         </div>
                         <div class="modal-body">
-                            <p>Current date: <% out.println(date); %></p>
+                            <p>Current date: <% out.println(dateC); %></p>
                             <br>
                             <div class="form-group">
                                 <div class='input-group date' id='dateChange'>
@@ -138,15 +144,14 @@
                         </div>
                         <form class="form-horizontal" role="form" method="post">
                             <div class="modal-body">
-                                <p>Today's date: 02/11/2014</p>
+                                <p>Today's date: <% out.println(dateC); %></p>
 
                                 <!-- Datetime picker reference: http://eonasdan.github.io/bootstrap-datetimepicker/ -->
                                 <p>Select a general practice (optional): </p>
-                                <select class="form-control">
+                                <select name="doctorSelected" class="form-control">
                                     <option>Select a general practice..</option>
                                     <%while(doctorList.next()) { %>
-                                    <option name="doctorSelected" value="<%=doctorList.getString("GP_ID")%>">Doctor <%=doctorList.getString("LastName")%> - <%=doctorList.getString("GP_ID")%> </option>
-                                    <% session.setAttribute("GP_ID", doctorList.getString("GP_ID")); %>
+                                    <option value="<%=doctorList.getString("GP_ID")%>">Doctor <%=doctorList.getString("LastName")%> - <%=doctorList.getString("GP_ID")%> </option>
                                     <%}%>
                                 </select>
                                 <br>
@@ -155,14 +160,14 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                        <input type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date..">
+                                        <input name='dateSelected' type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date..">
                                     </div>
                                     <p class="help-block"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;Press the calendar icon to pick a date.</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
-                                <button name='makeAppointment' type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Make appointment</button>
+                                <button name='makeAppointment' type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Make appointment</button>
                             </div>
                         </form>
                     </div>
