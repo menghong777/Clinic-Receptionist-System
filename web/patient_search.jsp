@@ -16,15 +16,28 @@
     /*Search patientID */
     if(PID !=null && PID != "") {                
         result = myStatement.executeQuery("SELECT main_table.*, patient.patient_ID FROM main_table, patient WHERE main_table.User_ID = patient.User_ID and patient.Patient_ID = '" +PID+"'");                       
-        }
+    }
     //Search by using Name and DOB
     if(name !=null && name != "" && dob !=null && dob != "" ){        
         result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.DateOfBirth = '"+dob+"' AND main_table.User_ID = patient.User_ID AND (FirstName = '"+name+"' OR LastName = '"+name+"')");
-        }
+    }
     //search by using Name and address    
     if(name !=null && name != "" && address !=null && address != "" ){      
         result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.Address like '%"+address+"%' AND main_table.User_ID = patient.User_ID AND (main_table.FirstName = '"+name+"' OR main_table.LastName = '"+name+"')");
-        } 
+    } 
+    
+    /* Not working :( cannot search if show error message, suspect that resultset can only be used once
+    
+    //No result found message 
+    if(result==null) {
+        session.setAttribute("error","");
+    }
+    if(result!=null) {
+        if(!result.next()) {
+            session.setAttribute("error","No result found");
+        }
+    }
+    */
     
 %>
 <!doctype html>
@@ -87,6 +100,7 @@
 				<button name="submit" type="submit" class="btn btn-primary">Search</button>
 			</form>
 			<br>
+                        <%=session.getAttribute("error")%>
 			<!--h4>3 result(s) found</h4><br-->
 			<table class="table table-hover table-condensed">
 				<thead>
