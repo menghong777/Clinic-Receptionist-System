@@ -52,9 +52,6 @@
         changeStatement.execute("UPDATE `clinic_receptionist`.`appointment` "
                 + "SET Date='"+changeDate+"' "
                 + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
-        out.println("UPDATE `clinic_receptionist`.`appointment` "
-                + "SET Date='"+changeDate+"' "
-                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
     }
     
     /* Doctor List in the Make Appointment */
