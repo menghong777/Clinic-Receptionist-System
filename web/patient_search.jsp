@@ -1,31 +1,31 @@
 <%@page import="java.sql.*"%>
 <%
-    /*For page tab/button/menu active state */
-    session.setAttribute("pagetitle","Patient Search");
-    session.setAttribute("tab","search");
-    session.setAttribute("patientMenu","search");
+	/*For page tab/button/menu active state */
+	session.setAttribute("pagetitle","Patient Search");
+	session.setAttribute("tab","search");
+	session.setAttribute("patientMenu","search");
 
-    /*Database connection */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
-    Statement myStatement = con.createStatement();
-    ResultSet result  = null;
-    String PID = request.getParameter("patientID");
-    String name = request.getParameter("name");    
-    String dob = request.getParameter("dob");
-    String address = request.getParameter("address");
-    /*Search patientID */
-    if(PID !=null && PID != "") {                
-        result = myStatement.executeQuery("SELECT main_table.*, patient.patient_ID FROM main_table, patient WHERE main_table.User_ID = patient.User_ID and patient.Patient_ID = '" +PID+"'");                       
-        }
-    //Search by using Name and DOB
-    if(name !=null && name != "" && dob !=null && dob != "" ){        
-        result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.DateOfBirth = '"+dob+"' AND main_table.User_ID = patient.User_ID AND (FirstName = '"+name+"' OR LastName = '"+name+"')");
-        }
-    //search by using Name and address    
-    if(name !=null && name != "" && address !=null && address != "" ){      
-        result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.Address like '%"+address+"%' AND main_table.User_ID = patient.User_ID AND (main_table.FirstName = '"+name+"' OR main_table.LastName = '"+name+"')");
-        } 
-    
+	/*Database connection */
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+	Statement myStatement = con.createStatement();
+	ResultSet result  = null;
+	String PID = request.getParameter("patientID");
+	String name = request.getParameter("name");    
+	String dob = request.getParameter("dob");
+	String address = request.getParameter("address");
+	/*Search patientID */
+	if(PID !=null && PID != "") {
+		result = myStatement.executeQuery("SELECT main_table.*, patient.patient_ID FROM main_table, patient WHERE main_table.User_ID = patient.User_ID and patient.Patient_ID = '" +PID+"'");                       
+		}
+	//Search by using Name and DOB
+	if(name !=null && name != "" && dob !=null && dob != "" ){        
+		result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.DateOfBirth = '"+dob+"' AND main_table.User_ID = patient.User_ID AND (FirstName = '"+name+"' OR LastName = '"+name+"')");
+		}
+	//search by using Name and address    
+	if(name !=null && name != "" && address !=null && address != "" ){      
+		result = myStatement.executeQuery("SELECT main_table.*, patient.Patient_ID FROM main_table, patient WHERE main_table.Address like '%"+address+"%' AND main_table.User_ID = patient.User_ID AND (main_table.FirstName = '"+name+"' OR main_table.LastName = '"+name+"')");
+		} 
+	
 %>
 <!doctype html>
 <html lang="en">
@@ -90,27 +90,27 @@
 			<!--h4>3 result(s) found</h4><br-->
 			<table class="table table-hover table-condensed">
 				<thead>
-                                <% String submit = request.getParameter("submit");
-                                  if(submit !=null){
-                                    if(result!=null) {
-                                        while(result.next()) {
-                                        String fName = result.getString("FirstName");
-                                        String lName = result.getString("LastName");
-                                        String IC = result.getString("IdentificationID");
-                                        String Phone = result.getString("PhoneNumber");
-                                        String sex = result.getString("Sex");
-                                        String pid = result.getString("Patient_ID");
-                                        session.setAttribute("PID",pid);
-                                %>
-                                <tr>
-                                    <th></th>
-                                    <th>Patient ID</th>
-                                    <th>Identification Card</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Sex</th>
-                                    <th>Personal contact</th>
-                                </tr>                      
+								<% String submit = request.getParameter("submit");
+								  if(submit !=null){
+									if(result!=null) {
+										while(result.next()) {
+										String fName = result.getString("FirstName");
+										String lName = result.getString("LastName");
+										String IC = result.getString("IdentificationID");
+										String Phone = result.getString("PhoneNumber");
+										String sex = result.getString("Sex");
+										String pid = result.getString("Patient_ID");
+										session.setAttribute("PID",pid);
+								%>
+								<tr>
+									<th></th>
+									<th>Patient ID</th>
+									<th>Identification Card</th>
+									<th>First name</th>
+									<th>Last name</th>
+									<th>Sex</th>
+									<th>Personal contact</th>
+								</tr>                      
 				</thead>
 				<tbody>
 				<tr>
@@ -119,10 +119,10 @@
 				<td><%=IC%></td>
 				<td><%=fName%></td>
 				<td><%=lName%></td>
-                                <td><%=sex%></td>
+								<td><%=sex%></td>
 				<td><%=Phone%></td>
 				</tr>
-                                <% } } } %>
+								<% } } } %>
 				</tbody>
 			</table>
 		</div>
