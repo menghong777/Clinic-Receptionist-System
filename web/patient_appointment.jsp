@@ -14,6 +14,7 @@
     Statement doctorStatement = con.createStatement();
     Statement appointmentStatement = con.createStatement();
     Statement deleteStatement = con.createStatement();
+    Statement changeStatement = con.createStatement();
 
 
     /* Get current date */
@@ -44,11 +45,14 @@
                 + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
     }
     
-    /* Remove appointment */
+    /* Change appointment */
     if(request.getParameter("changeAppointment")!=null) {
-        String appointmentID = request.getParameter("aID");
+        String appointmentID = request.getParameter("aIDc");
         String changeDate = request.getParameter("changedDate");
-        deleteStatement.execute("UPDATE `clinic_receptionist`.`appointment` "
+        changeStatement.execute("UPDATE `clinic_receptionist`.`appointment` "
+                + "SET Date='"+changeDate+"' "
+                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
+        out.println("UPDATE `clinic_receptionist`.`appointment` "
                 + "SET Date='"+changeDate+"' "
                 + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
     }
@@ -69,9 +73,8 @@
 
         <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
         <script>
-            var myDate = "No date";
             var ID;
-            </script>
+         </script>
     </head>
     <body>
         <!-- The NavBar -->
@@ -96,7 +99,7 @@
                         <%while(result.next()) {%>
                         <tr>
                             <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal"
-                                        onclick="$('#aID').val('<%=result.getString("Appoinment_ID")%>')">
+                                        onclick="$('#aIDc').val('<%=result.getString("Appoinment_ID")%>')">
                                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</button>
                             <button value="<%=result.getString("Date")%>" 
                                     class="btn btn-danger btn-sm"  role="button" data-toggle="modal" data-target="#cancelModal" 
@@ -137,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input name="aID" id="aID" type="hidden" value="">
+                                <input name="aIDc" id="aIDc" type="hidden" value="">
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
                                 <button name='changeAppointment' type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Update</button>
                             </div>
