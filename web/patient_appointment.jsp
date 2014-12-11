@@ -44,6 +44,15 @@
                 + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
     }
     
+    /* Remove appointment */
+    if(request.getParameter("changeAppointment")!=null) {
+        String appointmentID = request.getParameter("aID");
+        String changeDate = request.getParameter("changedDate");
+        deleteStatement.execute("UPDATE `clinic_receptionist`.`appointment` "
+                + "SET Date='"+changeDate+"' "
+                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
+    }
+    
     /* Doctor List in the Make Appointment */
     doctorList = doctorStatement.executeQuery("SELECT main_table.LastName, gp.* FROM main_table, gp "
             + "WHERE main_table.Category = 'GP' AND main_table.User_ID = gp.User_ID");
@@ -86,7 +95,8 @@
                     <tbody>
                         <%while(result.next()) {%>
                         <tr>
-                            <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal">
+                            <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal"
+                                        onclick="$('#aID').val('<%=result.getString("Appoinment_ID")%>')">
                                     <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</button>
                             <button value="<%=result.getString("Date")%>" 
                                     class="btn btn-danger btn-sm"  role="button" data-toggle="modal" data-target="#cancelModal" 
@@ -107,30 +117,33 @@
 
             <!-- Change Appointment Date Modal -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editAppointment" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="editAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Choose a new date</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Current date: <% out.println(dateC); %></p>
-                            <br>
-                            <div class="form-group">
-                                <div class='input-group date' id='dateChange'>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                    <input type='text' class="form-control" data-date-format="DD/MM/YYYY" placeholder="Pick a date..">
+                <form method="post">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="editAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Choose a new date</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Current date: <% out.println(dateC); %></p>
+                                <br>
+                                <div class="form-group">
+                                    <div class='input-group date' id='dateChange'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        <input name="changedDate" type='text' class="form-control" data-date-format="YYYY-MM-DD" placeholder="Pick a date..">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
-                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Update</button>
+                            <div class="modal-footer">
+                                <input name="aID" id="aID" type="hidden" value="">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
+                                <button name='changeAppointment' type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Update</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Cancel Appointment Modal -->
