@@ -44,7 +44,7 @@
                                             <%while(myResultSet.next()){ 
                                           //  health_ID = myResultSet.getString("health_ID");%>
                                         <tr>        
-                                            <td><a name="preview" class="btn btn-default btn-sm" href="patient_print_preview.jsp" role="button"><span class="glyphicon glyphicon-eye-open"></span><%= myResultSet.getString("health_ID") %><%session.setAttribute("health_ID",myResultSet.getString("health_ID"));%></a></td>
+                                            <td><form action="patient_print_preview.jsp" method="POST"><button name="preview" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-eye-open"></span><%= myResultSet.getString("health_ID") %></button><input type="hidden" name="blah" value="<%= myResultSet.getString("health_ID")%>"></form></td>
 						<td>General Report</td>
                                                 <%/* health_ID = myResultSet.getString("health_ID"); 
                                                     preview = request.getParameter("preview");

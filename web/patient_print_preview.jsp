@@ -1,4 +1,5 @@
 <% session.setAttribute("pagetitle","Print Preview"); %>
+<%session.setAttribute("health_ID",request.getParameter("blah"));%>
 <!doctype html>
 <html lang="en">
 	<head>

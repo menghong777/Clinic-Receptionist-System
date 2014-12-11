@@ -32,7 +32,7 @@
 
     //this loop for loop the health array any of the value is 0 it will replace it to '-' it mean he didn't check
     for(int zero = 0; zero < health.length; zero++){
-     //   if(health[zero] == "0")
+     //   if(health[zero].equals("0"))
     //        health[zero] = "~";       
     }
 %>

@@ -50,6 +50,9 @@
         <jsp:include page="head.jsp"></jsp:include>
 
         <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+        <script>
+            var myDate = "No date";
+            </script>
     </head>
     <body>
         <!-- The NavBar -->
@@ -73,8 +76,8 @@
                     <tbody>
                         <%while(result.next()) {%>
                         <tr>
-                            <td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</a>
-                            <a class="btn btn-danger btn-sm" href="#" role="button" data-toggle="modal" data-target="#cancelModal"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</a></td>
+                            <td><button class="btn btn-warning btn-sm"  role="button" data-toggle="modal" data-target="#editModal"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Change</button>
+                            <button name="date" type="submit" form="cancel" value="<%=result.getString("Date")%>" class="btn btn-danger btn-sm"  role="button" data-toggle="modal" data-target="#cancelModal" onclick="$('#updatedDate').html('<%=result.getString("Date")%>');"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel</button></td>
                             <td><%=result.getString("GP_ID")%></td>
                             <td>Dr. <%=result.getString("LastName")%></td>
                             <td><%=result.getString("Date")%></td>
@@ -117,21 +120,23 @@
 
             <!-- Cancel Appointment Modal -->
             <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelAppointment" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="cancelAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Cancel the appointment on dd/mm/yyyy</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
-                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel appointment</button>
+                <form method="post">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="cancelAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Cancel the appointment on <span id="updatedDate"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Close</button>
+                                <button name="confirmCancel" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;Cancel appointment</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Add Appointment Date Modal -->
