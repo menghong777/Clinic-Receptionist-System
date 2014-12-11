@@ -44,18 +44,16 @@
                         <th>Dosage</th>
                         <th>Period</th>
                         <th>Extension period</th>
-                        <th>Issue on</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% while(result.next()) { %>
                     <tr>
                         <td><a class="btn btn-warning btn-sm" href="#" role="button" data-toggle="modal" data-target="#extendModal"><span class="glyphicon glyphicon-resize-horizontal"></span>&nbsp;&nbsp;Extend</a></td>
-                        <td><%=result.getString("Medicine_Name")%></td>
+                        <td><%=result.getString("MedicineName")%></td>
                         <td><%=result.getString("Dosage")%></td>
-                        <td><%=result.getString("Period")%> day(s)</td>
+                        <td><%=result.getString("Period_days")%> day(s)</td>
                         <td><%=result.getString("Extension_Period")%></td>
-                        <td><%=result.getString("TimeStamp")%></td>
                     </tr>
                     <% } %>
                 </tbody>
