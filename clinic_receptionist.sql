@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.1.13
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2014 at 09:32 AM
--- Server version: 5.5.34
--- PHP Version: 5.4.22
+-- Generation Time: Dec 12, 2014 at 10:29 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.5.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `clinic_receptionist`
 --
-CREATE Database `clinic_receptionist`;
-Use `clinic_receptionist`;
+
 -- --------------------------------------------------------
 
 --
@@ -36,18 +35,23 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   PRIMARY KEY (`Appoinment_ID`),
   KEY `Patient_ID` (`Patient_ID`),
   KEY `GP_ID` (`GP_ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `appointment`
 --
 
 INSERT INTO `appointment` (`Appoinment_ID`, `Patient_ID`, `GP_ID`, `Date`, `Status`) VALUES
-(1, 'PT001', 'GP001', '2014-12-08', 'Pending'),
-(2, 'PT002', 'GP001', '2014-12-12', 'Pending'),
+(2, 'PT002', 'GP001', '2015-05-08', 'Pending'),
 (3, 'PT003', 'GP002', '2014-12-06', 'Done'),
-(4, 'PT002', 'GP003', '2014-12-08', 'Done'),
-(5, 'PT003', 'GP002', '2014-12-24', 'Cancelled');
+(5, 'PT003', 'GP002', '2014-12-24', 'Cancelled'),
+(14, 'PT002', 'GP002', '2014-12-05', 'Pending'),
+(15, 'PT001', 'GP001', '2014-12-18', 'Pending'),
+(21, 'PT001', 'GP003', '2014-12-12', 'Pending'),
+(22, 'PT001', 'GP001', '2015-01-01', 'Pending'),
+(23, 'PT001', 'GP003', '2014-12-16', 'Pending'),
+(24, 'PT001', 'GP001', '2014-12-12', 'Pending'),
+(25, 'PT002', 'GP002', '2014-12-12', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -75,6 +79,38 @@ INSERT INTO `gp` (`GP_ID`, `User_ID`, `TimeStamp`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `health_report`
+--
+
+CREATE TABLE IF NOT EXISTS `health_report` (
+  `Health_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Patient_ID` varchar(5) NOT NULL,
+  `GP_ID` varchar(5) NOT NULL,
+  `Date` date NOT NULL,
+  `bloodpressure` double NOT NULL,
+  `glucose` double NOT NULL,
+  `heartbeat` double NOT NULL,
+  `urea_level` double NOT NULL,
+  `height` double NOT NULL,
+  `weight` double NOT NULL,
+  PRIMARY KEY (`Health_ID`),
+  KEY `Patient_ID` (`Patient_ID`),
+  KEY `GP_ID` (`GP_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `health_report`
+--
+
+INSERT INTO `health_report` (`Health_ID`, `Patient_ID`, `GP_ID`, `Date`, `bloodpressure`, `glucose`, `heartbeat`, `urea_level`, `height`, `weight`) VALUES
+(1, 'PT001', 'GP001', '2014-12-07', 110, 120, 100, 0, 170, 80),
+(2, 'PT002', 'GP001', '2014-12-04', 90, 97, 92, 21, 160, 56),
+(3, 'PT003', 'GP002', '2014-11-19', 111, 87, 0, 15, 173, 65),
+(4, 'PT002', 'GP003', '2014-10-10', 145, 100, 125, 16, 169, 60);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `main_table`
 --
 
@@ -97,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `main_table` (
 --
 
 INSERT INTO `main_table` (`User_ID`, `FirstName`, `LastName`, `Address`, `IdentificationID`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) VALUES
-('admin', 'Admin', 'Gay', 'Gay house', '123456789', '123456789', '2014-12-01', 'Receptionist', 'Non', '2014-12-04 09:26:28'),
+('admin', 'Admin', 'Admin', 'Admin House', '123456789', '123456789', '2014-12-01', 'Receptionist', 'Female', '2014-12-12 10:28:14'),
 ('US001', 'Siva', 'Kunalan', '', '830918-01-1547', '0172768812', '1983-09-18', 'GP', 'Male', '2014-11-08 09:26:06'),
 ('US002', 'Angelo', 'Andy', '', 'A301324', '0127540892', '1973-03-22', 'GP', 'Female', '2014-11-08 09:26:06'),
 ('US003', 'Aron', 'Aziz', '', '840601-14-1482', '01118426416', '1984-06-01', 'GP', 'Male', '2014-11-08 09:31:37'),
@@ -166,21 +202,25 @@ INSERT INTO `patient` (`Patient_ID`, `User_ID`, `EmergencyContact`, `EmergencyNa
 --
 
 CREATE TABLE IF NOT EXISTS `prescription` (
+  `presrciptionID` int(11) NOT NULL AUTO_INCREMENT,
   `Patient_ID` varchar(5) NOT NULL,
-  `Medicine_Name` varchar(20) NOT NULL,
-  `Dosage` varchar(20) NOT NULL,
-  `Period` varchar(20) NOT NULL,
-  `Extension_Period` varchar(20) NOT NULL,
-  `TimeStamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `MedicineName` varchar(30) NOT NULL,
+  `Dosage` double NOT NULL,
+  `Period_days` int(11) NOT NULL,
+  `Extension_Period` int(11) NOT NULL,
+  PRIMARY KEY (`presrciptionID`),
   KEY `Patient_ID` (`Patient_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `prescription`
 --
 
-INSERT INTO `prescription` (`Patient_ID`, `Medicine_Name`, `Dosage`, `Period`, `Extension_Period`, `TimeStamp`) VALUES
-('PT001', 'Panadol', '3', '2 weeks', '', '2014-11-13 16:10:08');
+INSERT INTO `prescription` (`presrciptionID`, `Patient_ID`, `MedicineName`, `Dosage`, `Period_days`, `Extension_Period`) VALUES
+(1, 'PT001', 'AntiBiotic', 1.2, 12, 6),
+(2, 'PT002', 'Panadol', 2, 3, 0),
+(3, 'PT003', 'Pamelor', 1.5, 7, 0),
+(4, 'PT001', 'Antacids', 1, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -252,6 +292,13 @@ ALTER TABLE `appointment`
 --
 ALTER TABLE `gp`
   ADD CONSTRAINT `gp_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `main_table` (`User_ID`);
+
+--
+-- Constraints for table `health_report`
+--
+ALTER TABLE `health_report`
+  ADD CONSTRAINT `health_report_ibfk_1` FOREIGN KEY (`Patient_ID`) REFERENCES `patient` (`Patient_ID`),
+  ADD CONSTRAINT `health_report_ibfk_2` FOREIGN KEY (`GP_ID`) REFERENCES `gp` (`GP_ID`);
 
 --
 -- Constraints for table `nurse`
