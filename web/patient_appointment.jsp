@@ -29,14 +29,23 @@
     PID = PID.toUpperCase();
     ResultSet doctorList;
     
+    /* Make appointment error message */
+    session.setAttribute("status", "");
+    
     /* Make Appointment */
     if(request.getParameter("makeAppointment") != null) {
         if(request.getParameter("doctorSelected") != null && request.getParameter("dateSelected") != null &&
-                request.getParameter("doctorSelected") != "" && request.getParameter("dateSelected") != "")
+                !request.getParameter("doctorSelected").equals("") && !request.getParameter("dateSelected").equals("")) {
         GP_ID = (String)request.getParameter("doctorSelected");
         appointmentStatement.execute("INSERT INTO appointment (Patient_ID, GP_ID, Date, Status) "
                 + "VALUES ('"+PID+"','"+GP_ID+"','"+request.getParameter("dateSelected")+"','Pending' )");
+        session.setAttribute("status", "<div class='alert alert-success' role='alert'><b>Done!</b> "
+                + "New appointment added.</div>");
         //Default set to pending
+        } else {
+            session.setAttribute("status", "<div class='alert alert-danger' role='alert'><b>Oh snap!</b>"
+            + " Error submitting</div>");
+        }
     }
     
     /* Remove appointment */
@@ -44,7 +53,9 @@
         String appointmentID = request.getParameter("aID");
         deleteStatement.execute("DELETE FROM `clinic_receptionist`.`appointment` "
                 + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
-    }
+        session.setAttribute("status", "<div class='alert alert-success' role='alert'><b>Done!</b> "
+                + "Appointment deleted.</div>");
+    } 
     
     /* Change appointment */
     if(request.getParameter("changeAppointment")!=null) {
@@ -52,7 +63,9 @@
         String changeDate = request.getParameter("changedDate");
         changeStatement.execute("UPDATE `clinic_receptionist`.`appointment` "
                 + "SET Date='"+changeDate+"' "
-                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");
+                + "WHERE `appointment`.`Appoinment_ID` ='"+appointmentID+"'");  
+        session.setAttribute("status", "<div class='alert alert-success' role='alert'><b>Done!</b> "
+                + "Appointment changed to <b>"+changeDate+"</b></div>");
     }
     
     /* Doctor List in the Make Appointment */
@@ -83,6 +96,7 @@
         </div>
             <div class="col-md-9">
                 <jsp:include page="info_patient.jsp"></jsp:include>
+                <%= session.getAttribute("status") %>
                 <table class="table table-hover table-condensed">
                     <thead>
                         <tr>

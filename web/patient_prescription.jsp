@@ -13,6 +13,9 @@
 	/* Get PID from previous search page */
 	String PID = (String)session.getAttribute("PID");
 	PID = PID.toUpperCase();
+        
+        /* status message */
+        session.setAttribute("status", "");
 	
 	/* Get extend */
 	String extend = request.getParameter("extend");
@@ -20,8 +23,8 @@
                 String preID = request.getParameter("preID");
 		myStatement.execute("UPDATE prescription SET Extension_Period='"+extend+"' "
                         + "WHERE Patient_ID = '" +PID+"' AND presrciptionID='"+preID+"'");
-                out.print("UPDATE prescription SET Extension_Period='"+extend+"' "
-                        + "WHERE Patient_ID = '" +PID+"' AND presrciptionID='"+preID+"'");
+                session.setAttribute("status", "<div class='alert alert-success' role='alert'><b>Done!</b> "
+                + "extend to "+extend+" days</div>");
 	}
 	
 	/* To print out the prescription*/
@@ -41,6 +44,7 @@
 		</div>
 		<div class="col-md-9">
 			<jsp:include page="info_patient.jsp"></jsp:include>
+                        <%= session.getAttribute("status") %>
 			<table class="table table-hover table-condensed">
 				<thead>
 					<tr>
