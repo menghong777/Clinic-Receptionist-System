@@ -1,29 +1,28 @@
-Clinic-Receptionist-System
-==========================
+Over Surgery Clinic-Receptionist-System
+=======================================
 
 ARU - HELP CAT Software Engineering Project
 
-Stack
+Software Stack
 -----
 - NetBean Project
 - Apache Tomcat
 - MySQL (PHPmyAdmin)
 - Bootstrap
 
+Setup
+-----
+1. Download this project using git clone or download as zip
+2. Start your MySQL server
+3. Import "clinic_receptionist.sql" database (via PHPMyAdmin)
+4. Open this project using NetBeans (File > Open > "CRS")
+5. Modify database connection info in "WEB-INF/connection.jsp" if necessary.
+6. Run!
+
 Team
 ----
 - Pavi
-- Buruhan :P
-- Meng Hong
-- Ally
-- Joel
-
-Setup
------
-1. Open using Netbean (File > Open > "CRS")
-2. Import database using PHPMyAdmin
-3. Pray and compile! :D
-
-Known Bug
----------
-Non for the moment :D Yeah!
+- Buruhan
+- Lim Meng Hong
+- Allison Tu Dic Yin
+- Joel Yek Zong Yong
