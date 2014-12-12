@@ -1,4 +1,5 @@
 <%@page import="java.sql.*"%>
+<%@include file="WEB-INF/connection.jsp"%>
 <%
     /*For dynamic title and tab selected on each page*/
     session.setAttribute("pagetitle","Add Patient");
@@ -76,7 +77,7 @@
     }
 
     /*For page tab/button/menu active state */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Connection con = DriverManager.getConnection(host, username, password);
     Statement myStatement = con.createStatement();
     
     //userID

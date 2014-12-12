@@ -1,4 +1,5 @@
 <%@page import="java.sql.*"%>
+<%@include file="WEB-INF/connection.jsp"%>
 <%  
     String formUsername = request.getParameter("username");
     String formPassword = request.getParameter("password");
@@ -9,7 +10,7 @@
     String fname = "";
     Class.forName("com.mysql.jdbc.Driver");
     try {
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Connection con = DriverManager.getConnection(host, username, password);
     Statement myStatement = con.createStatement();   
    
 

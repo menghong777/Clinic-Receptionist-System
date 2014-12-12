@@ -1,7 +1,8 @@
 <%@page import="java.sql.*"%>
+<%@include file="WEB-INF/connection.jsp"%>
 <%
     /*Database connection */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Connection con = DriverManager.getConnection(host, username, password);
     Statement myStatement = con.createStatement();
     ResultSet myResultSet  = null;
     

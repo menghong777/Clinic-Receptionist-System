@@ -2,6 +2,7 @@
 <%@page import="java.sql.*"%>
 <%@ page import="java.io.*,java.util.Locale" %>
 <%@ page import="java.text.*,java.util.Date" %>
+<%@include file="WEB-INF/connection.jsp"%>
 <% 
     /*For page tab/button/menu active state */
     session.setAttribute("pagetitle","Appoinment");
@@ -9,7 +10,7 @@
     session.setAttribute("patientDetailMenu","appointment");
     
     /*Database connection */
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinic_receptionist", "root", "");
+    Connection con = DriverManager.getConnection(host,username,password);
     Statement myStatement = con.createStatement();
     Statement doctorStatement = con.createStatement();
     Statement appointmentStatement = con.createStatement();
