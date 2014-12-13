@@ -15,7 +15,7 @@
 
 	//get gp\nurse only with specific date
 	if(date != null && date != "" && s_type != null && s_type != "" && duty != null && duty != "") {
-		if (s_type == "all") {
+		if (s_type.equals("all")) {
 			result = myStatement.executeQuery("SELECT main_table.* FROM `schedule`, main_table WHERE schedule.user_id = main_table.user_id and schedule.date = '"+date+"' AND `Availability` = '"+duty+"'");
 		}
 		else {
@@ -37,7 +37,7 @@
 		
 		<div class="col-md-3">
 			<div class="text-center"><h4>Filter</h4></div>
-			<form role="form" method="get">
+			<form role="form" method="post">
 				<div class="form-group">
 					<div class='input-group date' id='date'>
 						<span class="input-group-addon">
