@@ -192,7 +192,7 @@
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <h4 class="modal-title" id="addAppointment"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;Choose a general practice and pick a date</h4>
                         </div>
-                        <form class="form-horizontal" role="form" method="post">
+                        <form role="form" method="post">
                             <div class="modal-body">
                                 <p>Today's date: <% out.println(dateC); %></p>
 
