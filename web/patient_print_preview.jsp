@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-md-9">
 			<div class="page-header"><h2><a class="btn btn-default" href="patient_print.jsp" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;&nbsp;Back</a>&nbsp;<%= session.getAttribute("pagetitle") %></h2></div>
-			<div class=""><h2>Patient <small>ID: P000 (Jerry Leong)</small></h2></div>
+			<div class=""><h2>Patient <small>ID: <%=session.getAttribute("PID")+" ("+session.getAttribute("name")+")"%></small></h2></div>
 			<a class="btn btn-success" onClick="printReport()">&nbsp;&nbsp;<span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Print&nbsp;&nbsp;</a><br><br>
 			<div class="embed-responsive embed-responsive-4by3">
 				<iframe id="printfile" name="printfile" class="embed-responsive-item" src="print.jsp"></iframe>

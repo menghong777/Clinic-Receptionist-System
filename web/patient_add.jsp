@@ -126,7 +126,7 @@
         condition=true;
         
         myStatement.execute("INSERT INTO `clinic_receptionist`.`main_table` "
-            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `IC/Passport`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
+            + "(`User_ID`, `FirstName`, `LastName`, `Address`, `identificationID`, `PhoneNumber`, `DateOFBirth`, `Category`, `Sex`, `TimeStamp`) "
             + "VALUES ('"+ user +"', '" + fname + "', '"+ lname + "', '" + address  + "', '" + IC +"', '"+ phone +"', "
             + "'"+ dob +"', 'Patient', '" + sex + "', CURRENT_TIMESTAMP);"); 
               
