@@ -79,7 +79,7 @@
 		<style>
 			body {
 				padding-top: 70px;
-				background: #ffffff url('assets/img/bg.jpeg') no-repeat fixed center;
+				background: #ffffff url('assets/img/bg.jpg') no-repeat fixed center;
                                 background-size: 100%;
 			}
                         error {

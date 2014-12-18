@@ -65,7 +65,7 @@
 					    <input type="radio" name="duty" value="false" checked>On duty
 					  </label>
 					  <label class="btn btn-default">
-					    <input type="radio" name="duty" value="true">Availability
+					    <input type="radio" name="duty" value="true">Available
 					  </label>
 					</div>
 				</div><br>
