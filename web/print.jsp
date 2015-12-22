@@ -43,7 +43,7 @@
 		<link rel="stylesheet" href="assets/css/print.css">
 		<jsp:include page="head.jsp"></jsp:include>
 	</head>
-	<body>            
+	<body>
 		<header>
 			<h3 class="text-center">Health Test Report</h3>
 			<address>

@@ -35,6 +35,7 @@
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
 		
+	<div class="container-fluid">
 		<div class="col-md-3">
 			<div class="text-center"><h4>Filter</h4></div>
 			<form role="form" method="post">
@@ -110,6 +111,7 @@
 				</table>
 			</div>
 		</div>
+	</div>
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->

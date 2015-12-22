@@ -9,6 +9,7 @@
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
 
+	<div class="container-fluid">
 		<div class="col-md-3">
 			<jsp:include page="nav_patient_detail.jsp"></jsp:include>
 		</div>
@@ -20,6 +21,7 @@
 				<iframe id="printfile" name="printfile" class="embed-responsive-item" src="print.jsp"></iframe>
 			</div>
 		</div>
+	</div>
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->

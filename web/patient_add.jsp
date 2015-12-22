@@ -215,6 +215,8 @@
 	<body>
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
+
+  <div class="container-fluid">
 		<div class="col-md-3">
 			<jsp:include page="nav_patient_search_add.jsp"></jsp:include>
 		</div>
@@ -340,6 +342,7 @@
 			  </div>
 			</form>
 		</div>
+  </div>
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->

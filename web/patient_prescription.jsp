@@ -38,7 +38,8 @@
 	<body>
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
-
+		
+	<div class="container-fluid">
 		<div class="col-md-3">
 			<jsp:include page="nav_patient_detail.jsp"></jsp:include>
 		</div>
@@ -97,6 +98,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
 		<!-- Bootstrap core JavaScript
 		================================================== -->

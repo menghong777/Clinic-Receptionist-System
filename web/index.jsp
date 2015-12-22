@@ -28,6 +28,7 @@
 	<body>
 		<!-- The NavBar -->
 		<jsp:include page="navbar.jsp"></jsp:include>
+	<div class="container-fluid">	
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<h3><% out.println(date); %></h3>
@@ -142,6 +143,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- Bootstrap core JavaScript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
